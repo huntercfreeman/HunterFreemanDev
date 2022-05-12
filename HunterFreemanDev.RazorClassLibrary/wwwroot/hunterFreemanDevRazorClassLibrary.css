@@ -21,3 +21,29 @@
     cursor: pointer;
     border-radius: 5px;
 }
+
+.hfd_grid-display {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hfd_grid-column-display-add-column-buttons {
+    position: absolute;
+    left: calc(50% - 3em);
+    top: calc(50% - 3ch);
+    font-family: monospace;
+}
+
+.hfd_grid-column-display-add-column-button-row {
+    margin-top: 5px;
+}
+
+.hfd_grid-column-display-add-column-button-item {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hfd_grid-column-display-add-column-button-item:hover {
+    background-color: aqua;
+}
