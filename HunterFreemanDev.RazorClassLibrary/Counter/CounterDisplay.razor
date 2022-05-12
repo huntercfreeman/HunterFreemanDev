@@ -1,0 +1,9 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>

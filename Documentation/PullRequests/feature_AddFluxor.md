@@ -1,0 +1,2 @@
+# Goal
+Add the [Fluxor](https://github.com/mrpmorris/Fluxor) state management library which is a Blazor implementation of the [Flux](https://facebook.github.io/flux/) state management application architecture.

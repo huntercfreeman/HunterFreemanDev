@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
+    <PackageReference Include="Fluxor.Blazor.Web" Version="5.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HunterFreemanDev.ClassLibrary\HunterFreemanDev.ClassLibrary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,12 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using HunterFreemanDev.RazorClassLibrary.Layout
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(DocumentLayoutDisplay)" />
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
+        <LayoutView Layout="@typeof(DocumentLayoutDisplay)">
             <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
