@@ -1,7 +1,7 @@
 ﻿@using HunterFreemanDev.ClassLibrary.Element
 @using HunterFreemanDev.ClassLibrary.Store.Grid
-<div class="hfd_grid-row-display">
 
+<div class="hfd_grid-row-display">
     @{
         ElementRecord? previousColumn = null;
 
@@ -12,7 +12,8 @@
             var currentColumn = GridRowElementReferences[columnIndex];
 
             <GridColumnDisplay GridColumnIndex="columnIndex"
-                               ElementRecord="currentColumn"/>
+                               ElementRecord="currentColumn"
+                               AddWindowEventCallback="OnAddWindowEventCallback" />
 
             previousColumn = currentColumn;
         }

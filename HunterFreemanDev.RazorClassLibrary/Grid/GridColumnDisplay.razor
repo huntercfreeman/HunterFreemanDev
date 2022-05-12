@@ -1,7 +1,7 @@
 ﻿@using HunterFreemanDev.ClassLibrary.Element
 
 <div class="hfd_grid-column-display">
-    <GridAddColumnButtons />
+    <GridAddColumnButtons AddWindowEventCallback="OnAddWindowEventCallback" />
 
     @if (ElementRecord.RenderedType != typeof(UninitializedElementRecord))
     {

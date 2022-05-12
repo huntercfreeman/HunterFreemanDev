@@ -17,7 +17,9 @@
             var rowIndex = i;
             var currentRow = GridState.Value.ElementRecords[rowIndex];
 
-            <GridRowDisplay GridRowIndex="rowIndex" GridRowElementReferences="currentRow"/>
+            <GridRowDisplay GridRowIndex="rowIndex"
+                            GridRowElementReferences="currentRow"
+                            AddWindowEventCallback="OnAddWindowEventCallback" />
 
             previousRow = currentRow;
         }
