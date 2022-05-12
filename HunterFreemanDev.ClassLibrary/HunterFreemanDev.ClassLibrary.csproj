@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Fluxor.Blazor.Web" Version="5.3.0" />
+  </ItemGroup>
+
 </Project>
