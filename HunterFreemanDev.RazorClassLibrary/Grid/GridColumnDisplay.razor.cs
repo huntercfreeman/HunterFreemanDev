@@ -15,7 +15,7 @@ public partial class GridColumnDisplay : ComponentBase
     [Parameter, EditorRequired]
     public EventCallback<(CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex)> AddWindowEventCallback { get; set; }
 
-    private string GetStyle => $"width: {100.0 / GridTotalColumnCount}%;";
+    private string GetStyle => $"width: calc({100.0 / GridTotalColumnCount}% - 3px);";
 
     private void OnAddWindowEventCallback(CardinalDirectionKind cardinalDirectionKind)
     {

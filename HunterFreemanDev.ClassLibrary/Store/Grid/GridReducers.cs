@@ -24,8 +24,7 @@ public class GridReducers
         switch (addGridStateAction.ArgumentTuple.CardinalDirectionKind)
         {
             case Direction.CardinalDirectionKind.North:
-                if (addGridStateAction.ArgumentTuple.GridRowIndex == 0)
-                    nextRowsList.Insert(0, new());
+                nextRowsList.Insert(addGridStateAction.ArgumentTuple.GridRowIndex, new());
 
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
                 break;
@@ -33,9 +32,8 @@ public class GridReducers
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
                 break;
             case Direction.CardinalDirectionKind.South:
-                if (addGridStateAction.ArgumentTuple.GridRowIndex == previousGridState.ElementRecords.Count - 1)
-                    nextRowsList.Add(new());
-
+                nextRowsList.Insert(addGridStateAction.ArgumentTuple.GridRowIndex + 1, new());
+                
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex + 1].Add(addGridStateAction.ElementRecord);
                 break;
             case Direction.CardinalDirectionKind.West:
