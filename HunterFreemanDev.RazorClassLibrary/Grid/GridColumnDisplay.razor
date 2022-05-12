@@ -1,0 +1,8 @@
+﻿@using HunterFreemanDev.ClassLibrary.Element
+
+<div class="hfd_grid-row-display">
+    @if (ElementRecord.RenderedType != typeof(UninitializedElementRecord))
+    {
+        <DynamicComponent Type="ElementRecord.RenderedType"/>
+    }
+</div>

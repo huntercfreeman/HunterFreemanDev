@@ -1,0 +1,25 @@
+﻿@using HunterFreemanDev.ClassLibrary.Element
+
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<div class="hfd_grid-display">
+    @if (GridState.Value.ElementRecords.Count == 0)
+    {
+        <GridIsEmptyDisplay />
+    }
+    else
+    {
+        List<ElementRecord> previousRow = null;
+
+        for (int i = 0; i < GridState.Value.ElementRecords.Count; i++)
+        {
+            @* Storing a local copy of the for loop iteration variable is required in Blazor *@
+            var rowIndex = i;
+            var currentRow = GridState.Value.ElementRecords[rowIndex];
+
+            <GridRowDisplay GridRowIndex="rowIndex" GridRowElementReferences="currentRow"/>
+
+            previousRow = currentRow;
+        }
+    }
+</div>

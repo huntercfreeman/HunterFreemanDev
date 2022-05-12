@@ -1,0 +1,20 @@
+﻿@using HunterFreemanDev.ClassLibrary.Element
+@using HunterFreemanDev.ClassLibrary.Store.Grid
+<div class="hfd_grid-row-display">
+
+    @{
+        ElementRecord? previousColumn = null;
+
+        for (int i = 0; i < GridRowElementReferences.Count; i++)
+        {
+            @* Storing a local copy of the for loop iteration variable is required in Blazor *@
+            var columnIndex = i;
+            var currentColumn = GridRowElementReferences[columnIndex];
+
+            <GridColumnDisplay GridColumnIndex="columnIndex"
+                               ElementRecord="currentColumn"/>
+
+            previousColumn = currentColumn;
+        }
+    }
+</div>
