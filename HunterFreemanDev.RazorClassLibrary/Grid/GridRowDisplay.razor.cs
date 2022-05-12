@@ -9,9 +9,13 @@ public partial class GridRowDisplay : ComponentBase
     [Parameter, EditorRequired]
     public int GridRowIndex { get; set; }
     [Parameter, EditorRequired]
+    public int GridTotalRowCount { get; set; }
+    [Parameter, EditorRequired]
     public List<ElementRecord> GridRowElementReferences { get; set; } = null!;
     [Parameter, EditorRequired]
     public EventCallback<(CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex)> AddWindowEventCallback { get; set; }
+
+    private string GetStyle => $"height: {100.0 / GridTotalRowCount}%;";
 
     private void OnAddWindowEventCallback((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex) argumentTuple)
     {
