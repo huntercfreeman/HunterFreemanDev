@@ -1,0 +1,39 @@
+﻿<div class="hfd_grid-column-display-add-column-buttons">
+    <div class="hfd_grid-column-display-add-column-button-row">
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-north-west hfd_grid-column-display-add-column-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-north"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.North))">
+            <IconArrowUp />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-north-east hfd_grid-column-display-add-column-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+    </div>
+    <div class="hfd_grid-column-display-add-column-button-row">
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-west"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.West))">
+            <IconArrowLeft />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-center">
+            <IconBrowser />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-east"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.East))">
+            <IconArrowRight />
+        </span>
+    </div>
+    <div class="hfd_grid-column-display-add-column-button-row">
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-south-west hfd_grid-column-display-add-column-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-south"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.South))">
+            <IconArrowDown />
+        </span>
+        <span class="hfd_grid-column-display-add-column-button-item hfd_grid-column-display-add-column-button-item-south-east hfd_grid-column-display-add-column-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+    </div>
+</div>

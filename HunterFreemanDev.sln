@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HunterFreemanDev.Hosts.BlazorWebAssembly", "HunterFreemanDev.Hosts.BlazorWebAssembly\HunterFreemanDev.Hosts.BlazorWebAssembly.csproj", "{6DF4622A-1B31-47CA-8555-F452286B5B6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.Hosts.BlazorWebAssembly", "HunterFreemanDev.Hosts.BlazorWebAssembly\HunterFreemanDev.Hosts.BlazorWebAssembly.csproj", "{6DF4622A-1B31-47CA-8555-F452286B5B6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HunterFreemanDev.Tests", "HunterFreemanDev.Tests\HunterFreemanDev.Tests.csproj", "{C19D802E-BD5A-4B9F-A78A-6F15E7976014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.Tests", "HunterFreemanDev.Tests\HunterFreemanDev.Tests.csproj", "{C19D802E-BD5A-4B9F-A78A-6F15E7976014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HunterFreemanDev.RazorClassLibrary", "HunterFreemanDev.RazorClassLibrary\HunterFreemanDev.RazorClassLibrary.csproj", "{43775C34-AFA5-484F-ACDD-83D0013E78BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.RazorClassLibrary", "HunterFreemanDev.RazorClassLibrary\HunterFreemanDev.RazorClassLibrary.csproj", "{43775C34-AFA5-484F-ACDD-83D0013E78BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HunterFreemanDev.ClassLibrary", "HunterFreemanDev.ClassLibrary\HunterFreemanDev.ClassLibrary.csproj", "{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.ClassLibrary", "HunterFreemanDev.ClassLibrary\HunterFreemanDev.ClassLibrary.csproj", "{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

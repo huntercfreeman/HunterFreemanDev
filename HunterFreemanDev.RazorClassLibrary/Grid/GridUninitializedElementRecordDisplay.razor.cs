@@ -1,0 +1,15 @@
+﻿using HunterFreemanDev.ClassLibrary.Element;
+using Microsoft.AspNetCore.Components;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HunterFreemanDev.RazorClassLibrary.Grid;
+
+public partial class GridUninitializedElementRecordDisplay : ComponentBase
+{
+    [Parameter, EditorRequired]
+    public ElementRecord ElementRecord { get; set; } = null!;
+}

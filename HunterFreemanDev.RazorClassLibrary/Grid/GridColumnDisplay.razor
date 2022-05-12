@@ -1,8 +1,15 @@
 ﻿@using HunterFreemanDev.ClassLibrary.Element
 
-<div class="hfd_grid-row-display">
+<div class="hfd_grid-column-display"
+     style="@GetStyle">
+    <GridAddColumnButtons AddWindowEventCallback="OnAddWindowEventCallback" />
+
     @if (ElementRecord.RenderedType != typeof(UninitializedElementRecord))
     {
         <DynamicComponent Type="ElementRecord.RenderedType"/>
+    }
+    else
+    {
+        <GridUninitializedElementRecordDisplay ElementRecord="ElementRecord" />
     }
 </div>
