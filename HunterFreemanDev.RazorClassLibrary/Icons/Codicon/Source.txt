@@ -1,0 +1,2 @@
+﻿Icons in this directory were taken from Visual Studio Code's Codicon repository.
+https://github.com/microsoft/vscode-codicons/

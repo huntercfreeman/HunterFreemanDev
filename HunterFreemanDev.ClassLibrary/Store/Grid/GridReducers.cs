@@ -30,10 +30,18 @@ public class GridReducers
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
                 break;
             case Direction.CardinalDirectionKind.East:
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
                 break;
             case Direction.CardinalDirectionKind.South:
+                if (addGridStateAction.ArgumentTuple.GridRowIndex == previousGridState.ElementRecords.Count - 1)
+                    nextRowsList.Add(new());
+
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex + 1].Add(addGridStateAction.ElementRecord);
                 break;
             case Direction.CardinalDirectionKind.West:
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex]
+                    .Insert(addGridStateAction.ArgumentTuple.GridColumnIndex, 
+                        addGridStateAction.ElementRecord);
                 break;
         }
 

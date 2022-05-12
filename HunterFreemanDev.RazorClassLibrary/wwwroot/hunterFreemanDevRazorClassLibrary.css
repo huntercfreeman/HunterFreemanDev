@@ -8,6 +8,16 @@
     user-select: none;
 }
 
+.hfd_visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
 .hfd_document-layout-display {
     width: 100vw;
     height: 100vh;
@@ -30,8 +40,8 @@
 
 .hfd_grid-column-display-add-column-buttons {
     position: absolute;
-    left: calc(50% - 3em);
-    top: calc(50% - 3ch);
+    left: calc(50% - 4em);
+    top: calc(50% - 9ch);
     font-family: monospace;
 }
 
@@ -42,6 +52,10 @@
 .hfd_grid-column-display-add-column-button-item {
     cursor: pointer;
     padding: 5px;
+}
+
+.hfd_grid-column-display-add-column-button-item-diagonal {
+    visibility: hidden;
 }
 
 .hfd_grid-column-display-add-column-button-item:hover {
