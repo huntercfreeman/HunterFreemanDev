@@ -11,6 +11,11 @@
             var columnIndex = i;
             var currentColumn = GridRowElementReferences[columnIndex];
 
+            @if(previousColumn is not null)
+            {
+                <GridColumnDividerDisplay />
+            }
+
             <GridColumnDisplay GridColumnIndex="columnIndex"
                                ElementRecord="currentColumn"
                                AddWindowEventCallback="OnAddWindowEventCallback" />

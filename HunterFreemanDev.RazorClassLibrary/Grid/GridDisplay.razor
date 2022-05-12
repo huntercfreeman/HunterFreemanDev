@@ -17,6 +17,11 @@
             var rowIndex = i;
             var currentRow = GridState.Value.ElementRecords[rowIndex];
 
+            @if(previousRow is not null)
+            {
+                <GridRowDividerDisplay />
+            }
+
             <GridRowDisplay GridRowIndex="rowIndex"
                             GridRowElementReferences="currentRow"
                             AddWindowEventCallback="OnAddWindowEventCallback" />

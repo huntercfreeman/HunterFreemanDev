@@ -38,6 +38,14 @@
     height: 100%;
 }
 
+.hfd_grid-row-display {
+    display: flex;
+}
+
+.hfd_grid-column-display {
+    display: inline-flex;
+}
+
 .hfd_grid-column-display-add-column-buttons {
     position: absolute;
     left: calc(50% - 4em);
@@ -60,4 +68,14 @@
 
 .hfd_grid-column-display-add-column-button-item:hover {
     background-color: aqua;
+}
+
+.hfd_grid-row-divider-display {
+    height: 3px;
+    background-color: orangered;
+}
+
+.hfd_grid-column-divider-display {
+    width: 3px;
+    background-color: orangered;
 }
