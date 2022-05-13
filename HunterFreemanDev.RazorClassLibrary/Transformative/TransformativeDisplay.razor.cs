@@ -68,11 +68,13 @@ public partial class TransformativeDisplay : FluxorComponent
             {
                 _dragStateChangedStack.Clear();
 
+                _resizeEventCounter++;
 
+                await InvokeAsync(StateHasChanged);
 
                 _dragStateThrottlingTask = Task.Run(async () =>
                 {
-                    await Task.Delay(300);
+                    await Task.Delay(100);
                 }, _dragStateChangedCancellationTokenSource.Token);
             }
         }
