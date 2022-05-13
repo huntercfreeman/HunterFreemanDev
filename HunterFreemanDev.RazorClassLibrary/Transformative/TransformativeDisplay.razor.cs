@@ -8,16 +8,81 @@ using HunterFreemanDev.RazorClassLibrary.Button;
 using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using HunterFreemanDev.ClassLibrary.Dimension;
 using System.Text;
+using HunterFreemanDev.ClassLibrary.Store.Drag;
+using Fluxor;
+using HunterFreemanDev.ClassLibrary.Store.Dialog;
+using Fluxor.Blazor.Web.Components;
 
 namespace HunterFreemanDev.RazorClassLibrary.Transformative;
 
-public partial class TransformativeDisplay : ComponentBase
+public partial class TransformativeDisplay : FluxorComponent
 {
+    [Inject]
+    private IState<DragState> DragState { get; set; } = null!;
+    [Inject]
+    private IState<DialogStates> DialogStates { get; set; } = null!;
+    [Inject]
+    private IDispatcher Dispatcher { get; set; } = null!;
+
     [Parameter, EditorRequired]
     public DimensionsRecord DimensionsRecord { get; set; } = null!;
 
     private DimensionValuedUnit DEFAULT_HANDLE_SIZE_IN_PIXELS = new DimensionValuedUnit(7, DimensionUnitKind.Pixels);
+    private SemaphoreSlim _dragStateChangedSemaphoreSlim = new(1, 1);
+    private Stack<(object? sender, EventArgs e)> _dragStateChangedStack = new();
+    private CancellationTokenSource _dragStateChangedCancellationTokenSource = new();
+    private Task? _dragStateThrottlingTask;
+    private Action? _dragStateHandler;
+    private Guid _transformativeDisplayId = Guid.NewGuid();
 
+    private int _resizeEventCounter;
+
+    protected override void OnInitialized()
+    {
+        DragState.StateChanged += DragState_StateChanged;
+
+        base.OnInitialized();
+    }
+
+    private async void DragState_StateChanged(object? sender, EventArgs e)
+    {
+        try
+        {
+            await _dragStateChangedSemaphoreSlim.WaitAsync();
+
+            _dragStateChangedStack.Push((sender, e));
+        }
+        finally
+        {
+            _dragStateChangedSemaphoreSlim.Release();
+        }
+
+        if(_dragStateThrottlingTask is not null)
+            await _dragStateThrottlingTask;
+
+        try
+        {
+            await _dragStateChangedSemaphoreSlim.WaitAsync();
+
+            if(_dragStateChangedStack.Any())
+            {
+                _dragStateChangedStack.Clear();
+
+
+
+                _dragStateThrottlingTask = Task.Run(async () =>
+                {
+                    await Task.Delay(300);
+                }, _dragStateChangedCancellationTokenSource.Token);
+            }
+        }
+        finally
+        {
+            _dragStateChangedSemaphoreSlim.Release();
+        }
+    }
+
+    #region HandleCssStylings
     private string GetNorthResizeHandleCssStyling()
     {
         ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
@@ -290,6 +355,25 @@ public partial class TransformativeDisplay : ComponentBase
 
         return cssStylingBuilder.ToString();
     }
+    #endregion
+
+    private void SubscribeToDragEventWithNorthResizeHandle() =>
+        DispatchSubscribeToDragEventProviderStateAction(DragEventHandlerNorthResizeHandle);
+
+    private void DispatchSubscribeToDragEventProviderStateAction(Action dragEventActionHandler)
+    {
+        var action = new SubscribeToDragEventProviderStateAction(_transformativeDisplayId,
+            dragEventActionHandler);
+
+        Dispatcher.Dispatch(action);
+    }
+
+    private void DragEventHandlerNorthResizeHandle()
+    {
+        _resizeEventCounter++;
+
+        InvokeAsync(StateHasChanged);
+    }
 
     private void ValidateDimensionUnitKindIsSupported(string dimensionName, 
         DimensionValuedUnit dimensionValuedUnit)
@@ -298,5 +382,11 @@ public partial class TransformativeDisplay : ComponentBase
             throw new ApplicationException($"The {nameof(DimensionUnitKind)}: {dimensionValuedUnit.DimensionUnitKind} " +
                 $"is not supported for {nameof(TransformativeDisplay)}. The name of the dimension with this " +
                 $"unsupported type is named: {dimensionName}.");
+    }
+
+    public void Dispose()
+    {
+        DragState.StateChanged -= DragState_StateChanged;
+        _dragStateChangedCancellationTokenSource?.Cancel();
     }
 }

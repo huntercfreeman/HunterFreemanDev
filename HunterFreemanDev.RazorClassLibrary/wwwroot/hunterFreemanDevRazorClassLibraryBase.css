@@ -102,13 +102,8 @@
     top: 0;
 }
 
-    .hfd_drag-event-provider-display .hfd_active {
+    .hfd_drag-event-provider-display.hfd_active {
         display: block;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
     }
 
 .hfd_debug-css-class-provider-display {

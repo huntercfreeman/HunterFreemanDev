@@ -20,7 +20,7 @@ public partial class DragEventProviderDisplay : FluxorComponent
     private IDispatcher Dispatcher { get; set; } = null!;
 
     private string IsActiveCssClass => DragEventProviderState.Value.OnDragEventSubscriptions.Any()
-        ? "active"
+        ? "hfd_active"
         : string.Empty;
 
     private void DispatchOnDragEventActionOnMouseMove(MouseEventArgs mouseEventArgs)
