@@ -235,7 +235,21 @@
     cursor: nw-resize;
 }
 
+.hfd_theme-display {
+    margin-bottom: 10px;
+}
 
+.hfd_theme-display.hfd_active {
+    background-color: cornflowerblue;
+}
+
+.hfd_theme-display-title {
+    font-size: 1.5em;
+}
+
+.hfd_theme-display-body {
+    margin-left: 30px;
+}
 
 
 
