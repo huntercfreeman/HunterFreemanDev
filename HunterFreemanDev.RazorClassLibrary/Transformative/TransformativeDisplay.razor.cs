@@ -30,14 +30,9 @@ public partial class TransformativeDisplay : FluxorComponent
     public EventCallback<DimensionsRecord> OnDimensionsRecordChangedEventCallback { get; set; }
 
     private DimensionValuedUnit DEFAULT_HANDLE_SIZE_IN_PIXELS = new DimensionValuedUnit(7, DimensionUnitKind.Pixels);
-    private SemaphoreSlim _dragStateChangedSemaphoreSlim = new(1, 1);
-    private Stack<(object? sender, EventArgs e)> _dragStateChangedStack = new();
-    private CancellationTokenSource _dragStateChangedCancellationTokenSource = new();
-    private Task? _dragStateThrottlingTask;
     private Action? _dragStateEventHandler;
     private Guid _transformativeDisplayId = Guid.NewGuid();
 
-    private DragState? _previousDragState;
     private int _resizeEventCounter;
 
     protected override void OnInitialized()
@@ -47,50 +42,11 @@ public partial class TransformativeDisplay : FluxorComponent
         base.OnInitialized();
     }
 
-    private async void DragState_StateChanged(object? sender, EventArgs e)
+    private void DragState_StateChanged(object? sender, EventArgs e)
     {
-        try
+        if (_dragStateEventHandler is not null)
         {
-            await _dragStateChangedSemaphoreSlim.WaitAsync();
-
-            _dragStateChangedStack.Push((sender, e));
-        }
-        finally
-        {
-            _dragStateChangedSemaphoreSlim.Release();
-        }
-
-        if(_dragStateThrottlingTask is not null)
-            await _dragStateThrottlingTask;
-
-        try
-        {
-            await _dragStateChangedSemaphoreSlim.WaitAsync();
-
-            if(_dragStateChangedStack.Any())
-            {
-                _dragStateChangedStack.Clear();
-
-                if(_dragStateEventHandler is not null)
-                {
-                    if(_previousDragState?.MouseEventArgs is not null &&
-                        DragState.Value.MouseEventArgs is not null)
-                    {
-                        _dragStateEventHandler();
-                    }
-
-                    _previousDragState = DragState.Value;
-                }
-
-                _dragStateThrottlingTask = Task.Run(async () =>
-                {
-                    await Task.Delay(100);
-                }, _dragStateChangedCancellationTokenSource.Token);
-            }
-        }
-        finally
-        {
-            _dragStateChangedSemaphoreSlim.Release();
+            _dragStateEventHandler();
         }
     }
 
@@ -387,8 +343,6 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var differenceY = DragState.Value.MouseEventArgs!.ClientY - _previousDragState!.MouseEventArgs!.ClientY;
-
         var nextDimensionsRecord = DimensionsRecord with
         {
             Height = 
@@ -415,7 +369,6 @@ public partial class TransformativeDisplay : FluxorComponent
     protected override void Dispose(bool disposing)
     {
         DragState.StateChanged -= DragState_StateChanged;
-        _dragStateChangedCancellationTokenSource?.Cancel();
 
         base.Dispose(disposing);
     }

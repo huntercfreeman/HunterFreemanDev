@@ -58,7 +58,7 @@ public partial class DragEventProviderDisplay : FluxorComponent
 
                 _dragStateThrottlingTask = Task.Run(async () =>
                 {
-                    await Task.Delay(50);
+                    await Task.Delay(40);
                 }, _dragStateChangedCancellationTokenSource.Token);
             }
         }
