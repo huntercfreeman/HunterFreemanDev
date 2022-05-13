@@ -21,19 +21,19 @@ public record DialogRecord(Guid DialogRecordId, Type RenderedContentType, Dimens
 
         DimensionValuedUnit widthInPixels = 
             new DimensionValuedUnit(DEFAULT_WIDTH_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL * viewportDimensions.WidthInPixels,
-                DimensionUnitKind.PercentageOfParentAsDecimal);
+                DimensionUnitKind.Pixels);
 
         DimensionValuedUnit heightInPixels = 
             new DimensionValuedUnit(DEFAULT_HEIGHT_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL * viewportDimensions.HeightInPixels,
-                DimensionUnitKind.PercentageOfParentAsDecimal);
+                DimensionUnitKind.Pixels);
         
         DimensionValuedUnit leftInPixels = 
             new DimensionValuedUnit(DEFAULT_LEFT_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL * viewportDimensions.WidthInPixels,
-                DimensionUnitKind.PercentageOfParentAsDecimal);
+                DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels = 
             new DimensionValuedUnit(DEFAULT_TOP_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL * viewportDimensions.HeightInPixels,
-                DimensionUnitKind.PercentageOfParentAsDecimal);
+                DimensionUnitKind.Pixels);
 
         return new DimensionsRecord(widthInPixels, heightInPixels, leftInPixels, topInPixels);
     }

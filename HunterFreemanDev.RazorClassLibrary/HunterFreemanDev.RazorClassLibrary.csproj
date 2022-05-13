@@ -20,4 +20,10 @@
     <ProjectReference Include="..\HunterFreemanDev.ClassLibrary\HunterFreemanDev.ClassLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\hunterFreemanDevRazorClassLibrary.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

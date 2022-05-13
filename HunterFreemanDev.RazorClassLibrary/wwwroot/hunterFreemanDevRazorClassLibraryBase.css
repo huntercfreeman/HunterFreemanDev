@@ -1,7 +1,7 @@
 ﻿:root {
     --hfd_toolbar-display-row-padding: 4px 0;
     --hfd_toolbar-display-padding: 5px;
-    --hfd_toolbar-display-height: 8ch;
+    --hfd_toolbar-display-height: 10ch;
     --hfd_button-display-padding: 5px;
     --hfd_button-display-border-radius: 5px;
     --hfd_grid-column-display-add-column-button-row-margin-top: 5px;
@@ -120,6 +120,7 @@
     height: var(--hfd_toolbar-display-height);
     overflow-x: auto;
     padding: var(--hfd_toolbar-display-padding);
+    background-color: #b8ddff;
 }
 
 .hfd_toolbar-display-row {
@@ -137,4 +138,13 @@
 
 .hfd_dialog-task-bar-display {
     height: var(--hfd_dialog-task-bar-display-height);
+    background-color: silver;
+}
+
+.hfd_transformative-resize-handle-display {
+    position: absolute;
+}
+
+.hfd_transformative-resize-handle-north-display {
+    cursor: n-resize;
 }
