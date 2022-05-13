@@ -1,5 +1,9 @@
 ﻿<div class="hfd_dialog-display"
      style="@DialogRecord.DimensionsRecord.BuildCssStyleString()">
+
+     <div @onclick="StateHasChanged">
+        @@DialogRecord.DimensionsRecord.BuildCssStyleString(): @DialogRecord.DimensionsRecord.BuildCssStyleString()
+     </div>
      
      <HunterFreemanDev.RazorClassLibrary.Transformative.TransformativeDisplay DimensionsRecord="DialogRecord.DimensionsRecord"
                                                                               OnDimensionsRecordChangedEventCallback="OnDimensionsRecordChangedEventCallback"/>

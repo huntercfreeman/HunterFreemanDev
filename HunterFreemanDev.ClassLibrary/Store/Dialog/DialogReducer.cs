@@ -34,10 +34,15 @@ public class DialogReducer
     {
         var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
 
+        var nextDialogRecord = replaceDialogDimensionsRecordAction.DialogRecord with
+        {
+            DimensionsRecord = replaceDialogDimensionsRecordAction.DimensionsRecord
+        };
+
         nextDialogStates.DialogRecordMap.Remove(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId);
 
-        nextDialogStates.DialogRecordMap.Add(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId,
-            replaceDialogDimensionsRecordAction.DialogRecord);
+        nextDialogStates.DialogRecordMap.Add(nextDialogRecord.DialogRecordId,
+            nextDialogRecord);
 
         return nextDialogStates;
     }
