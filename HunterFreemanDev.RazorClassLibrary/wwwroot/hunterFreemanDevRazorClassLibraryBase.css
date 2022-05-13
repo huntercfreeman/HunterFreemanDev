@@ -132,6 +132,7 @@
     position: fixed;
     left: 0;
     top: 0;
+    background-color: aquamarine;
 }
 
 .hfd_dialog-task-bar-display {

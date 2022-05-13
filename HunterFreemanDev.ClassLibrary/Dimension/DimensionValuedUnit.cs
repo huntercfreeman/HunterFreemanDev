@@ -1,3 +1,8 @@
-﻿namespace HunterFreemanDev.ClassLibrary.Dimension;
+﻿using System.Text;
 
-public record DimensionValuedUnit(double Value, DimensionUnitKind DimensionUnitKind);
+namespace HunterFreemanDev.ClassLibrary.Dimension;
+
+public record DimensionValuedUnit(double Value, DimensionUnitKind DimensionUnitKind)
+{
+    public string BuildCssStyleString() => $"{Value}{DimensionUnitKind.ConvertToCssUnitString()}";
+}
