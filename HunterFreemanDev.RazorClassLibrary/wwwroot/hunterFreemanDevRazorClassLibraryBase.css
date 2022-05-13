@@ -34,7 +34,7 @@
 
 .hfd_grid-display {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 10ch - 10px);
 }
 
 .hfd_grid-row-display {
@@ -78,4 +78,38 @@
 .hfd_grid-column-divider-display {
     width: 3px;
     background-color: orangered;
+}
+
+.hfd_drag-event-provider-display {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+    .hfd_drag-event-provider-display .hfd_active {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+.hfd_debug-css-class-provider-display {
+    width: 100%;
+    height: 100%;
+}
+
+.hfd_toolbar-display {
+    height: 8ch;
+    overflow-x: auto;
+    padding: 5px;
+}
+
+.hfd_toolbar-display-row {
+    white-space: nowrap;
+    padding: 4px 0;
 }

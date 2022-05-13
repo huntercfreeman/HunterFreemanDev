@@ -14,7 +14,8 @@
 
             @if(previousColumn is not null)
             {
-                <GridColumnDividerDisplay />
+                <GridColumnDividerDisplay LeftElementRecord="previousColumn"
+                                          RightElementRecord="currentColumn" />
             }
 
             <GridColumnDisplay GridColumnIndex="columnIndex"
