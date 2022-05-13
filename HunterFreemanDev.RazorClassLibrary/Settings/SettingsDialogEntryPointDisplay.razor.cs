@@ -9,6 +9,7 @@ using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using Fluxor;
 using HunterFreemanDev.ClassLibrary.Store.Dialog;
 using HunterFreemanDev.ClassLibrary.Dialog;
+using HunterFreemanDev.ClassLibrary.Dimension;
 
 namespace HunterFreemanDev.RazorClassLibrary.Settings;
 
@@ -18,14 +19,21 @@ public partial class SettingsDialogEntryPointDisplay : ComponentBase
     private IState<DialogStates> DialogStates { get; set; } = null!;
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
+    [Inject]
+    private IViewportDimensionsService ViewportDimensionsService { get; set;} = null!;
 
-    private DialogRecord _settingsDialogRecord = new(Guid.NewGuid(), typeof(SettingsDisplay));
+    private Guid _settingsDialogRecordId = Guid.NewGuid();
+    private Type _settingsDialogRecordType = typeof(SettingsDisplay);
 
-    private void DispatchConstructDialogOnClick()
+    private async Task DispatchConstructDialogOnClick()
     {
-        if (!DialogStates.Value.DialogRecordMap.ContainsKey(_settingsDialogRecord.DialogRecordId))
+        if (!DialogStates.Value.DialogRecordMap.ContainsKey(_settingsDialogRecordId))
         {
-            var action = new RegisterDialogAction(_settingsDialogRecord);
+            var defaultDimensionsRecordForDialog = await DialogRecord.ConstructDefaultDimensionsRecord(ViewportDimensionsService);
+
+            var action = new RegisterDialogAction(new DialogRecord(_settingsDialogRecordId,
+                _settingsDialogRecordType,
+                defaultDimensionsRecordForDialog));
 
             Dispatcher.Dispatch(action);
         }
