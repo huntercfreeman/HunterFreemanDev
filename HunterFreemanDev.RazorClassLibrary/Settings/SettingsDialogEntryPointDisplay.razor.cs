@@ -19,19 +19,15 @@ public partial class SettingsDialogEntryPointDisplay : ComponentBase
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
 
-    private DialogRecord _settingsDialogRecord = new(Guid.NewGuid(), typeof(SettingsDialogDisplay));
-
-    private int _count;
+    private DialogRecord _settingsDialogRecord = new(Guid.NewGuid(), typeof(SettingsDisplay));
 
     private void DispatchConstructDialogOnClick()
     {
-
         if (!DialogStates.Value.DialogRecordMap.ContainsKey(_settingsDialogRecord.DialogRecordId))
         {
             var action = new RegisterDialogAction(_settingsDialogRecord);
 
             Dispatcher.Dispatch(action);
-            _count++;
         }
     }
 }

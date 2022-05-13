@@ -1,4 +1,16 @@
-﻿.hfd_unselectable {
+﻿:root {
+    --hfd_toolbar-display-row-padding: 4px 0;
+    --hfd_toolbar-display-padding: 5px;
+    --hfd_toolbar-display-height: 8ch;
+    --hfd_button-display-padding: 5px;
+    --hfd_button-display-border-radius: 5px;
+    --hfd_grid-column-display-add-column-button-row-margin-top: 5px;
+    --hfd_grid-column-display-add-column-button-item-padding: 5px;
+    --hfd_grid-row-divider-display-height: 3px;
+    --hfd_grid-column-divider-display-width: 3px;
+}
+
+.hfd_unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -24,17 +36,17 @@
 }
 
 .hfd_button-display {
-    padding: 5px;
+    padding: var(--hfd_button-display-padding);
     background-color: aqua;
     display: inline-flex;
     width: fit-content;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(----hfd_button-display-border-radius);
 }
 
 .hfd_grid-display {
     width: 100%;
-    height: calc(100% - 10ch - 10px);
+    height: calc(100% - var(--hfd_toolbar-display-height) - 2 * var(--hfd_toolbar-display-padding));
 }
 
 .hfd_grid-row-display {
@@ -54,12 +66,12 @@
 }
 
 .hfd_grid-column-display-add-column-button-row {
-    margin-top: 5px;
+    margin-top: var(--hfd_grid-column-display-add-column-button-row-margin-top);
 }
 
 .hfd_grid-column-display-add-column-button-item {
     cursor: pointer;
-    padding: 5px;
+    padding: var(--hfd_grid-column-display-add-column-button-item-padding);
 }
 
 .hfd_grid-column-display-add-column-button-item-diagonal {
@@ -71,12 +83,12 @@
 }
 
 .hfd_grid-row-divider-display {
-    height: 3px;
+    height: var(--hfd_grid-row-divider-display-height);
     background-color: orangered;
 }
 
 .hfd_grid-column-divider-display {
-    width: 3px;
+    width: var(--hfd_grid-column-divider-display-width);
     background-color: orangered;
 }
 
@@ -104,14 +116,14 @@
 }
 
 .hfd_toolbar-display {
-    height: 8ch;
+    height: var(--hfd_toolbar-display-height);
     overflow-x: auto;
-    padding: 5px;
+    padding: var(--hfd_toolbar-display-padding);
 }
 
 .hfd_toolbar-display-row {
     white-space: nowrap;
-    padding: 4px 0;
+    padding: var(--hfd_toolbar-display-row-padding);
 }
 
 .hfd_dialog-display {

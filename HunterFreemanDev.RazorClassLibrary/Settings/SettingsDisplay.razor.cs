@@ -9,6 +9,6 @@ using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 
 namespace HunterFreemanDev.RazorClassLibrary.Settings;
 
-public partial class SettingsDialogDisplay : ComponentBase
+public partial class SettingsDisplay : ComponentBase
 {
 }
