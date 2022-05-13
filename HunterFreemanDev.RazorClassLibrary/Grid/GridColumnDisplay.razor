@@ -4,9 +4,9 @@
      style="@GetStyle">
     <GridAddColumnButtons AddWindowEventCallback="OnAddWindowEventCallback" />
 
-    @if (ElementRecord.RenderedType != typeof(UninitializedElementRecord))
+    @if (ElementRecord.RenderedContentType != typeof(UninitializedElementRecord))
     {
-        <DynamicComponent Type="ElementRecord.RenderedType"/>
+        <DynamicComponent Type="ElementRecord.RenderedContentType"/>
     }
     else
     {

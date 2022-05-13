@@ -1,5 +1,6 @@
 using HunterFreemanDev.ClassLibrary;
 using HunterFreemanDev.Hosts.BlazorWebAssembly;
+using HunterFreemanDev.RazorClassLibrary;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -10,5 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddHunterFreemanDevClassLibraryServices();
+
+builder.Services.AddHunterFreemanDevRazorClassLibraryServices();
 
 await builder.Build().RunAsync();

@@ -1,0 +1,10 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_dialog-task-bar-display">
+    @foreach(var dialogRecord in DialogStates.Value.DialogRecordMap.Values)
+    {
+        <DialogTaskBarEntryDisplay DialogRecord="dialogRecord" />
+    }
+</div>

@@ -8,7 +8,8 @@
     <base href="/" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="HunterFreemanDev.Hosts.BlazorWebAssembly.styles.css" rel="stylesheet" />
-    <link href="_content/HunterFreemanDev.RazorClassLibrary/hunterFreemanDevRazorClassLibrary.css" rel="stylesheet" />
+    <link href="_content/HunterFreemanDev.RazorClassLibrary/hunterFreemanDevRazorClassLibraryBase.css" rel="stylesheet" />
+    <link href="_content/HunterFreemanDev.RazorClassLibrary/hunterFreemanDevRazorClassLibraryDebug.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
@@ -23,7 +24,10 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+
+    <script src="_content/HunterFreemanDev.RazorClassLibrary/hunterFreemanDevRazorClassLibrary.js"></script>
 </body>
 
 </html>

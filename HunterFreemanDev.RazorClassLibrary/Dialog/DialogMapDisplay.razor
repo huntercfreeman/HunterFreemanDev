@@ -1,0 +1,13 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_dialog-map-display">
+    @foreach(var dialogRecord in DialogStates.Value.DialogRecordMap.Values)
+    {
+        if(!dialogRecord.IsMinimized)
+        {
+           <DialogDisplay DialogRecord="dialogRecord" />
+        }
+    }
+</div>

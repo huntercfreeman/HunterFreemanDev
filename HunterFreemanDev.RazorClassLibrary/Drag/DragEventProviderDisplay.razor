@@ -1,0 +1,9 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_drag-event-provider-display @IsActiveCssClass"
+     @onmousemove="DispatchOnDragEventActionOnMouseMove"
+     @onmouseup="DispatchUnsubscribeActionOnMouseUp">
+
+</div>

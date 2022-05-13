@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.RazorClass
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.ClassLibrary", "HunterFreemanDev.ClassLibrary\HunterFreemanDev.ClassLibrary.csproj", "{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HunterFreemanDev.Hosts.MauiBlazor", "HunterFreemanDev.Hosts.MauiBlazor\HunterFreemanDev.Hosts.MauiBlazor.csproj", "{034868D4-44C4-409D-B776-61B4E0C07570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D7AFFE8-538A-4D51-A9E6-B8FAEBD2C36F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034868D4-44C4-409D-B776-61B4E0C07570}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

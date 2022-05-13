@@ -1,5 +1,6 @@
-﻿<div class="hfd_button-display hfd_unselectable"
-     @onclick="FireOnClickEventCallback">
+﻿<div class="hfd_button-display hfd_unselectable @(Class ?? string.Empty)"
+     @onclick="FireOnClickEventCallback"
+     title="@(Title ?? string.Empty)">
      
      @ChildContent
 </div>

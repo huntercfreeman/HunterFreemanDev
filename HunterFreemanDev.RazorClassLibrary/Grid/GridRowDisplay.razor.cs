@@ -22,4 +22,10 @@ public partial class GridRowDisplay : ComponentBase
         if (AddWindowEventCallback.HasDelegate)
             AddWindowEventCallback.InvokeAsync((argumentTuple.CardinalDirectionKind, argumentTuple.GridColumnIndex, GridRowIndex));
     }
+    
+    //private void OnMouseDownEventCallback((ElementRecord LeftElementRecord, ElementRecord RightElementRecord) argumentTuple)
+    //{
+    //    if (AddWindowEventCallback.HasDelegate)
+    //        AddWindowEventCallback.InvokeAsync((argumentTuple.CardinalDirectionKind, argumentTuple.GridColumnIndex, GridRowIndex));
+    //}
 }
