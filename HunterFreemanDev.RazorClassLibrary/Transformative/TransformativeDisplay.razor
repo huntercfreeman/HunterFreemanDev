@@ -30,37 +30,44 @@
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-east-display"
-     style="@GetEastResizeHandleCssStyling()">
+     style="@GetEastResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithEastResizeHandle">
 
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-south-display"
-     style="@GetSouthResizeHandleCssStyling()">
+     style="@GetSouthResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithSouthResizeHandle">
 
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-west-display"
-     style="@GetWestResizeHandleCssStyling()">
+     style="@GetWestResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithWestResizeHandle">
 
 </div>
 
 @* Diagonal Resize Handles *@
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-north-east-display"
-     style="@GetNorthEastResizeHandleCssStyling()">
+     style="@GetNorthEastResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithNorthEastResizeHandle">
 
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-south-east-display"
-     style="@GetSouthEastResizeHandleCssStyling()">
+     style="@GetSouthEastResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithSouthEastResizeHandle">
 
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-south-west-display"
-     style="@GetSouthWestResizeHandleCssStyling()">
+     style="@GetSouthWestResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithSouthWestResizeHandle">
 
 </div>
 
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-north-west-display"
-     style="@GetNorthWestResizeHandleCssStyling()">
+     style="@GetNorthWestResizeHandleCssStyling()"
+     @onmousedown="SubscribeToDragEventWithNorthWestResizeHandle">
 
 </div>
