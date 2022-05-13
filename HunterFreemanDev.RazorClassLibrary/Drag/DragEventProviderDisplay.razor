@@ -3,6 +3,7 @@
 @inherits FluxorComponent
 
 <div class="hfd_drag-event-provider-display @IsActiveCssClass"
-     @onmousemove="DispatchOnDragEventActionOnMouseMove">
+     @onmousemove="DispatchOnDragEventActionOnMouseMove"
+     @onmouseup="DispatchUnsubscribeActionOnMouseUp">
 
 </div>

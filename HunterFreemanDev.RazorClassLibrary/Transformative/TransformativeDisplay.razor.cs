@@ -385,15 +385,17 @@ public partial class TransformativeDisplay : FluxorComponent
 
     private void DragEventHandlerNorthResizeHandle()
     {
+        _resizeEventCounter++;
+
         var differenceY = DragState.Value.MouseEventArgs!.ClientY - _previousDragState!.MouseEventArgs!.ClientY;
 
         var nextDimensionsRecord = DimensionsRecord with
         {
             Height = 
-                new DimensionValuedUnit(DimensionsRecord.Height.Value + -1 * differenceY, 
+                new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY, 
                     DimensionUnitKind.Pixels),
             Top =
-                new DimensionValuedUnit(DimensionsRecord.Height.Value + differenceY,
+                new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
         };
 

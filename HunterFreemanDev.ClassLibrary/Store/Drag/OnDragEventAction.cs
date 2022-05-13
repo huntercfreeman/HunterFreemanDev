@@ -7,4 +7,5 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Drag;
 
-public record class OnDragEventAction(MouseEventArgs MouseEventArgs);
+public record class OnDragEventAction(MouseEventArgs? MouseEventArgs);
+

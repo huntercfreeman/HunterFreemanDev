@@ -67,4 +67,15 @@ public partial class DragEventProviderDisplay : FluxorComponent
             _dragStateChangedSemaphoreSlim.Release();
         }
     }
+    
+    private async Task DispatchUnsubscribeActionOnMouseUp(MouseEventArgs mouseEventArgs)
+    {
+        var clearDragEventSubscriptionsAction = new ClearDragEventSubscriptionsAction();
+
+        Dispatcher.Dispatch(clearDragEventSubscriptionsAction);
+
+        var onDragEventAction = new OnDragEventAction(null);
+
+        Dispatcher.Dispatch(onDragEventAction);
+    }
 }

@@ -40,4 +40,14 @@ public class DragReducers
 
         return nextDragEventProviderState;
     }
+    
+    [ReducerMethod]
+    public static DragEventProviderState ReduceDragEventProviderState(DragEventProviderState previousDragEventProviderState,
+        ClearDragEventSubscriptionsAction clearDragEventSubscriptionsAction)
+    {
+        var nextDragEventProviderState = 
+            new DragEventProviderState(new Dictionary<Guid, Action>());
+
+        return nextDragEventProviderState;
+    }
 }
