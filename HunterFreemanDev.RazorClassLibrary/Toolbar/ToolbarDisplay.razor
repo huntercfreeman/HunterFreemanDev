@@ -4,7 +4,7 @@
 
 <div class="hfd_toolbar-display">
     <div class="hfd_toolbar-display-row hfd_toolbar-display-row-main">
-        @foreach(var toolbarRecord in ToolbarState.Value.MainRowToolbarRecordMap)
+        @foreach(var toolbarRecord in ToolbarState.Value.MainRowToolbarRecordMap.Values)
         {
             <ToolbarItemDisplay ToolbarRecord="toolbarRecord" />
         }

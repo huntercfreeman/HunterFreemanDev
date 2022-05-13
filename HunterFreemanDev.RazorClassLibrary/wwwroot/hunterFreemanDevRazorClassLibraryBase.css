@@ -113,3 +113,10 @@
     white-space: nowrap;
     padding: 4px 0;
 }
+
+.hfd_dialog-display {
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    top: 0;
+}

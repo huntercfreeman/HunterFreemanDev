@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace HunterFreemanDev.ClassLibrary.Store.Toolbar;
 
 [FeatureState]
-public record ToolbarState(Dictionary<Guid, IToolbarRecordUntyped> MainRowToolbarRecordMap,
-    Dictionary<Guid, IToolbarRecordUntyped> SecondaryRowToolbarRecordMap)
+public record ToolbarState(Dictionary<Guid, ToolbarRecord> MainRowToolbarRecordMap,
+    Dictionary<Guid, ToolbarRecord> SecondaryRowToolbarRecordMap)
 {
-    public ToolbarState() : this(new Dictionary<Guid, IToolbarRecordUntyped>(), new Dictionary<Guid, IToolbarRecordUntyped>())
+    public ToolbarState() : this(new Dictionary<Guid, ToolbarRecord>(), new Dictionary<Guid, ToolbarRecord>())
     {
 
     }

@@ -6,12 +6,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using HunterFreemanDev.RazorClassLibrary.Button;
 using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
-using HunterFreemanDev.ClassLibrary.Toolbar;
 
-namespace HunterFreemanDev.RazorClassLibrary.Toolbar;
+namespace HunterFreemanDev.RazorClassLibrary.Settings;
 
-public partial class ToolbarItemDisplay : ComponentBase
+public partial class SettingsDialogDisplay : ComponentBase
 {
-    [Parameter, EditorRequired]
-    public ToolbarRecord ToolbarRecord { get; set; } = null!;
 }

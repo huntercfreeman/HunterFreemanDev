@@ -13,6 +13,8 @@ public partial class ButtonDisplay : ComponentBase
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public EventCallback OnClickEventCallback { get; set; }
+    [Parameter]
+    public string? Title { get; set; }
 
     private void FireOnClickEventCallback()
     {

@@ -7,4 +7,4 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Toolbar;
 
-public record RegisterMainRowToolbarRecordAction(IToolbarRecordUntyped ToolbarRecordUntyped);
+public record RegisterMainRowToolbarRecordAction(ToolbarRecord ToolbarRecord);

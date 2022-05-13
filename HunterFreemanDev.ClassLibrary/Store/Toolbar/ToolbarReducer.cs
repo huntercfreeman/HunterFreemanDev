@@ -15,11 +15,11 @@ public class ToolbarReducer
         RegisterMainRowToolbarRecordAction registerMainRowToolbarRecordAction)
     {
         var nextToolbarState = 
-            new ToolbarState(new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.MainRowToolbarRecordMap),
-                new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.SecondaryRowToolbarRecordMap));
+            new ToolbarState(new Dictionary<Guid, ToolbarRecord>(previousToolbarState.MainRowToolbarRecordMap),
+                new Dictionary<Guid, ToolbarRecord>(previousToolbarState.SecondaryRowToolbarRecordMap));
 
-        nextToolbarState.MainRowToolbarRecordMap.Add(registerMainRowToolbarRecordAction.ToolbarRecordUntyped.ToolbarRecordId, 
-            registerMainRowToolbarRecordAction.ToolbarRecordUntyped);
+        nextToolbarState.MainRowToolbarRecordMap.Add(registerMainRowToolbarRecordAction.ToolbarRecord.ToolbarRecordId, 
+            registerMainRowToolbarRecordAction.ToolbarRecord);
 
         return nextToolbarState;
     }
@@ -29,11 +29,11 @@ public class ToolbarReducer
         RegisterSecondaryRowToolbarRecordAction registerSecondaryRowToolbarRecordAction)
     {
         var nextToolbarState =
-            new ToolbarState(new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.MainRowToolbarRecordMap),
-                new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.SecondaryRowToolbarRecordMap));
+            new ToolbarState(new Dictionary<Guid, ToolbarRecord>(previousToolbarState.MainRowToolbarRecordMap),
+                new Dictionary<Guid, ToolbarRecord>(previousToolbarState.SecondaryRowToolbarRecordMap));
 
-        nextToolbarState.SecondaryRowToolbarRecordMap.Add(registerSecondaryRowToolbarRecordAction.ToolbarRecordUntyped.ToolbarRecordId,
-            registerSecondaryRowToolbarRecordAction.ToolbarRecordUntyped);
+        nextToolbarState.SecondaryRowToolbarRecordMap.Add(registerSecondaryRowToolbarRecordAction.ToolbarRecord.ToolbarRecordId,
+            registerSecondaryRowToolbarRecordAction.ToolbarRecord);
 
         return nextToolbarState;
     }
@@ -43,8 +43,8 @@ public class ToolbarReducer
         UnregisterMainRowToolbarRecordAction unregisterMainRowToolbarRecordAction)
     {
         var nextToolbarState =
-            new ToolbarState(new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.MainRowToolbarRecordMap),
-                new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.SecondaryRowToolbarRecordMap));
+            new ToolbarState(new Dictionary<Guid, ToolbarRecord>(previousToolbarState.MainRowToolbarRecordMap),
+                new Dictionary<Guid, ToolbarRecord>(previousToolbarState.SecondaryRowToolbarRecordMap));
 
         nextToolbarState.MainRowToolbarRecordMap.Remove(unregisterMainRowToolbarRecordAction.ToolbarRecordId);
 
@@ -56,8 +56,8 @@ public class ToolbarReducer
         UnregisterSecondaryRowToolbarRecordAction unregisterSecondaryRowToolbarRecordAction)
     {
         var nextToolbarState =
-            new ToolbarState(new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.MainRowToolbarRecordMap),
-                new Dictionary<Guid, IToolbarRecordUntyped>(previousToolbarState.SecondaryRowToolbarRecordMap));
+            new ToolbarState(new Dictionary<Guid, ToolbarRecord>(previousToolbarState.MainRowToolbarRecordMap),
+                new Dictionary<Guid, ToolbarRecord>(previousToolbarState.SecondaryRowToolbarRecordMap));
 
         nextToolbarState.MainRowToolbarRecordMap.Remove(unregisterSecondaryRowToolbarRecordAction.ToolbarRecordId);
 

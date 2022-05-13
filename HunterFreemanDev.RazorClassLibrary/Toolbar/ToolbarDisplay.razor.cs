@@ -10,6 +10,7 @@ using HunterFreemanDev.ClassLibrary.Store.Toolbar;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
 using HunterFreemanDev.ClassLibrary.Toolbar;
+using HunterFreemanDev.RazorClassLibrary.Settings;
 
 namespace HunterFreemanDev.RazorClassLibrary.Toolbar;
 
@@ -24,12 +25,9 @@ public partial class ToolbarDisplay : FluxorComponent
     {
         if(firstRender)
         {
-            foreach(var toolbarRecord in ToolbarFacts.AllToolbarRecordsUntyped)
-            {
-                var action = new RegisterToolbarRecordAction(toolbarRecord);
+            var action = new RegisterMainRowToolbarRecordAction(new ToolbarRecord(Guid.NewGuid(), typeof(SettingsDialogEntryPointDisplay)));
 
-                Dispatcher.Dispatch(action);
-            }
+            Dispatcher.Dispatch(action);
         }
 
         await base.OnAfterRenderAsync(firstRender);
