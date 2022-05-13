@@ -9,6 +9,7 @@
     --hfd_grid-row-divider-display-height: 3px;
     --hfd_grid-column-divider-display-width: 3px;
     --hfd_dialog-task-bar-display-height: 4ch;
+    --hfd_dialog-display-title-height: 4ch;
 }
 
 .hfd_unselectable {
@@ -131,6 +132,36 @@
     top: 0;
     background-color: aquamarine;
 }
+
+.hfd_dialog-display-title {
+    cursor: pointer;
+    background-color: antiquewhite;
+    height: var(--hfd_dialog-display-title-height);
+    display: flex;
+    justify-content: space-between;
+}
+
+.hfd_dialog-display-title-content {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.hfd_dialog-display-title-control-buttons {
+    display: flex;
+    align-items: center;
+}
+
+    .hfd_dialog-display-title-control-buttons .hfd_dialog-display-title-control-button-wrapper {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 5px;
+    }
+
+        .hfd_dialog-display-title-control-buttons .hfd_dialog-display-title-control-button-wrapper:hover {
+            background-color: orange;
+        }
 
 .hfd_dialog-task-bar-display {
     height: var(--hfd_dialog-task-bar-display-height);

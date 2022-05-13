@@ -1,10 +1,23 @@
 ﻿<div class="hfd_dialog-display"
      style="@DialogRecord.DimensionsRecord.BuildCssStyleString()">
 
-     <div class="hfd_dialog-display-move-zone"
-          @onmousedown="FireSubscribeToDragEventWithMoveHandle"
-          style="cursor: pointer;">
-          Test Movement Handle by dragging this
+     <div class="hfd_dialog-display-title"
+          @onmousedown="FireSubscribeToDragEventWithMoveHandle">
+          <div class="hfd_dialog-display-title-content">
+              Test Movement Handle by dragging this
+          </div>
+          
+          <div class="hfd_dialog-display-title-control-buttons">
+              <div class="hfd_dialog-display-title-control-button-wrapper">
+                  <IconChromeMinimize />
+              </div>
+              <div class="hfd_dialog-display-title-control-button-wrapper">
+                  <IconChromeMaximize />
+              </div>
+              <div class="hfd_dialog-display-title-control-button-wrapper">
+                  <IconChromeClose />
+              </div>
+          </div>
      </div>
 
      <HunterFreemanDev.RazorClassLibrary.Transformative.TransformativeDisplay DimensionsRecord="DialogRecord.DimensionsRecord"
