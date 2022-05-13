@@ -1,12 +1,15 @@
 ﻿<div class="hfd_dialog-display"
      style="@DialogRecord.DimensionsRecord.BuildCssStyleString()">
 
-     <div @onclick="StateHasChanged">
-        @@DialogRecord.DimensionsRecord.BuildCssStyleString(): @DialogRecord.DimensionsRecord.BuildCssStyleString()
+     <div class="hfd_dialog-display-move-zone"
+          @onmousedown="FireSubscribeToDragEventWithMoveHandle"
+          style="cursor: pointer;">
+          Test Movement Handle by dragging this
      </div>
-     
+
      <HunterFreemanDev.RazorClassLibrary.Transformative.TransformativeDisplay DimensionsRecord="DialogRecord.DimensionsRecord"
-                                                                              OnDimensionsRecordChangedEventCallback="OnDimensionsRecordChangedEventCallback"/>
+                                                                              OnDimensionsRecordChangedEventCallback="OnDimensionsRecordChangedEventCallback"
+                                                                              @ref="_transformativeDisplay" />
 
     <DynamicComponent Type="DialogRecord.RenderedContentType" />
 </div>

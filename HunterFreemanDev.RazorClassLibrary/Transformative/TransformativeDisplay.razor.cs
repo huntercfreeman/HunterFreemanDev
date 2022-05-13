@@ -511,6 +511,28 @@ public partial class TransformativeDisplay : FluxorComponent
         if (OnDimensionsRecordChangedEventCallback.HasDelegate)
             OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
     }
+    
+    public void SubscribeToDragEventWithMoveHandle()
+    {
+        _dragStateEventHandler = DragEventHandlerMoveHandle;
+        DispatchSubscribeToDragEventProviderStateAction(DragEventHandlerMoveHandle);
+    }
+
+    private void DragEventHandlerMoveHandle()
+    {
+        _resizeEventCounter++;
+
+        var nextDimensionsRecord = DimensionsRecord with
+        {
+            Top = new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
+                    DimensionUnitKind.Pixels),
+            Left = new DimensionValuedUnit(DimensionsRecord.Left.Value + DragState.Value.DeltaX, 
+                    DimensionUnitKind.Pixels)
+        };
+
+        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
+            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+    }
 
     private void ValidateDimensionUnitKindIsSupported(string dimensionName, 
         DimensionValuedUnit dimensionValuedUnit)
