@@ -346,10 +346,10 @@ public partial class TransformativeDisplay : FluxorComponent
         var nextDimensionsRecord = DimensionsRecord with
         {
             Height = 
-                new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY, 
+                new DimensionValuedUnit(DimensionsRecord.Height.Value - DragState.Value.DeltaY, 
                     DimensionUnitKind.Pixels),
             Top =
-                new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY,
+                new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
         };
 
