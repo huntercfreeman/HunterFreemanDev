@@ -154,6 +154,142 @@ public partial class TransformativeDisplay : ComponentBase
 
         return cssStylingBuilder.ToString();
     }
+    
+    private string GetNorthEastResizeHandleCssStyling()
+    {
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+
+        var cssStylingBuilder = new StringBuilder();
+
+        DimensionValuedUnit widthInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+                DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit heightInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit leftInPixels =
+            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit topInPixels =
+            new DimensionValuedUnit(-1 * DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"height: {heightInPixels.BuildCssStyleString()}; ");
+
+        cssStylingBuilder.Append($"left: {leftInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"top: {topInPixels.BuildCssStyleString()}; ");
+
+        return cssStylingBuilder.ToString();
+    }
+    
+    private string GetSouthEastResizeHandleCssStyling()
+    {
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+
+        var cssStylingBuilder = new StringBuilder();
+
+        DimensionValuedUnit widthInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+                DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit heightInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit leftInPixels =
+            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit topInPixels =
+            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"height: {heightInPixels.BuildCssStyleString()}; ");
+
+        cssStylingBuilder.Append($"left: {leftInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"top: {topInPixels.BuildCssStyleString()}; ");
+
+        return cssStylingBuilder.ToString();
+    }
+    
+    private string GetSouthWestResizeHandleCssStyling()
+    {
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+
+        var cssStylingBuilder = new StringBuilder();
+
+        DimensionValuedUnit widthInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+                DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit heightInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit leftInPixels =
+            new DimensionValuedUnit(-1 * DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit topInPixels =
+            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"height: {heightInPixels.BuildCssStyleString()}; ");
+
+        cssStylingBuilder.Append($"left: {leftInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"top: {topInPixels.BuildCssStyleString()}; ");
+
+        return cssStylingBuilder.ToString();
+    }
+    
+    private string GetNorthWestResizeHandleCssStyling()
+    {
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+
+        var cssStylingBuilder = new StringBuilder();
+
+        DimensionValuedUnit widthInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+                DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit heightInPixels =
+            new DimensionValuedUnit(DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit leftInPixels =
+            new DimensionValuedUnit(-1 * DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        DimensionValuedUnit topInPixels =
+            new DimensionValuedUnit(-1 * DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            DimensionUnitKind.Pixels);
+
+        cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"height: {heightInPixels.BuildCssStyleString()}; ");
+
+        cssStylingBuilder.Append($"left: {leftInPixels.BuildCssStyleString()}; ");
+        cssStylingBuilder.Append($"top: {topInPixels.BuildCssStyleString()}; ");
+
+        return cssStylingBuilder.ToString();
+    }
 
     private void ValidateDimensionUnitKindIsSupported(string dimensionName, 
         DimensionValuedUnit dimensionValuedUnit)

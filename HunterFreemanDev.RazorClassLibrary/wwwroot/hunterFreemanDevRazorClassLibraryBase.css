@@ -160,3 +160,24 @@
 .hfd_transformative-resize-handle-west-display {
     cursor: w-resize;
 }
+
+.hfd_transformative-resize-handle-north-east-display {
+    cursor: ne-resize;
+}
+
+.hfd_transformative-resize-handle-south-east-display {
+    cursor: se-resize;
+}
+
+.hfd_transformative-resize-handle-south-west-display {
+    cursor: sw-resize;
+}
+
+.hfd_transformative-resize-handle-north-west-display {
+    cursor: nw-resize;
+}
+
+
+
+
+
