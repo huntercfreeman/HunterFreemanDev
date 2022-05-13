@@ -16,6 +16,25 @@ public class DialogReducer
 
         return nextDialogStates;
     }
+    
+    [ReducerMethod]
+    public static DialogStates ReduceSetIsMinimizedDialogAction(DialogStates previousDialogStates,
+        SetIsMinimizedDialogAction setIsMinimizedDialogAction)
+    {
+        var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
+
+        if(nextDialogStates.DialogRecordMap.TryGetValue(setIsMinimizedDialogAction.DialogRecord.DialogRecordId, out var dialogRecord))
+        {
+            nextDialogStates.DialogRecordMap.Remove(setIsMinimizedDialogAction.DialogRecord.DialogRecordId);
+
+            nextDialogStates.DialogRecordMap.Add(setIsMinimizedDialogAction.DialogRecord.DialogRecordId, setIsMinimizedDialogAction.DialogRecord with
+            {
+                IsMinimized = setIsMinimizedDialogAction.IsMinimized
+            });
+        }
+
+        return nextDialogStates;
+    }
 
     [ReducerMethod]
     public static DialogStates ReduceUnregisterDialogAction(DialogStates previousDialogStates,

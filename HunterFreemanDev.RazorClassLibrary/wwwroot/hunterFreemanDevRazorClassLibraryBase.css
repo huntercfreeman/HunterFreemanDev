@@ -168,6 +168,37 @@
     background-color: silver;
 }
 
+.hfd_dialog-task-entry-display {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 5px;
+}
+
+    .hfd_dialog-task-entry-display:hover {
+        background-color: burlywood;
+    }
+
+.hfd_dialog-task-entry-display-title {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px;
+    padding-left: 5px;
+}
+
+.hfd_dialog-task-entry-display-close-button {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .hfd_dialog-task-entry-display-close-button:hover {
+        background-color: red;
+    }
+
 .hfd_transformative-resize-handle-display {
     position: absolute;
 }

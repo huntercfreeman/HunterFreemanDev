@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Dialog;
 
-public record DialogRecord(Guid DialogRecordId, Type RenderedContentType, DimensionsRecord DimensionsRecord)
+public record DialogRecord(Guid DialogRecordId, Type RenderedContentType, DimensionsRecord DimensionsRecord, bool IsMinimized = false)
 {
     public const double DEFAULT_WIDTH_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL = 0.7;
     public const double DEFAULT_HEIGHT_PERCENTAGE_OF_VIEWPORT_DIMENSIONS_MULTIPLIER_AS_DECIMAL = 0.7;

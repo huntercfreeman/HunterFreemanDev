@@ -8,13 +8,19 @@
           </div>
           
           <div class="hfd_dialog-display-title-control-buttons">
-              <div class="hfd_dialog-display-title-control-button-wrapper">
+              <div class="hfd_dialog-display-title-control-button-wrapper"
+                   @onclick="MinimizeDialogOnClick"
+                   @onclick:stopPropagation="true"
+                   @onmousedown:stopPropagation="true">
                   <IconChromeMinimize />
               </div>
               <div class="hfd_dialog-display-title-control-button-wrapper">
                   <IconChromeMaximize />
               </div>
-              <div class="hfd_dialog-display-title-control-button-wrapper">
+              <div class="hfd_dialog-display-title-control-button-wrapper"
+                   @onclick="CloseDialogOnClick"
+                   @onclick:stopPropagation="true"
+                   @onmousedown:stopPropagation="true">
                   <IconChromeClose />
               </div>
           </div>

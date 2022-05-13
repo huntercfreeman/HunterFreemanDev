@@ -35,4 +35,18 @@ public partial class DialogDisplay : ComponentBase
 
         Dispatcher.Dispatch(action);
     }
+
+    private void MinimizeDialogOnClick()
+    {
+        var action = new SetIsMinimizedDialogAction(DialogRecord, true);
+
+        Dispatcher.Dispatch(action);
+    }
+    
+    private void CloseDialogOnClick()
+    {
+        var action = new UnregisterDialogAction(DialogRecord);
+
+        Dispatcher.Dispatch(action);
+    }
 }

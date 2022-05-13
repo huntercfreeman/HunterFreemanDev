@@ -5,6 +5,9 @@
 <div class="hfd_dialog-map-display">
     @foreach(var dialogRecord in DialogStates.Value.DialogRecordMap.Values)
     {
-        <DialogDisplay DialogRecord="dialogRecord" />
+        if(!dialogRecord.IsMinimized)
+        {
+           <DialogDisplay DialogRecord="dialogRecord" />
+        }
     }
 </div>

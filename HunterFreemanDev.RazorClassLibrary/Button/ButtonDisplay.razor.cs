@@ -15,6 +15,8 @@ public partial class ButtonDisplay : ComponentBase
     public EventCallback OnClickEventCallback { get; set; }
     [Parameter]
     public string? Title { get; set; }
+    [Parameter]
+    public string? Class { get; set; }
 
     private void FireOnClickEventCallback()
     {
