@@ -36,7 +36,7 @@ public class DragReducers
         var nextDragEventProviderState = 
             new DragEventProviderState(new Dictionary<Guid, Action>(previousDragEventProviderState.OnDragEventSubscriptions));
 
-        nextDragEventProviderState.OnDragEventSubscriptions.Add(subscribeToDragEventProviderStateAction.Id, subscribeToDragEventProviderStateAction.Action);
+        nextDragEventProviderState.OnDragEventSubscriptions.TryAdd(subscribeToDragEventProviderStateAction.Id, subscribeToDragEventProviderStateAction.Action);
 
         return nextDragEventProviderState;
     }

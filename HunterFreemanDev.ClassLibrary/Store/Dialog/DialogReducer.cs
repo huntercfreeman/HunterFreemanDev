@@ -27,4 +27,18 @@ public class DialogReducer
 
         return nextDialogStates;
     }
+    
+    [ReducerMethod]
+    public static DialogStates ReduceReplaceDialogDimensionsRecordAction(DialogStates previousDialogStates,
+        ReplaceDialogDimensionsRecordAction replaceDialogDimensionsRecordAction)
+    {
+        var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
+
+        nextDialogStates.DialogRecordMap.Remove(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId);
+
+        nextDialogStates.DialogRecordMap.Add(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId,
+            replaceDialogDimensionsRecordAction.DialogRecord);
+
+        return nextDialogStates;
+    }
 }

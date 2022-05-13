@@ -26,15 +26,18 @@ public partial class TransformativeDisplay : FluxorComponent
 
     [Parameter, EditorRequired]
     public DimensionsRecord DimensionsRecord { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public EventCallback<DimensionsRecord> OnDimensionsRecordChangedEventCallback { get; set; }
 
     private DimensionValuedUnit DEFAULT_HANDLE_SIZE_IN_PIXELS = new DimensionValuedUnit(7, DimensionUnitKind.Pixels);
     private SemaphoreSlim _dragStateChangedSemaphoreSlim = new(1, 1);
     private Stack<(object? sender, EventArgs e)> _dragStateChangedStack = new();
     private CancellationTokenSource _dragStateChangedCancellationTokenSource = new();
     private Task? _dragStateThrottlingTask;
-    private Action? _dragStateHandler;
+    private Action? _dragStateEventHandler;
     private Guid _transformativeDisplayId = Guid.NewGuid();
 
+    private DragState? _previousDragState;
     private int _resizeEventCounter;
 
     protected override void OnInitialized()
@@ -68,9 +71,16 @@ public partial class TransformativeDisplay : FluxorComponent
             {
                 _dragStateChangedStack.Clear();
 
-                _resizeEventCounter++;
+                if(_dragStateEventHandler is not null)
+                {
+                    if(_previousDragState?.MouseEventArgs is not null &&
+                        DragState.Value.MouseEventArgs is not null)
+                    {
+                        _dragStateEventHandler();
+                    }
 
-                await InvokeAsync(StateHasChanged);
+                    _previousDragState = DragState.Value;
+                }
 
                 _dragStateThrottlingTask = Task.Run(async () =>
                 {
@@ -359,8 +369,11 @@ public partial class TransformativeDisplay : FluxorComponent
     }
     #endregion
 
-    private void SubscribeToDragEventWithNorthResizeHandle() =>
+    private void SubscribeToDragEventWithNorthResizeHandle()
+    {
+        _dragStateEventHandler = DragEventHandlerNorthResizeHandle;
         DispatchSubscribeToDragEventProviderStateAction(DragEventHandlerNorthResizeHandle);
+    }
 
     private void DispatchSubscribeToDragEventProviderStateAction(Action dragEventActionHandler)
     {
@@ -372,9 +385,20 @@ public partial class TransformativeDisplay : FluxorComponent
 
     private void DragEventHandlerNorthResizeHandle()
     {
-        _resizeEventCounter++;
+        var differenceY = DragState.Value.MouseEventArgs!.ClientY - _previousDragState!.MouseEventArgs!.ClientY;
 
-        InvokeAsync(StateHasChanged);
+        var nextDimensionsRecord = DimensionsRecord with
+        {
+            Height = 
+                new DimensionValuedUnit(DimensionsRecord.Height.Value + -1 * differenceY, 
+                    DimensionUnitKind.Pixels),
+            Top =
+                new DimensionValuedUnit(DimensionsRecord.Height.Value + differenceY,
+                    DimensionUnitKind.Pixels),
+        };
+
+        if(OnDimensionsRecordChangedEventCallback.HasDelegate)
+            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
     }
 
     private void ValidateDimensionUnitKindIsSupported(string dimensionName, 
@@ -386,9 +410,11 @@ public partial class TransformativeDisplay : FluxorComponent
                 $"unsupported type is named: {dimensionName}.");
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
         DragState.StateChanged -= DragState_StateChanged;
         _dragStateChangedCancellationTokenSource?.Cancel();
+
+        base.Dispose(disposing);
     }
 }

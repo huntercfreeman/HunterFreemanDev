@@ -2,7 +2,13 @@
 
 @inherits FluxorComponent
 
-@@_resizeEventCounter: @_resizeEventCounter
+<div>
+    @@DragState.DeltaX: @DragState.Value.DeltaX 
+</div>
+
+<div>
+    @@DragState.DeltaY: @DragState.Value.DeltaY 
+</div>
 
 @* Cardinal Resize Handles *@
 <div class="hfd_transformative-resize-handle-display hfd_transformative-resize-handle-north-display"

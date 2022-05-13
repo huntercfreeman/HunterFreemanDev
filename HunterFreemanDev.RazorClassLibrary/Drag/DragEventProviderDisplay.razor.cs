@@ -23,10 +23,48 @@ public partial class DragEventProviderDisplay : FluxorComponent
         ? "hfd_active"
         : string.Empty;
 
-    private void DispatchOnDragEventActionOnMouseMove(MouseEventArgs mouseEventArgs)
-    {
-        var action = new OnDragEventAction(mouseEventArgs);
+    private SemaphoreSlim _dragStateChangedSemaphoreSlim = new(1, 1);
+    private Stack<MouseEventArgs> _dragStateChangedStack = new();
+    private CancellationTokenSource _dragStateChangedCancellationTokenSource = new();
+    private Task? _dragStateThrottlingTask;
 
-        Dispatcher.Dispatch(action);
+    private async Task DispatchOnDragEventActionOnMouseMove(MouseEventArgs mouseEventArgs)
+    {
+        try
+        {
+            await _dragStateChangedSemaphoreSlim.WaitAsync();
+
+            _dragStateChangedStack.Push(mouseEventArgs);
+        }
+        finally
+        {
+            _dragStateChangedSemaphoreSlim.Release();
+        }
+
+        if (_dragStateThrottlingTask is not null)
+            await _dragStateThrottlingTask;
+
+        try
+        {
+            await _dragStateChangedSemaphoreSlim.WaitAsync();
+
+            if (_dragStateChangedStack.Any())
+            {
+                _dragStateChangedStack.Clear();
+
+                var action = new OnDragEventAction(mouseEventArgs);
+
+                Dispatcher.Dispatch(action);
+
+                _dragStateThrottlingTask = Task.Run(async () =>
+                {
+                    await Task.Delay(50);
+                }, _dragStateChangedCancellationTokenSource.Token);
+            }
+        }
+        finally
+        {
+            _dragStateChangedSemaphoreSlim.Release();
+        }
     }
 }
