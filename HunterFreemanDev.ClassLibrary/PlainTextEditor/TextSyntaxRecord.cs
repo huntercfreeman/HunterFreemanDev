@@ -24,6 +24,9 @@ public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRec
         fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex]
             .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
 
-        return new PlainTextEditorRecordEdit(fabricatedDocumentClone);
+        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId, 
+            fabricatedDocumentClone,
+            PlainTextEditorRecord.CurrentRowIndex, 
+            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
     }
 }

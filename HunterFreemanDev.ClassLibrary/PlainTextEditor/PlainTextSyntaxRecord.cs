@@ -25,6 +25,9 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
         fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTextSyntaxRecordIndex]
             = nextPlainTextSyntaxRecord;
 
-        return Task.FromResult(new PlainTextEditorRecordEdit(fabricatedDocumentClone));
+        return Task.FromResult(new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
+            fabricatedDocumentClone,
+            PlainTextEditorRecord.CurrentRowIndex,
+            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex));
     }
 }

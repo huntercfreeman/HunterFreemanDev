@@ -65,12 +65,14 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
     {
         var documentEdit = await CurrentTextSyntaxRecord.HandleKeyDownEventRecordAsync(onKeyDownEventRecord);
 
-        UndoDocumentEditStack.Push(new PlainTextEditorRecordEdit(_document));
+        UndoDocumentEditStack.Push(new PlainTextEditorRecordEdit(this));
 
         return this with
         {
             _document = documentEdit.Document,
-            UndoDocumentEditStack = UndoDocumentEditStack
+            UndoDocumentEditStack = UndoDocumentEditStack,
+            CurrentRowIndex = documentEdit.CurrentRowIndex,
+            CurrentTextSyntaxRecordIndex = documentEdit.CurrentTextSyntaxRecordIndex,
         };
     }
 
@@ -80,7 +82,6 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 
         foreach (var immutableRow in GetImmutableDocument())
         {
-
             var listCloneRow = new List<TextSyntaxRecord>();
 
             foreach (var immutableTextSyntaxRecord in immutableRow)
