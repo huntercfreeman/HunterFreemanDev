@@ -12,6 +12,84 @@
     --hfd_dialog-display-title-height: 4ch;
 }
 
+.hfd_hfd-light-theme-default-contrast {
+    --hfd_primary-color: #679aff;
+    --hfd_secondary-color: #b9b9b9;
+    --hfd_success-color: #72e672;
+    --hfd_danger-color: #ff7a7a;
+    --hfd_warning-color: #ffff61;
+    --hfd_info-color: #85eaf7;
+    --hfd_primary-border-color: #4c4e54;
+    --hfd_toolbar-background-color: #cddcf8;
+    --hfd_primary-background-color: #fdfdfd;
+    --hfd_dialog-display-title-background-color: #dadada;
+    --hfd_primary-hover-background-color: #94b2f2;
+    --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-font-color: black;
+    --hfd_secondary-font-color: gray;
+    --hfd_primary-box-shadow: 0 0 3px #333;
+    --hfd_dialog-task-bar-display-background-color: silver;
+    --hfd_primary-active-background-color: #c0e0ff;
+}
+
+.hfd_hfd-light-theme-high-contrast {
+    --hfd_primary-color: #387afc;
+    --hfd_secondary-color: #8c8c8c;
+    --hfd_success-color: #3be03b;
+    --hfd_danger-color: #ef4444;
+    --hfd_warning-color: #e7e735;
+    --hfd_info-color: #33d8ee;
+    --hfd_primary-border-color: #000000;
+    --hfd_toolbar-background-color: #a2bef2;
+    --hfd_primary-background-color: #ffffff;
+    --hfd_dialog-display-title-background-color: #dadada;
+    --hfd_primary-hover-background-color: #94b2f2;
+    --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-font-color: black;
+    --hfd_secondary-font-color: gray;
+    --hfd_primary-box-shadow: 0 0 3px #333;
+    --hfd_dialog-task-bar-display-background-color: silver;
+    --hfd_primary-active-background-color: #c0e0ff;
+}
+
+.hfd_hfd-dark-theme-default-contrast {
+    --hfd_primary-color: #457bf4;
+    --hfd_secondary-color: #aba9a9;
+    --hfd_success-color: #47d647;
+    --hfd_danger-color: #f25343;
+    --hfd_warning-color: #e0e02d;
+    --hfd_info-color: #a1dede;
+    --hfd_toolbar-background-color: #6a6a6a;
+    --hfd_primary-background-color: #272523;
+    --hfd_dialog-display-title-background-color: #515151;
+    --hfd_primary-hover-background-color: #8c7ac7;
+    --hfd_dialog-display-background-color: #747474;
+    --hfd_primary-font-color: #fdfdfd;
+    --hfd_secondary-font-color: white;
+    --hfd_primary-box-shadow: 0 0 3px #fdfdfd;
+    --hfd_dialog-task-bar-display-background-color: #465c8c;
+    --hfd_primary-active-background-color: #d2972b;
+}
+
+.hfd_hfd-dark-theme-high-contrast {
+    --hfd_primary-color: #457bf4;
+    --hfd_secondary-color: #aba9a9;
+    --hfd_success-color: #47d647;
+    --hfd_danger-color: #f25343;
+    --hfd_warning-color: #e0e02d;
+    --hfd_info-color: #a1dede;
+    --hfd_toolbar-background-color: #d0d4f4;
+    --hfd_primary-background-color: #272523;
+    --hfd_dialog-display-title-background-color: #515151;
+    --hfd_primary-hover-background-color: #8c7ac7;
+    --hfd_dialog-display-background-color: #747474;
+    --hfd_primary-font-color: #fdfdfd;
+    --hfd_secondary-font-color: white;
+    --hfd_primary-box-shadow: 0 0 3px #fdfdfd;
+    --hfd_dialog-task-bar-display-background-color: #465c8c;
+    --hfd_primary-active-background-color: #d2972b;
+}
+
 .hfd_unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -37,14 +115,44 @@
     height: 100vh;
 }
 
+.hfd_theme-wrapping {
+    width: 100%;
+    height: 100%;
+    background-color: var(--hfd_primary-background-color);
+    color: var(--hfd_primary-font-color);
+}
+
 .hfd_button-display {
     padding: var(--hfd_button-display-padding);
-    background-color: aqua;
     display: inline-flex;
     width: fit-content;
     cursor: pointer;
-    border-radius: var(----hfd_button-display-border-radius);
+    border-radius: var(--hfd_button-display-border-radius);
 }
+
+    .hfd_button-display.hfd_primary {
+        background-color: var(--hfd_primary-color);
+    }
+
+    .hfd_button-display.hfd_secondary {
+        background-color: var(--hfd_secondary-color);
+    }
+
+    .hfd_button-display.hfd_success {
+        background-color: var(--hfd_success-color);
+    }
+
+    .hfd_button-display.hfd_danger {
+        background-color: var(--hfd_danger-color);
+    }
+
+    .hfd_button-display.hfd_warning {
+        background-color: var(--hfd_warning-color);
+    }
+
+    .hfd_button-display.hfd_info {
+        background-color: var(--hfd_info-color);
+    }
 
 .hfd_grid-display {
     width: 100%;
@@ -81,17 +189,17 @@
 }
 
 .hfd_grid-column-display-add-column-button-item:hover {
-    background-color: aqua;
+    background-color: var(--hfd_primary-hover-background-color);
 }
 
 .hfd_grid-row-divider-display {
     height: var(--hfd_grid-row-divider-display-height);
-    background-color: orangered;
+    background-color: var(--hfd_primary-border-color);
 }
 
 .hfd_grid-column-divider-display {
     width: var(--hfd_grid-column-divider-display-width);
-    background-color: orangered;
+    background-color: var(--hfd_primary-border-color);
 }
 
 .hfd_drag-event-provider-display {
@@ -117,7 +225,7 @@
     height: var(--hfd_toolbar-display-height);
     overflow-x: auto;
     padding: var(--hfd_toolbar-display-padding);
-    background-color: #b8ddff;
+    background-color: var(--hfd_toolbar-background-color);
 }
 
 .hfd_toolbar-display-row {
@@ -130,12 +238,13 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: aquamarine;
+    background-color: var(--hfd_dialog-display-background-color);
+    box-shadow: var(--hfd_primary-box-shadow);
 }
 
 .hfd_dialog-display-title {
     cursor: pointer;
-    background-color: antiquewhite;
+    background-color: var(--hfd_dialog-display-title-background-color);
     height: var(--hfd_dialog-display-title-height);
     display: flex;
     justify-content: space-between;
@@ -160,12 +269,12 @@
     }
 
         .hfd_dialog-display-title-control-buttons .hfd_dialog-display-title-control-button-wrapper:hover {
-            background-color: orange;
+            background-color: var(--hfd_primary-hover-background-color);
         }
 
 .hfd_dialog-task-bar-display {
     height: var(--hfd_dialog-task-bar-display-height);
-    background-color: silver;
+    background-color: var(--hfd_dialog-task-bar-display-background-color);
 }
 
 .hfd_dialog-task-entry-display {
@@ -178,7 +287,7 @@
 }
 
     .hfd_dialog-task-entry-display:hover {
-        background-color: burlywood;
+        background-color: var(--hfd_primary-hover-background-color);
     }
 
 .hfd_dialog-task-entry-display-title {
@@ -193,10 +302,11 @@
     height: 100%;
     display: inline-flex;
     align-items: center;
+    padding: 0 5px;
 }
 
     .hfd_dialog-task-entry-display-close-button:hover {
-        background-color: red;
+        background-color: var(--hfd_danger-color);
     }
 
 .hfd_transformative-resize-handle-display {
@@ -235,7 +345,21 @@
     cursor: nw-resize;
 }
 
+.hfd_theme-display {
+    margin-bottom: 10px;
+}
 
+    .hfd_theme-display.hfd_active {
+        background-color: var(--hfd_primary-active-background-color);
+    }
+
+.hfd_theme-display-title {
+    font-size: 1.5em;
+}
+
+.hfd_theme-display-body {
+    margin-left: 30px;
+}
 
 
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HunterFreemanDev.ClassLibrary.Theme;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -17,6 +18,12 @@ public partial class ButtonDisplay : ComponentBase
     public string? Title { get; set; }
     [Parameter]
     public string? Class { get; set; }
+    [Parameter]
+    public ColorKind? ColorKind { get; set; }
+
+    private string ColorKindCssClassString => ColorKind is null
+        ? string.Empty
+        : ColorKind.Value.ToCssClassString();
 
     private void FireOnClickEventCallback()
     {

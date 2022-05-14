@@ -1,0 +1,28 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_theme-display @IsActiveThemeStateCssClass"
+     @onclick="SetThemeStateOnClick">
+    <div class="hfd_theme-display-title">
+        @ThemeRecord.ThemeDisplayName:
+    </div>
+    
+    <div class="hfd_theme-display-body">
+        <div>
+            ThemeCssClassName: @ThemeRecord.ThemeCssClassName
+        </div>
+        <div>
+            ThemeColorPaletteKind: @ThemeRecord.ThemeColorPaletteKind
+        </div>
+        <div>
+            ThemeContrastKind: @ThemeRecord.ThemeContrastKind
+        </div>
+        <div>
+            ThemeId: @ThemeRecord.ThemeId
+        </div>
+        <div>
+            ThemeDescription: @ThemeRecord.ThemeDescription
+        </div>
+    </div>
+</div>

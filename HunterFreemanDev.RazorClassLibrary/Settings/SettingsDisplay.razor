@@ -1,3 +1,16 @@
-﻿<div class="hfd_settings-display">
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_settings-display">
     Settings Display
+
+    <div>
+        Current Theme: @ThemeState.Value.ThemeRecord.ThemeDisplayName (ThemeId: @ThemeState.Value.ThemeRecord.ThemeId)
+    </div>
+
+    @foreach(var themeRecord in ThemesProvider.Value.ThemeRecords)
+    {
+        <HunterFreemanDev.RazorClassLibrary.Theme.ThemeDisplay ThemeRecord="themeRecord" />
+    }
 </div>
