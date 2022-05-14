@@ -1,17 +1,21 @@
-﻿@inherits LayoutComponentBase
+﻿@using Fluxor.Blazor.Web.Components
 
-<div class="hfd_document-layout-display">
-    <Fluxor.Blazor.Web.StoreInitializer/>
+@inherits FluxorLayout
 
-    <HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
-        <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
+<div class="hfd_document-layout-display @ThemeState.Value.ThemeRecord.ThemeCssClassName">
+    <div class="hfd_background-color-wrapping">
+        <Fluxor.Blazor.Web.StoreInitializer />
 
-        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
+        <HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
+            <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
 
-        <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
+            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
 
-        <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay />
+            <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
 
-        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
-    </HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
+            <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay />
+
+            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
+        </HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
+    </div>
 </div>

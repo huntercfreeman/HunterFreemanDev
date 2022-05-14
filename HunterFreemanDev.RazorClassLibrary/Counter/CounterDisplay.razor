@@ -2,7 +2,43 @@
 
 @inherits FluxorComponent
 
-<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction">
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Primary">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Secondary">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Success">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Danger">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Warning">
+    <div class="hfd_counter-display">
+        Count: @CounterState.Value.Count
+    </div>
+</ButtonDisplay>
+
+<ButtonDisplay OnClickEventCallback="DispatchIncrementCounterAction"
+               ColorKind="ClassLibrary.Theme.ColorKind.Info">
     <div class="hfd_counter-display">
         Count: @CounterState.Value.Count
     </div>

@@ -8,10 +8,11 @@ using HunterFreemanDev.RazorClassLibrary.Button;
 using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using HunterFreemanDev.ClassLibrary.Store.Theme;
 using Fluxor;
+using Fluxor.Blazor.Web.Components;
 
 namespace HunterFreemanDev.RazorClassLibrary.Settings;
 
-public partial class SettingsDisplay : ComponentBase
+public partial class SettingsDisplay : FluxorComponent
 {
     [Inject]
     private IState<ThemeState> ThemeState { get; set; } = null!;
