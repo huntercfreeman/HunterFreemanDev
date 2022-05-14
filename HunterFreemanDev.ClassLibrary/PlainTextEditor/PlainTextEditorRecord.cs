@@ -53,9 +53,29 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
             UndoDocumentEditStack = UndoDocumentEditStack
         };
     }
+
+    public List<List<TextSyntaxRecord>> ConstructListClone()
+    {
+        List<List<TextSyntaxRecord>> listClone = new();
+
+        foreach (var immutableRow in GetDocument())
+        {
+
+            var listCloneRow = new List<TextSyntaxRecord>();
+
+            foreach (var immutableToken in immutableRow)
+            {
+                listCloneRow.Add(immutableToken);
+            }
+
+            listClone.Add(listCloneRow);
+        }
+
+        return listClone;
+    }
 }
 
-public abstract record TextSyntaxRecord()
+public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
 {
     public Guid TextSyntaxRecordId { get; } = Guid.NewGuid();
 
@@ -63,22 +83,31 @@ public abstract record TextSyntaxRecord()
 
     public PlainTextSyntaxRecord ConstructPlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
     {
-        return new PlainTextSyntaxRecord(keyDownEventRecord);
+        return new PlainTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
     }
 }
 
-public record StartOfRowTextSyntaxRecord() : TextSyntaxRecord
+public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord) 
+    : TextSyntaxRecord(PlainTextEditorRecord)
 {
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
-        throw new NotImplementedException();
+        var plainTextSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
+
+        List<List<TextSyntaxRecord>> listClone = PlainTextEditorRecord.ConstructListClone();
+
+        listClone[PlainTextEditorRecord.CurrentRowIndex].Insert(PlainTextEditorRecord.CurrentTokenIndex,
+            plainTextSyntaxRecord);
+
+        return Task.FromResult(new PlainTextEditorRecordEdit(listClone));
     }
 }
 
-public record PlainTextSyntaxRecord(string PlainText) : TextSyntaxRecord
+public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord, string PlainText)
+    : TextSyntaxRecord(PlainTextEditorRecord)
 {
-    public PlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord) 
-        : this(keyDownEventRecord.Key 
+    public PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord, KeyDownEventRecord keyDownEventRecord) 
+        : this(PlainTextEditorRecord, keyDownEventRecord.Key 
               ?? throw new ApplicationException($"{nameof(PlainTextSyntaxRecord)} was attempted " +
                   $"to be constructed with a {nameof(keyDownEventRecord.Key)} that was null."))
     {
@@ -86,11 +115,20 @@ public record PlainTextSyntaxRecord(string PlainText) : TextSyntaxRecord
 
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
-        return _
+        var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainTextEditorRecord, 
+            PlainText + keyDownEventRecord.Key);
+
+        List<List<TextSyntaxRecord>> listClone = PlainTextEditorRecord.ConstructListClone();
+
+        listClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTokenIndex]
+            = nextPlainTextSyntaxRecord;
+
+        return Task.FromResult(new PlainTextEditorRecordEdit(listClone));
     }
 }
 
-public record WhitespaceTextSyntaxRecord() : TextSyntaxRecord
+public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
+    : TextSyntaxRecord(PlainTextEditorRecord)
 {
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
