@@ -16,6 +16,6 @@ public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
 
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        return Task.FromResult(InsertAfterCurrentTextSyntaxTokenAndMakeCurrent(fabricatedDocumentClone, plainTextSyntaxRecord));
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, plainTextSyntaxRecord));
     }
 }

@@ -1,4 +1,5 @@
-﻿using HunterFreemanDev.ClassLibrary.KeyDown;
+﻿using HunterFreemanDev.ClassLibrary.Keyboard;
+using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
@@ -15,8 +16,19 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.PlainText;
     public override string ToPlainText => PlainText;
 
-    public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
+    public override async Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
+        if(KeyboardKeyFacts.IsWhitespaceKey(keyDownEventRecord))
+        {
+            if(KeyboardKeyFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
+            {
+                return await PlainTextEditorRecord.InsertNewLine();
+            }
+
+            return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(PlainTextEditorRecord.ConstructFabricatedDocumentClone(),
+                ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord));
+        }    
+
         var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainTextEditorRecord, 
             PlainText + keyDownEventRecord.Key);
 
@@ -25,9 +37,9 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
         fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTextSyntaxRecordIndex]
             = nextPlainTextSyntaxRecord;
 
-        return Task.FromResult(new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
+        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
             fabricatedDocumentClone,
             PlainTextEditorRecord.CurrentRowIndex,
-            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex));
+            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex);
     }
 }

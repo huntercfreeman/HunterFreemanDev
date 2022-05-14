@@ -94,4 +94,17 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 
         return fabricatedDocumentClone;
     }
+
+    public Task<PlainTextEditorRecordEdit> InsertNewLine()
+    {
+        // TODO: If inserting new line in the middle of a row it is necessary to split the line and possibly a TextEditorRecord that the user was within
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = ConstructFabricatedDocumentClone();
+
+        fabricatedDocumentClone.Insert(CurrentRowIndex, new List<TextSyntaxRecord>());
+
+        return Task.FromResult(new PlainTextEditorRecordEdit(PlainTextEditorRecordId,
+            fabricatedDocumentClone,
+            CurrentRowIndex + 1,
+            0));
+    }
 }

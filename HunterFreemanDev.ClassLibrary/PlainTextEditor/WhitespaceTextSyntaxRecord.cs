@@ -8,7 +8,7 @@ public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
 {
     private readonly char _whitespaceCharacter;
 
-    public WhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord, PlainTextEditorRecord plainTextEditorRecord) 
+    public WhitespaceTextSyntaxRecord(PlainTextEditorRecord plainTextEditorRecord, KeyDownEventRecord keyDownEventRecord) 
         : this(plainTextEditorRecord)
     {
         switch (keyDownEventRecord.Code)

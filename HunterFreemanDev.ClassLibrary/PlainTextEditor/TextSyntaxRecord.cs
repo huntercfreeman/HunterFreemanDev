@@ -1,4 +1,5 @@
-﻿using HunterFreemanDev.ClassLibrary.KeyDown;
+﻿using HunterFreemanDev.ClassLibrary.Keyboard;
+using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
@@ -16,16 +17,19 @@ public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRec
         return new PlainTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
     }
     
-    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxTokenAndMakeCurrent(List<List<TextSyntaxRecord>> fabricatedDocument, 
+    public WhitespaceTextSyntaxRecord ConstructWhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
+    {
+        return new WhitespaceTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
+    }
+
+    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(List<List<TextSyntaxRecord>> fabricatedDocument, 
         TextSyntaxRecord textSyntaxRecord)
     {
-        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
-
-        fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex]
+        fabricatedDocument[PlainTextEditorRecord.CurrentRowIndex]
             .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
 
-        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId, 
-            fabricatedDocumentClone,
+        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
+            fabricatedDocument,
             PlainTextEditorRecord.CurrentRowIndex, 
             PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
     }
