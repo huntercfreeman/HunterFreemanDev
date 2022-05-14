@@ -32,10 +32,10 @@
                         @for(int j = 0; j < row.Length; j++)
                         {
                             @* Storing for loop iteration variables locally is necessary in Blazor *@
-                            var tokenIndex = j;
-                            var token = row[tokenIndex];
+                            var textSyntaxRecordIndex = j;
+                            var textSyntaxRecord = row[textSyntaxRecordIndex];
 
-                            <TextSyntaxRecordDisplay TextSyntaxRecord="token" />
+                            <TextSyntaxRecordDisplay TextSyntaxRecord="textSyntaxRecord" />
                         }
                     </div>
                 }
