@@ -52,7 +52,7 @@ public partial class DragEventProviderDisplay : FluxorComponent
             {
                 _dragStateChangedStack.Clear();
 
-                var action = new OnDragEventAction(mouseEventArgs);
+                var action = new DragEventAction(mouseEventArgs);
 
                 Dispatcher.Dispatch(action);
 
@@ -74,7 +74,7 @@ public partial class DragEventProviderDisplay : FluxorComponent
 
         Dispatcher.Dispatch(clearDragEventSubscriptionsAction);
 
-        var onDragEventAction = new OnDragEventAction(null);
+        var onDragEventAction = new DragEventAction(null);
 
         Dispatcher.Dispatch(onDragEventAction);
     }

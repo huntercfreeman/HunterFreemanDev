@@ -16,5 +16,25 @@
 
         // For browsers in Quirks mode
         return { widthInPixels: d.body.clientWidth, heightInPixels: d.body.clientHeight };
-    }
+    },
+    initializeOnKeyDownEventProvider: function (onKeyDownProviderDisplayReference) {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Tab") {
+                e.preventDefault();
+            }
+            if (e.key === "a" && e.ctrlKey) {
+                e.preventDefault();
+            }
+
+            let dto = {
+                "key": e.key,
+                "code": e.code,
+                "ctrlWasPressed": e.ctrlKey,
+                "shiftWasPressed": e.shiftKey,
+                "altWasPressed": e.altKey
+            };
+
+            onKeyDownProviderDisplayReference.invokeMethodAsync('DispatchOnKeyDownEventAction', dto);
+        });
+    },
 };
