@@ -20,11 +20,11 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
         var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainTextEditorRecord, 
             PlainText + keyDownEventRecord.Key);
 
-        List<List<TextSyntaxRecord>> listClone = PlainTextEditorRecord.ConstructListClone();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        listClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTextSyntaxRecordIndex]
+        fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTextSyntaxRecordIndex]
             = nextPlainTextSyntaxRecord;
 
-        return Task.FromResult(new PlainTextEditorRecordEdit(listClone));
+        return Task.FromResult(new PlainTextEditorRecordEdit(fabricatedDocumentClone));
     }
 }

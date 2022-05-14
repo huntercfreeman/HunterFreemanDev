@@ -40,7 +40,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
     public TextSyntaxRecord CurrentTextSyntaxRecord => _document[CurrentRowIndex][CurrentTextSyntaxRecordIndex];
     public Guid StartOfDocumentTextSyntaxRecordId => _document.First().First().TextSyntaxRecordId;
     
-    public ImmutableArray<ImmutableArray<TextSyntaxRecord>> GetDocument()
+    public ImmutableArray<ImmutableArray<TextSyntaxRecord>> GetImmutableDocument()
     {
         ImmutableArray<TextSyntaxRecord>[] temporaryRows = new ImmutableArray<TextSyntaxRecord>[_document.Count];
 
@@ -74,11 +74,11 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         };
     }
 
-    public List<List<TextSyntaxRecord>> ConstructListClone()
+    public List<List<TextSyntaxRecord>> ConstructFabricatedDocumentClone()
     {
-        List<List<TextSyntaxRecord>> listClone = new();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = new();
 
-        foreach (var immutableRow in GetDocument())
+        foreach (var immutableRow in GetImmutableDocument())
         {
 
             var listCloneRow = new List<TextSyntaxRecord>();
@@ -88,9 +88,9 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
                 listCloneRow.Add(immutableTextSyntaxRecord);
             }
 
-            listClone.Add(listCloneRow);
+            fabricatedDocumentClone.Add(listCloneRow);
         }
 
-        return listClone;
+        return fabricatedDocumentClone;
     }
 }

@@ -15,4 +15,15 @@ public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRec
     {
         return new PlainTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
     }
+    
+    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxTokenAndMakeCurrent(List<List<TextSyntaxRecord>> fabricatedDocument, 
+        TextSyntaxRecord textSyntaxRecord)
+    {
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
+
+        fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex]
+            .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex, textSyntaxRecord);
+
+        return new PlainTextEditorRecordEdit(fabricatedDocumentClone);
+    }
 }

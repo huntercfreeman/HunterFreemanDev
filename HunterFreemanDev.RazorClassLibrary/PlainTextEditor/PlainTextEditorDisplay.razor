@@ -17,7 +17,7 @@
 
         <div class="hfd_plain-text-editor-display-body">
             @{
-                var document = _plainTextEditorRecord.GetDocument();
+                var document = _plainTextEditorRecord.GetImmutableDocument();
 
                 for (int i = 0; i < document.Length; i++)
                 {

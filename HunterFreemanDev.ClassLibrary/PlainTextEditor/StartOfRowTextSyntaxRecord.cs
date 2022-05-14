@@ -14,11 +14,8 @@ public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
     {
         var plainTextSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
 
-        List<List<TextSyntaxRecord>> listClone = PlainTextEditorRecord.ConstructListClone();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        listClone[PlainTextEditorRecord.CurrentRowIndex].Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1,
-            plainTextSyntaxRecord);
-
-        return Task.FromResult(new PlainTextEditorRecordEdit(listClone));
+        return Task.FromResult(InsertAfterCurrentTextSyntaxTokenAndMakeCurrent(fabricatedDocumentClone, plainTextSyntaxRecord));
     }
 }
