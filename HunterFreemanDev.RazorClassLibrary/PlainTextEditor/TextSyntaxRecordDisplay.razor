@@ -1,6 +1,6 @@
 @using HunterFreemanDev.ClassLibrary.PlainTextEditor
 
-<div class="hfd_text-syntax-record-display">
+<span class="hfd_text-syntax-record-display">
     @switch(TextSyntaxRecord.TextSyntaxRecordKind)
     {
         case TextSyntaxRecordKind.StartOfRowText:
@@ -13,4 +13,4 @@
             <WhitespaceTextSyntaxRecordDisplay WhitespaceTextSyntaxRecord="(WhitespaceTextSyntaxRecord) TextSyntaxRecord" />
             break;
     }
-</div>
+</span>

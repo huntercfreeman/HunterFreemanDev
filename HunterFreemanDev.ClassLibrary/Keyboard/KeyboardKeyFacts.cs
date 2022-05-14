@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Keyboard;
 
-public static class KeyboardKeyFacts
+public static class KeyboardFacts
 {
     public static bool IsMetaKey(KeyDownEventRecord keyDownEventRecord)
     {

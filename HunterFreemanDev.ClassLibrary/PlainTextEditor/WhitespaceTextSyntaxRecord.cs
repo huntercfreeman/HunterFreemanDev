@@ -13,10 +13,10 @@ public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
     {
         switch (keyDownEventRecord.Code)
         {
-            case KeyboardKeyFacts.WhitespaceKeys.Space:
+            case KeyboardFacts.WhitespaceKeys.Space:
                 _whitespaceCharacter = ' ';
                 break;
-            case KeyboardKeyFacts.WhitespaceKeys.Tab:
+            case KeyboardFacts.WhitespaceKeys.Tab:
                 _whitespaceCharacter = '\t';
                 break;
             default:
@@ -30,6 +30,19 @@ public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
 
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
-        throw new NotImplementedException();
+        TextSyntaxRecord textSyntaxRecord;
+
+        if (KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
+        {
+            textSyntaxRecord = ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord);
+        }
+        else
+        {
+            textSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
+        }
+
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
+
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, textSyntaxRecord));
     }
 }

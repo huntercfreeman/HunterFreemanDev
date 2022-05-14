@@ -18,9 +18,9 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
 
     public override async Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
-        if(KeyboardKeyFacts.IsWhitespaceKey(keyDownEventRecord))
+        if(KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
         {
-            if(KeyboardKeyFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
+            if(KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
             {
                 return await PlainTextEditorRecord.InsertNewLine();
             }

@@ -1,4 +1,5 @@
-﻿using HunterFreemanDev.ClassLibrary.KeyDown;
+﻿using HunterFreemanDev.ClassLibrary.Keyboard;
+using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
@@ -12,10 +13,19 @@ public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
 
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
-        var plainTextSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
+        TextSyntaxRecord textSyntaxRecord;
+
+        if (KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
+        {
+            textSyntaxRecord = ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord);
+        }
+        else
+        {
+            textSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
+        }
 
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, plainTextSyntaxRecord));
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, textSyntaxRecord));
     }
 }

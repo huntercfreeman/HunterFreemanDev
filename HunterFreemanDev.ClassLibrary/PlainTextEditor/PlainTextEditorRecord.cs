@@ -1,4 +1,5 @@
 ﻿using HunterFreemanDev.ClassLibrary.Focus;
+using HunterFreemanDev.ClassLibrary.Keyboard;
 using HunterFreemanDev.ClassLibrary.KeyDown;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,9 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 
     public async Task<PlainTextEditorRecord> HandleKeyDownEventAsync(KeyDownEventRecord onKeyDownEventRecord)
     {
+        if(KeyboardFacts.IsMetaKey(onKeyDownEventRecord))
+            return this;
+
         var documentEdit = await CurrentTextSyntaxRecord.HandleKeyDownEventRecordAsync(onKeyDownEventRecord);
 
         UndoDocumentEditStack.Push(new PlainTextEditorRecordEdit(this));
