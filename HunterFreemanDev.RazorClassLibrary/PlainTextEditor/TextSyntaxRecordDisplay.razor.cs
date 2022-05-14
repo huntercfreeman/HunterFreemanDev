@@ -14,4 +14,6 @@ public partial class TextSyntaxRecordDisplay : ComponentBase
 {
     [Parameter, EditorRequired]
     public TextSyntaxRecord TextSyntaxRecord { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public Guid CurrentTextSyntaxRecordId { get; set; }
 }

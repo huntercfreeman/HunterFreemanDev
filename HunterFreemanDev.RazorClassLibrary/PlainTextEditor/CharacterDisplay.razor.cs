@@ -6,14 +6,17 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using HunterFreemanDev.RazorClassLibrary.Button;
 using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
-using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
 namespace HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
 
-public partial class WhitespaceTextSyntaxRecordDisplay : ComponentBase
+public partial class CharacterDisplay : ComponentBase
 {
+    /// <summary>
+    /// Some Characters look like '&nbsp;' as they're HTML escaped
+    /// and require a string to hold them.
+    /// </summary>
     [Parameter, EditorRequired]
-    public WhitespaceTextSyntaxRecord WhitespaceTextSyntaxRecord { get; set; } = null!;
+    public string HtmlCharacter { get; set; } = null!;
     [Parameter, EditorRequired]
-    public Guid CurrentTextSyntaxRecordId { get; set; }
+    public bool DisplayCursor { get; set; }
 }

@@ -1,5 +1,6 @@
 @using HunterFreemanDev.ClassLibrary.Html
 
 <span class="hfd_text-syntax-record-display hfd_whitespace-text-syntax-record-display">
-    @((MarkupString) WhitespaceTextSyntaxRecord.ToPlainText.EscapeHtml())
+    <CharacterDisplay HtmlCharacter="@WhitespaceTextSyntaxRecord.ToPlainText.EscapeHtml()"
+                      DisplayCursor="CurrentTextSyntaxRecordId == WhitespaceTextSyntaxRecord.TextSyntaxRecordId" />
 </span>

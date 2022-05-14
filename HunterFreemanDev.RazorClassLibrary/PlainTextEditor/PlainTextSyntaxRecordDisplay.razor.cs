@@ -14,4 +14,6 @@ public partial class PlainTextSyntaxRecordDisplay : ComponentBase
 {
     [Parameter, EditorRequired]
     public PlainTextSyntaxRecord PlainTextSyntaxRecord { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public Guid CurrentTextSyntaxRecordId { get; set; }
 }

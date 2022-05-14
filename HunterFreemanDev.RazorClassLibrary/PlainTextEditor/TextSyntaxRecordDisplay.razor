@@ -4,13 +4,16 @@
     @switch(TextSyntaxRecord.TextSyntaxRecordKind)
     {
         case TextSyntaxRecordKind.StartOfRowText:
-            <StartOfRowTextSyntaxRecordDisplay StartOfRowTextSyntaxRecord="(StartOfRowTextSyntaxRecord) TextSyntaxRecord" />
+            <StartOfRowTextSyntaxRecordDisplay StartOfRowTextSyntaxRecord="(StartOfRowTextSyntaxRecord) TextSyntaxRecord"
+                                               CurrentTextSyntaxRecordId="CurrentTextSyntaxRecordId" />
             break;
         case TextSyntaxRecordKind.PlainText:
-            <PlainTextSyntaxRecordDisplay PlainTextSyntaxRecord="(PlainTextSyntaxRecord) TextSyntaxRecord" />
+            <PlainTextSyntaxRecordDisplay PlainTextSyntaxRecord="(PlainTextSyntaxRecord) TextSyntaxRecord"
+                                          CurrentTextSyntaxRecordId="CurrentTextSyntaxRecordId"/>
             break;
         case TextSyntaxRecordKind.WhitespaceText:
-            <WhitespaceTextSyntaxRecordDisplay WhitespaceTextSyntaxRecord="(WhitespaceTextSyntaxRecord) TextSyntaxRecord" />
+            <WhitespaceTextSyntaxRecordDisplay WhitespaceTextSyntaxRecord="(WhitespaceTextSyntaxRecord) TextSyntaxRecord"
+                                               CurrentTextSyntaxRecordId="CurrentTextSyntaxRecordId"/>
             break;
     }
 </span>

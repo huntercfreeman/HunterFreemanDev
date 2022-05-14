@@ -6,14 +6,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using HunterFreemanDev.RazorClassLibrary.Button;
 using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
-using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
 namespace HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
 
-public partial class WhitespaceTextSyntaxRecordDisplay : ComponentBase
+public partial class CursorDisplay : ComponentBase
 {
-    [Parameter, EditorRequired]
-    public WhitespaceTextSyntaxRecord WhitespaceTextSyntaxRecord { get; set; } = null!;
-    [Parameter, EditorRequired]
-    public Guid CurrentTextSyntaxRecordId { get; set; }
+
 }

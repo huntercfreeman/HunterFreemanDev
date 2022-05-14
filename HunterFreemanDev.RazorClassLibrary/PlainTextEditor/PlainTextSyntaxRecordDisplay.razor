@@ -1,3 +1,11 @@
 <span class="hfd_text-syntax-record-display hfd_plain-text-syntax-record-display">
-    @PlainTextSyntaxRecord.ToPlainText
+    @{
+        var plainTextContent = PlainTextSyntaxRecord.ToPlainText;
+
+        for (int i = 0; i < plainTextContent.Length; i++)
+        {
+            <CharacterDisplay HtmlCharacter="@plainTextContent[i].ToString()"
+                              DisplayCursor="CurrentTextSyntaxRecordId == PlainTextSyntaxRecord.TextSyntaxRecordId" />
+        }
+    }
 </span>

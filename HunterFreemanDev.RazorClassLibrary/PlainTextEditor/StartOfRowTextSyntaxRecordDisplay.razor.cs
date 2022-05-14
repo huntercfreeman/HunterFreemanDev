@@ -14,4 +14,6 @@ public partial class StartOfRowTextSyntaxRecordDisplay : ComponentBase
 {
     [Parameter, EditorRequired]
     public StartOfRowTextSyntaxRecord StartOfRowTextSyntaxRecord { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public Guid CurrentTextSyntaxRecordId { get; set; }
 }

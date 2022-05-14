@@ -1,0 +1,10 @@
+﻿@using HunterFreemanDev.ClassLibrary.Html
+
+<span class="hfd_character-display">
+    @((MarkupString) HtmlCharacter)
+
+    @if(DisplayCursor)
+    {
+        <CursorDisplay />
+    }
+</span>
