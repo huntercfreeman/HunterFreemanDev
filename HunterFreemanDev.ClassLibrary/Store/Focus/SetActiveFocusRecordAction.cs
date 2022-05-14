@@ -7,4 +7,4 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Focus;
 
-public record SetActiveFocusRecordAction(FocusRecord FocusRecord);
+public record SetActiveFocusRecordAction(FocusRecord? FocusRecord);

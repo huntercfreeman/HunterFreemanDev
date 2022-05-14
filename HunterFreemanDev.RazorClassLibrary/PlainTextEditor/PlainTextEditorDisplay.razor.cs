@@ -35,7 +35,10 @@ public partial class PlainTextEditorDisplay : FluxorComponent
 
     private async void KeyDownState_StateChanged(object? sender, EventArgs e)
     {
-        _contentBuilder.Append(KeyDownEventState.Value.OnKeyDownEventRecord.Key);
+        if (_focusBoundaryDisplay?.GetIsFocused() ?? false)
+        {
+            _contentBuilder.Append(KeyDownEventState.Value.OnKeyDownEventRecord.Key);
+        }
 
         await InvokeAsync(StateHasChanged);
     }

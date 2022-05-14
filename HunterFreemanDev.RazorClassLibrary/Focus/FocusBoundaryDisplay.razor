@@ -4,7 +4,8 @@
 
 <span class="bs_focusable-boundary @(Class ?? string.Empty)"
       @onclick="FocusIn">
-    <FocusTrapDisplay @ref="_focusTrapDisplay" />
+    <FocusTrapDisplay @ref="_focusTrapDisplay" 
+                      FocusOut="FocusOut" />
     
     <CascadingValue Value="FocusRecord">
         @ChildContent

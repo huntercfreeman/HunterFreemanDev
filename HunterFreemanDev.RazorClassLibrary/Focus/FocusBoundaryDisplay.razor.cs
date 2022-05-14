@@ -45,6 +45,22 @@ public partial class FocusBoundaryDisplay : FluxorComponent
         base.OnInitialized();
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && InitiallySetFocusOnAfterRender)
+        {
+            var action = new SetActiveFocusRecordAction(FocusRecord);
+
+            Dispatcher.Dispatch(action);
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+
+    public bool GetIsFocused() => FocusState.Value.FocusRecord is not null &&
+                FocusRecord is not null &&
+                FocusState.Value.FocusRecord.FocusRecordId == FocusRecord.FocusRecordId;
+
     private async void FocusState_StateChanged(object? sender, EventArgs e)
     {
         if(FocusState.Value.FocusRecord is not null &&
@@ -53,18 +69,6 @@ public partial class FocusBoundaryDisplay : FluxorComponent
             if(_focusTrapDisplay is not null)
                 await _focusTrapDisplay.GetFocusTrapElementReference().FocusAsync();
         }
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if(firstRender && InitiallySetFocusOnAfterRender)
-        {
-            var action = new SetActiveFocusRecordAction(FocusRecord);
-
-            Dispatcher.Dispatch(action);
-        }
-
-        base.OnAfterRender(firstRender);
     }
 
     public async Task FocusIn()
@@ -81,6 +85,13 @@ public partial class FocusBoundaryDisplay : FluxorComponent
             // await _focusTrap.FocusAsync();
             // After component is no longer rendered
         }
+    }
+    
+    public async Task FocusOut()
+    {
+        var action = new SetActiveFocusRecordAction(null);
+
+        Dispatcher.Dispatch(action);
     }
 
     protected override void Dispose(bool disposing)
