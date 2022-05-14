@@ -3,13 +3,13 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
-    : TextSyntaxRecord(PlainTextEditorRecord)
+public record WhitespaceTextSyntaxRecord()
+    : TextSyntaxRecord()
 {
     private readonly char _whitespaceCharacter;
 
-    public WhitespaceTextSyntaxRecord(PlainTextEditorRecord plainTextEditorRecord, KeyDownEventRecord keyDownEventRecord) 
-        : this(plainTextEditorRecord)
+    public WhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord) 
+        : this()
     {
         switch (keyDownEventRecord.Code)
         {
@@ -28,7 +28,8 @@ public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.WhitespaceText;
     public override string ToPlainText => _whitespaceCharacter.ToString();
 
-    public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
+    public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord,
+        KeyDownEventRecord keyDownEventRecord)
     {
         TextSyntaxRecord textSyntaxRecord;
 
@@ -41,8 +42,8 @@ public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
             textSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
         }
 
-        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, textSyntaxRecord));
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord, fabricatedDocumentClone, textSyntaxRecord));
     }
 }

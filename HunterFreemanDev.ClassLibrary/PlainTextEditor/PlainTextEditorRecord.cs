@@ -32,7 +32,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         {
             new List<TextSyntaxRecord>
             {
-                new StartOfRowTextSyntaxRecord(this)
+                new StartOfRowTextSyntaxRecord(true)
             }
         };
     }
@@ -67,7 +67,8 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         if(KeyboardFacts.IsMetaKey(onKeyDownEventRecord))
             return this;
 
-        var documentEdit = await CurrentTextSyntaxRecord.HandleKeyDownEventRecordAsync(onKeyDownEventRecord);
+        var documentEdit = await CurrentTextSyntaxRecord.HandleKeyDownEventRecordAsync(this,
+            onKeyDownEventRecord);
 
         UndoDocumentEditStack.Push(new PlainTextEditorRecordEdit(this));
 
@@ -104,7 +105,10 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         // TODO: If inserting new line in the middle of a row it is necessary to split the line and possibly a TextEditorRecord that the user was within
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = ConstructFabricatedDocumentClone();
 
-        fabricatedDocumentClone.Insert(CurrentRowIndex, new List<TextSyntaxRecord>());
+        fabricatedDocumentClone.Insert(CurrentRowIndex, new List<TextSyntaxRecord>
+        {
+            new StartOfRowTextSyntaxRecord(false)
+        });
 
         return Task.FromResult(new PlainTextEditorRecordEdit(PlainTextEditorRecordId,
             fabricatedDocumentClone,

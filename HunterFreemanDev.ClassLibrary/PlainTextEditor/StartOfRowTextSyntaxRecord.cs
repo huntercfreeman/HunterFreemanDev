@@ -3,15 +3,16 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord) 
-    : TextSyntaxRecord(PlainTextEditorRecord)
+public record StartOfRowTextSyntaxRecord(bool IsStartOfDocument) 
+    : TextSyntaxRecord()
 {
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.StartOfRowText;
-    public override string ToPlainText => TextSyntaxRecordId == PlainTextEditorRecord.StartOfDocumentTextSyntaxRecordId
+    public override string ToPlainText => IsStartOfDocument
         ? string.Empty
         : '\n'.ToString();
 
-    public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
+    public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord,
+        KeyDownEventRecord keyDownEventRecord)
     {
         TextSyntaxRecord textSyntaxRecord;
 
@@ -24,8 +25,10 @@ public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRe
             textSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
         }
 
-        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(fabricatedDocumentClone, textSyntaxRecord));
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord,
+            fabricatedDocumentClone, 
+            textSyntaxRecord));
     }
 }

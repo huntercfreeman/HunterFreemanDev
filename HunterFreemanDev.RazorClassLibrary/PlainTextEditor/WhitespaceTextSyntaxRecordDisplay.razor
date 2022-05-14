@@ -1,3 +1,5 @@
+@using HunterFreemanDev.ClassLibrary.Html
+
 <span class="hfd_text-syntax-record-display hfd_whitespace-text-syntax-record-display">
-    hfd_whitespace-text-syntax-record-display
+    @((MarkupString) WhitespaceTextSyntaxRecord.ToPlainText.EscapeHtml())
 </span>

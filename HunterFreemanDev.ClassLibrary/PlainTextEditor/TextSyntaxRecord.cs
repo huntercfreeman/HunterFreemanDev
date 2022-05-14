@@ -3,34 +3,36 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
+public abstract record TextSyntaxRecord()
 {
     public Guid TextSyntaxRecordId { get; } = Guid.NewGuid();
 
     public abstract TextSyntaxRecordKind TextSyntaxRecordKind { get; }
     public abstract string ToPlainText { get; }
 
-    public abstract Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord);
+    public abstract Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord, 
+        KeyDownEventRecord keyDownEventRecord);
 
     public PlainTextSyntaxRecord ConstructPlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
     {
-        return new PlainTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
+        return new PlainTextSyntaxRecord(keyDownEventRecord);
     }
     
     public WhitespaceTextSyntaxRecord ConstructWhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
     {
-        return new WhitespaceTextSyntaxRecord(PlainTextEditorRecord, keyDownEventRecord);
+        return new WhitespaceTextSyntaxRecord(keyDownEventRecord);
     }
 
-    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(List<List<TextSyntaxRecord>> fabricatedDocument, 
+    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(PlainTextEditorRecord plainTextEditorRecord, 
+        List<List<TextSyntaxRecord>> fabricatedDocument, 
         TextSyntaxRecord textSyntaxRecord)
     {
-        fabricatedDocument[PlainTextEditorRecord.CurrentRowIndex]
-            .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
+        fabricatedDocument[plainTextEditorRecord.CurrentRowIndex]
+            .Insert(plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
 
-        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
+        return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
             fabricatedDocument,
-            PlainTextEditorRecord.CurrentRowIndex, 
-            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
+            plainTextEditorRecord.CurrentRowIndex,
+            plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
     }
 }

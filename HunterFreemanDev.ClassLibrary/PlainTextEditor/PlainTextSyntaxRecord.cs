@@ -3,11 +3,11 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord, string PlainText)
-    : TextSyntaxRecord(PlainTextEditorRecord)
+public record PlainTextSyntaxRecord(string PlainText)
+    : TextSyntaxRecord()
 {
-    public PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord, KeyDownEventRecord keyDownEventRecord) 
-        : this(PlainTextEditorRecord, keyDownEventRecord.Key 
+    public PlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord) 
+        : this(keyDownEventRecord.Key 
               ?? throw new ApplicationException($"{nameof(PlainTextSyntaxRecord)} was attempted " +
                   $"to be constructed with a {nameof(keyDownEventRecord.Key)} that was null."))
     {
@@ -16,30 +16,31 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.PlainText;
     public override string ToPlainText => PlainText;
 
-    public override async Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
+    public override async Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord,
+        KeyDownEventRecord keyDownEventRecord)
     {
         if(KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
         {
             if(KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
             {
-                return await PlainTextEditorRecord.InsertNewLine();
+                return await plainTextEditorRecord.InsertNewLine();
             }
 
-            return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(PlainTextEditorRecord.ConstructFabricatedDocumentClone(),
+            return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord,
+                plainTextEditorRecord.ConstructFabricatedDocumentClone(),
                 ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord));
         }    
 
-        var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainTextEditorRecord, 
-            PlainText + keyDownEventRecord.Key);
+        var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainText + keyDownEventRecord.Key);
 
-        List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex][PlainTextEditorRecord.CurrentTextSyntaxRecordIndex]
+        fabricatedDocumentClone[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex]
             = nextPlainTextSyntaxRecord;
 
-        return new PlainTextEditorRecordEdit(PlainTextEditorRecord.PlainTextEditorRecordId,
+        return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
             fabricatedDocumentClone,
-            PlainTextEditorRecord.CurrentRowIndex,
-            PlainTextEditorRecord.CurrentTextSyntaxRecordIndex);
+            plainTextEditorRecord.CurrentRowIndex,
+            plainTextEditorRecord.CurrentTextSyntaxRecordIndex);
     }
 }
