@@ -19,7 +19,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
     Stack<PlainTextEditorRecordEdit> RedoJumpMovementStack,
     Stack<PlainTextEditorRecordEdit> UndoJumpMovementStack)
 {
-    private List<List<TextSyntaxRecord>> _document = new();
+    private List<List<TextSyntaxRecord>> _document;
 
     public PlainTextEditorRecord() : this(Guid.NewGuid(),
         0,
@@ -29,7 +29,13 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         new Stack<PlainTextEditorRecordEdit>(),
         new Stack<PlainTextEditorRecordEdit>())
     {
-
+        _document = new()
+        {
+            new List<TextSyntaxRecord>
+            {
+                new StartOfRowTextSyntaxRecord(this)
+            }
+        };
     }
 
     public List<TextSyntaxRecord> CurrentRow => _document[CurrentRowIndex];
@@ -43,10 +49,14 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         {
             List<TextSyntaxRecord>? documentRow = _document[i];
 
-            var immutableRow = new TextSyntaxRecord[documentRow.Count]
-                .ToImmutableArray();
+            var temporaryRow = new TextSyntaxRecord[documentRow.Count];
 
-            temporaryRows[i] = immutableRow;
+            for (int j = 0; j < documentRow.Count; j++)
+            {
+                temporaryRow[j] = documentRow[j];
+            }
+
+            temporaryRows[i] = temporaryRow.ToImmutableArray();
         }
 
         return temporaryRows.ToImmutableArray();
