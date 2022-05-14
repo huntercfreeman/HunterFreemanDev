@@ -32,7 +32,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         {
             new List<TextSyntaxRecord>
             {
-                new StartOfRowTextSyntaxRecord(true)
+                new StartOfRowTextSyntaxRecord(true, 0)
             }
         };
     }
@@ -109,7 +109,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 
         fabricatedDocumentClone.Insert(CurrentRowIndex + 1, new List<TextSyntaxRecord>
         {
-            new StartOfRowTextSyntaxRecord(false)
+            new StartOfRowTextSyntaxRecord(false, 0)
         });
 
         return Task.FromResult(new PlainTextEditorRecordEdit(PlainTextEditorRecordId,

@@ -4,8 +4,10 @@
 
         for (int i = 0; i < plainTextContent.Length; i++)
         {
-            <CharacterDisplay HtmlCharacter="@plainTextContent[i].ToString()"
-                              DisplayCursor="CurrentTextSyntaxRecordId == PlainTextSyntaxRecord.TextSyntaxRecordId" />
+            int characterIndex = i;
+
+            <CharacterDisplay HtmlCharacter="@plainTextContent[characterIndex].ToString()"
+                              DisplayCursor="@ShouldDisplayCursor(characterIndex)" />
         }
     }
 </span>

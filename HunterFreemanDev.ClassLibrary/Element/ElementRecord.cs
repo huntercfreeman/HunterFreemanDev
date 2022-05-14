@@ -1,6 +1,6 @@
 ﻿namespace HunterFreemanDev.ClassLibrary.Element;
 
-public record ElementRecord(Type RenderedContentType)
+public record ElementRecord(Guid ElementRecordId, Type RenderedContentType)
 {
-    public static ElementRecord Uninitialized => new ElementRecord(typeof(UninitializedElementRecord));
+    public static ElementRecord Uninitialized => new ElementRecord(Guid.NewGuid(), typeof(UninitializedElementRecord));
 }

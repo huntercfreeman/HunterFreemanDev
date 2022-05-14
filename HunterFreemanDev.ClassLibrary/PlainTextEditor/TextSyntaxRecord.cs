@@ -3,7 +3,7 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public abstract record TextSyntaxRecord()
+public abstract record TextSyntaxRecord(int? IndexInContent)
 {
     public Guid TextSyntaxRecordId { get; } = Guid.NewGuid();
 
@@ -15,12 +15,12 @@ public abstract record TextSyntaxRecord()
 
     public PlainTextSyntaxRecord ConstructPlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
     {
-        return new PlainTextSyntaxRecord(keyDownEventRecord);
+        return new PlainTextSyntaxRecord(keyDownEventRecord, null);
     }
     
     public WhitespaceTextSyntaxRecord ConstructWhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord)
     {
-        return new WhitespaceTextSyntaxRecord(keyDownEventRecord);
+        return new WhitespaceTextSyntaxRecord(keyDownEventRecord, null);
     }
 
     public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(PlainTextEditorRecord plainTextEditorRecord, 
@@ -28,7 +28,10 @@ public abstract record TextSyntaxRecord()
         TextSyntaxRecord textSyntaxRecord)
     {
         fabricatedDocument[plainTextEditorRecord.CurrentRowIndex]
-            .Insert(plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
+            .Insert(plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord with
+            {
+                IndexInContent = 0
+            });
 
         return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
             fabricatedDocument,

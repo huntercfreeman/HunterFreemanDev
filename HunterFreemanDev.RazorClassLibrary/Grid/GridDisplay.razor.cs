@@ -18,7 +18,7 @@ public partial class GridDisplay : FluxorComponent
 
     private void OnAddWindowEventCallback((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) argumentTuple)
     {
-        var action = new AddGridStateAction(argumentTuple, new ElementRecord(typeof(PlainTextEditorDisplay)));
+        var action = new AddGridStateAction(argumentTuple, new ElementRecord(Guid.NewGuid(), typeof(PlainTextEditorDisplay)));
 
         Dispatcher.Dispatch(action);
     }

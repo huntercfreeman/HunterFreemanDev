@@ -16,4 +16,11 @@ public partial class PlainTextSyntaxRecordDisplay : ComponentBase
     public PlainTextSyntaxRecord PlainTextSyntaxRecord { get; set; } = null!;
     [Parameter, EditorRequired]
     public Guid CurrentTextSyntaxRecordId { get; set; }
+
+    private bool ShouldDisplayCursor(int characterIndex)
+    {
+        return CurrentTextSyntaxRecordId == PlainTextSyntaxRecord.TextSyntaxRecordId &&
+            PlainTextSyntaxRecord.IndexInContent == characterIndex;
+
+    }
 }

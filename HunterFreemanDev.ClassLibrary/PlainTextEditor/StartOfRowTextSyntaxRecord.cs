@@ -3,8 +3,8 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record StartOfRowTextSyntaxRecord(bool IsStartOfDocument) 
-    : TextSyntaxRecord()
+public record StartOfRowTextSyntaxRecord(bool IsStartOfDocument, int? IndexInContent) 
+    : TextSyntaxRecord(IndexInContent)
 {
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.StartOfRowText;
     public override string ToPlainText => IsStartOfDocument

@@ -3,13 +3,14 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record PlainTextSyntaxRecord(string PlainText)
-    : TextSyntaxRecord()
+public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
+    : TextSyntaxRecord(IndexInContent)
 {
-    public PlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord) 
+    public PlainTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord, int? IndexInContent) 
         : this(keyDownEventRecord.Key 
               ?? throw new ApplicationException($"{nameof(PlainTextSyntaxRecord)} was attempted " +
-                  $"to be constructed with a {nameof(keyDownEventRecord.Key)} that was null."))
+                  $"to be constructed with a {nameof(keyDownEventRecord.Key)} that was null."),
+              IndexInContent)
     {
     }
 
@@ -27,9 +28,13 @@ public record PlainTextSyntaxRecord(string PlainText)
             return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord,
                 plainTextEditorRecord.ConstructFabricatedDocumentClone(),
                 ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord));
-        }    
+        }
 
-        var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainText + keyDownEventRecord.Key);
+        var nextPlainTextSyntaxRecord = this with
+        {
+            IndexInContent = IndexInContent + 1,
+            PlainText = PlainText + keyDownEventRecord.Key
+        };
 
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 

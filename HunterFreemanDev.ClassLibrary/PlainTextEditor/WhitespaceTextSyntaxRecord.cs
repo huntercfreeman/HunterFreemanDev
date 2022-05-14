@@ -3,13 +3,13 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record WhitespaceTextSyntaxRecord()
-    : TextSyntaxRecord()
+public record WhitespaceTextSyntaxRecord(int? IndexInContent)
+    : TextSyntaxRecord(IndexInContent)
 {
     private readonly char _whitespaceCharacter;
 
-    public WhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord) 
-        : this()
+    public WhitespaceTextSyntaxRecord(KeyDownEventRecord keyDownEventRecord, int? IndexInContent) 
+        : this(IndexInContent)
     {
         switch (keyDownEventRecord.Code)
         {
