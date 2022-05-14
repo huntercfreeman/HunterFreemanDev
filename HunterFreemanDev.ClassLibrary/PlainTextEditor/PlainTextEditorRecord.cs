@@ -21,6 +21,17 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 {
     private List<List<TextSyntaxRecord>> _document = new();
 
+    public PlainTextEditorRecord() : this(Guid.NewGuid(),
+        0,
+        0,
+        new Stack<PlainTextEditorRecordEdit>(),
+        new Stack<PlainTextEditorRecordEdit>(),
+        new Stack<PlainTextEditorRecordEdit>(),
+        new Stack<PlainTextEditorRecordEdit>())
+    {
+
+    }
+
     public List<TextSyntaxRecord> CurrentRow => _document[CurrentRowIndex];
     public TextSyntaxRecord CurrentToken => _document[CurrentRowIndex][CurrentTokenIndex];
     
@@ -75,9 +86,18 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
     }
 }
 
+public enum TextSyntaxRecordKind
+{
+    StartOfRowText,
+    PlainText,
+    WhitespaceText
+}
+
 public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
 {
     public Guid TextSyntaxRecordId { get; } = Guid.NewGuid();
+
+    public abstract TextSyntaxRecordKind TextSyntaxRecordKind { get; }
 
     public abstract Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord);
 
@@ -90,6 +110,8 @@ public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRec
 public record StartOfRowTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord) 
     : TextSyntaxRecord(PlainTextEditorRecord)
 {
+    public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.StartOfRowText;
+
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
         var plainTextSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
@@ -113,6 +135,8 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
     {
     }
 
+    public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.PlainText;
+
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
         var nextPlainTextSyntaxRecord = new PlainTextSyntaxRecord(PlainTextEditorRecord, 
@@ -130,6 +154,8 @@ public record PlainTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord,
 public record WhitespaceTextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRecord)
     : TextSyntaxRecord(PlainTextEditorRecord)
 {
+    public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.WhitespaceText;
+
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(KeyDownEventRecord keyDownEventRecord)
     {
         throw new NotImplementedException();

@@ -15,7 +15,32 @@
             }
         </div>
 
-        @_plainTextEditorRecord.ContentBuilder
+        <div class="hfd_plain-text-editor-display-body">
+            @{
+                var document = _plainTextEditorRecord.GetDocument();
+
+                for (int i = 0; i < document.Length; i++)
+                {
+                    @* Storing for loop iteration variables locally is necessary in Blazor *@
+                    var rowIndex = i;
+                    var row = document[rowIndex];
+                    <div class="hfd_plain-text-editor-display-body-row">
+                        <span class="hfd_plain-text-editor-display-body-row-line-number">
+                            @(rowIndex + 1)
+                        </span>
+
+                        @for(int j = 0; j < row.Length; j++)
+                        {
+                            @* Storing for loop iteration variables locally is necessary in Blazor *@
+                            var tokenIndex = j;
+                            var token = row[tokenIndex];
+
+                            <TextSyntaxRecordDisplay />
+                        }
+                    </div>
+                }
+            }
+        </div>
     </div>
 </HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay>
 

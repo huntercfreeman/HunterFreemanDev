@@ -27,7 +27,7 @@ public partial class PlainTextEditorDisplay : FluxorComponent
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
 
-    private PlainTextEditorRecord _plainTextEditorRecord = new(Guid.NewGuid());
+    private PlainTextEditorRecord _plainTextEditorRecord = new();
     private FocusBoundaryDisplay? _focusBoundaryDisplay = null!;
 
     protected override void OnInitialized()
