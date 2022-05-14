@@ -23,8 +23,13 @@
     --hfd_toolbar-background-color: #cddcf8;
     --hfd_primary-background-color: #fdfdfd;
     --hfd_dialog-display-title-background-color: #dadada;
-    --hfd_primary-hover-background-color: #cbcef6;
+    --hfd_primary-hover-background-color: #94b2f2;
     --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-font-color: black;
+    --hfd_secondary-font-color: gray;
+    --hfd_primary-box-shadow: 0 0 3px #333;
+    --hfd_dialog-task-bar-display-background-color: silver;
+    --hfd_primary-active-background-color: #c0e0ff;
 }
 
 .hfd_hfd-light-theme-high-contrast {
@@ -38,36 +43,51 @@
     --hfd_toolbar-background-color: #a2bef2;
     --hfd_primary-background-color: #ffffff;
     --hfd_dialog-display-title-background-color: #dadada;
-    --hfd_primary-hover-background-color: #b6bbf6;
+    --hfd_primary-hover-background-color: #94b2f2;
     --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-font-color: black;
+    --hfd_secondary-font-color: gray;
+    --hfd_primary-box-shadow: 0 0 3px #333;
+    --hfd_dialog-task-bar-display-background-color: silver;
+    --hfd_primary-active-background-color: #c0e0ff;
 }
 
 .hfd_hfd-dark-theme-default-contrast {
-    --hfd_primary-color: blue;
-    --hfd_secondary-color: gray;
-    --hfd_success-color: green;
-    --hfd_danger-color: red;
-    --hfd_warning-color: yellow;
-    --hfd_info-color: powderblue;
-    --hfd_toolbar-background-color: #d0d4f4;
-    --hfd_primary-background-color: orange;
-    --hfd_dialog-display-title-background-color: green;
-    --hfd_primary-hover-background-color: #dcdcdc;
-    --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-color: #457bf4;
+    --hfd_secondary-color: #aba9a9;
+    --hfd_success-color: #47d647;
+    --hfd_danger-color: #f25343;
+    --hfd_warning-color: #e0e02d;
+    --hfd_info-color: #a1dede;
+    --hfd_toolbar-background-color: #6a6a6a;
+    --hfd_primary-background-color: #272523;
+    --hfd_dialog-display-title-background-color: #515151;
+    --hfd_primary-hover-background-color: #8c7ac7;
+    --hfd_dialog-display-background-color: #747474;
+    --hfd_primary-font-color: #fdfdfd;
+    --hfd_secondary-font-color: white;
+    --hfd_primary-box-shadow: 0 0 3px #fdfdfd;
+    --hfd_dialog-task-bar-display-background-color: #465c8c;
+    --hfd_primary-active-background-color: #d2972b;
 }
 
 .hfd_hfd-dark-theme-high-contrast {
-    --hfd_primary-color: blue;
-    --hfd_secondary-color: gray;
-    --hfd_success-color: green;
-    --hfd_danger-color: red;
-    --hfd_warning-color: yellow;
-    --hfd_info-color: powderblue;
+    --hfd_primary-color: #457bf4;
+    --hfd_secondary-color: #aba9a9;
+    --hfd_success-color: #47d647;
+    --hfd_danger-color: #f25343;
+    --hfd_warning-color: #e0e02d;
+    --hfd_info-color: #a1dede;
     --hfd_toolbar-background-color: #d0d4f4;
-    --hfd_primary-background-color: orange;
-    --hfd_dialog-display-title-background-color: green;
-    --hfd_primary-hover-background-color: #dcdcdc;
-    --hfd_dialog-display-background-color: #fcfcf0;
+    --hfd_primary-background-color: #272523;
+    --hfd_dialog-display-title-background-color: #515151;
+    --hfd_primary-hover-background-color: #8c7ac7;
+    --hfd_dialog-display-background-color: #747474;
+    --hfd_primary-font-color: #fdfdfd;
+    --hfd_secondary-font-color: white;
+    --hfd_primary-box-shadow: 0 0 3px #fdfdfd;
+    --hfd_dialog-task-bar-display-background-color: #465c8c;
+    --hfd_primary-active-background-color: #d2972b;
 }
 
 .hfd_unselectable {
@@ -95,10 +115,11 @@
     height: 100vh;
 }
 
-.hfd_background-color-wrapping {
+.hfd_theme-wrapping {
     width: 100%;
     height: 100%;
     background-color: var(--hfd_primary-background-color);
+    color: var(--hfd_primary-font-color);
 }
 
 .hfd_button-display {
@@ -218,9 +239,7 @@
     left: 0;
     top: 0;
     background-color: var(--hfd_dialog-display-background-color);
-    -moz-box-shadow: 0 0 3px #ccc;
-    -webkit-box-shadow: 0 0 3px #ccc;
-    box-shadow: 0 0 3px #333;
+    box-shadow: var(--hfd_primary-box-shadow);
 }
 
 .hfd_dialog-display-title {
@@ -255,7 +274,7 @@
 
 .hfd_dialog-task-bar-display {
     height: var(--hfd_dialog-task-bar-display-height);
-    background-color: silver;
+    background-color: var(--hfd_dialog-task-bar-display-background-color);
 }
 
 .hfd_dialog-task-entry-display {
@@ -330,9 +349,9 @@
     margin-bottom: 10px;
 }
 
-.hfd_theme-display.hfd_active {
-    background-color: cornflowerblue;
-}
+    .hfd_theme-display.hfd_active {
+        background-color: var(--hfd_primary-active-background-color);
+    }
 
 .hfd_theme-display-title {
     font-size: 1.5em;
