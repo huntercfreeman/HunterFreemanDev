@@ -9,15 +9,22 @@ using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using Fluxor;
 using HunterFreemanDev.ClassLibrary.Store.KeyDown;
 using System.Text;
+using HunterFreemanDev.ClassLibrary.Store.Focus;
+using HunterFreemanDev.ClassLibrary.Focus;
+using Fluxor.Blazor.Web.Components;
+using HunterFreemanDev.RazorClassLibrary.Focus;
 
 namespace HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
 
-public partial class PlainTextEditorDisplay : ComponentBase, IDisposable
+public partial class PlainTextEditorDisplay : FluxorComponent
 {
     [Inject]
     private IState<KeyDownEventState> KeyDownEventState { get; set; } = null!;
+    [Inject]
+    private IState<FocusState> FocusState { get; set; } = null!;
 
     private StringBuilder _contentBuilder = new();
+    private FocusBoundaryDisplay? _focusBoundaryDisplay = null!;
 
     protected override void OnInitialized()
     {

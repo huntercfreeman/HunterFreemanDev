@@ -1,3 +1,21 @@
-﻿<div class="hfd_plain-text-editor-display">
-    @_contentBuilder
-</div>
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay @ref="_focusBoundaryDisplay" 
+                                                               FocusRecordDisplayName="@nameof(PlainTextEditorDisplay)"
+                                                               Class="hfd_match-parent-width-and-height">
+    <div class="hfd_plain-text-editor-display">
+        <div>
+            @if(FocusState.Value.FocusRecord is not null &&
+                _focusBoundaryDisplay is not null &&
+                FocusState.Value.FocusRecord.FocusRecordId == _focusBoundaryDisplay.FocusRecord.FocusRecordId)
+            {
+                <text>Is Focused</text>
+            }
+        </div>
+
+        @_contentBuilder
+    </div>
+</HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay>
+
