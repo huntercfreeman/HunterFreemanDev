@@ -4,5 +4,18 @@
 }
 
 .hfd_debug-plain-text-editor .hfd_plain-text-editor-display {
-    background-color: green;
+}
+
+.hfd_debug-colored-start-of-row-text-syntax-record-displays .hfd_start-of-row-text-syntax-record-display {
+    background-color: yellow;
+    min-width: 1em;
+    min-height: 1ch;
+}
+
+.hfd_debug-colored-plain-text-syntax-record-displays .hfd_plain-text-syntax-record-display {
+    background-color: aquamarine;
+}
+
+.hfd_debug-colored-whitespace-text-syntax-record-displays .hfd_whitespace-text-syntax-record-display {
+    background-color: orange;
 }

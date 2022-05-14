@@ -22,7 +22,7 @@ public abstract record TextSyntaxRecord(PlainTextEditorRecord PlainTextEditorRec
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = PlainTextEditorRecord.ConstructFabricatedDocumentClone();
 
         fabricatedDocumentClone[PlainTextEditorRecord.CurrentRowIndex]
-            .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex, textSyntaxRecord);
+            .Insert(PlainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1, textSyntaxRecord);
 
         return new PlainTextEditorRecordEdit(fabricatedDocumentClone);
     }
