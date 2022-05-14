@@ -1,0 +1,5 @@
+﻿using HunterFreemanDev.ClassLibrary.DebugCssClasses;
+
+namespace HunterFreemanDev.ClassLibrary.Store.DebugCssClasses;
+
+public record RegisterDebugCssClassRecordAction(DebugCssClassRecord DebugCssClassRecord);

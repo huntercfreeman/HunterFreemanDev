@@ -1,4 +1,8 @@
-﻿.hfd_debug .hfd_drag-event-provider-display {
+﻿.hfd_debug-global .hfd_drag-event-provider-display {
     background-color: orchid;
     opacity: 0.5;
+}
+
+.hfd_debug-plain-text-editor .hfd_plain-text-editor-display {
+    background-color: green;
 }

@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.DebugCssClasses;
 
-public record DebugCssClassRecord(Guid Id, string CssClassString, bool IsEnabled);
+public record DebugCssClassRecord(Guid DebugCssClassId, string CssClassString, bool IsEnabled);

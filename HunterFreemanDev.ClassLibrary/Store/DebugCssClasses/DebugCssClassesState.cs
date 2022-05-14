@@ -13,6 +13,5 @@ public record DebugCssClassesState(Dictionary<Guid, DebugCssClassRecord> DebugCs
 {
     public DebugCssClassesState() : this(new Dictionary<Guid, DebugCssClassRecord>())
     {
-
     }
 }
