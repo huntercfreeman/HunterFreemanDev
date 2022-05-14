@@ -1,4 +1,5 @@
-﻿using HunterFreemanDev.ClassLibrary.KeyDown;
+﻿using HunterFreemanDev.ClassLibrary.Focus;
+using HunterFreemanDev.ClassLibrary.KeyDown;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record PlainTextEditorRecord
+public record PlainTextEditorRecord(Guid PlainTextEditorRecordId)
 {
     private StringBuilder _contentBuilder = new();
 
-    public Task HandleKeyDownEvent(KeyDownEventRecord onKeyDownEventRecord)
+    public StringBuilder ContentBuilder => _contentBuilder;
+
+    public Task HandleKeyDownEventAsync(KeyDownEventRecord onKeyDownEventRecord)
     {
         _contentBuilder.Append(onKeyDownEventRecord.Key);
 
