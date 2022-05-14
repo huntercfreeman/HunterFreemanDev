@@ -18,6 +18,9 @@ public record StartOfRowTextSyntaxRecord(bool IsStartOfDocument)
 
         if (KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
         {
+            if (KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
+                return plainTextEditorRecord.InsertNewLine();
+
             textSyntaxRecord = ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord);
         }
         else

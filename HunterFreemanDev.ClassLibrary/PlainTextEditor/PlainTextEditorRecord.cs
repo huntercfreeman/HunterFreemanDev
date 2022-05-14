@@ -64,7 +64,9 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
 
     public async Task<PlainTextEditorRecord> HandleKeyDownEventAsync(KeyDownEventRecord onKeyDownEventRecord)
     {
-        if(KeyboardFacts.IsMetaKey(onKeyDownEventRecord))
+        if(KeyboardFacts.IsMetaKey(onKeyDownEventRecord) &&
+            !KeyboardFacts.IsMovementKey(onKeyDownEventRecord) &&
+            !KeyboardFacts.IsWhitespaceKey(onKeyDownEventRecord))
             return this;
 
         var documentEdit = await CurrentTextSyntaxRecord.HandleKeyDownEventRecordAsync(this,
@@ -105,7 +107,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         // TODO: If inserting new line in the middle of a row it is necessary to split the line and possibly a TextEditorRecord that the user was within
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = ConstructFabricatedDocumentClone();
 
-        fabricatedDocumentClone.Insert(CurrentRowIndex, new List<TextSyntaxRecord>
+        fabricatedDocumentClone.Insert(CurrentRowIndex + 1, new List<TextSyntaxRecord>
         {
             new StartOfRowTextSyntaxRecord(false)
         });

@@ -22,9 +22,7 @@ public record PlainTextSyntaxRecord(string PlainText)
         if(KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
         {
             if(KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
-            {
                 return await plainTextEditorRecord.InsertNewLine();
-            }
 
             return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord,
                 plainTextEditorRecord.ConstructFabricatedDocumentClone(),
