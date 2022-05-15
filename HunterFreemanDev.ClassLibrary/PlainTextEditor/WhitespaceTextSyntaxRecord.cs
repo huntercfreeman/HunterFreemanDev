@@ -31,22 +31,55 @@ public record WhitespaceTextSyntaxRecord(int? IndexInContent)
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord,
         KeyDownEventRecord keyDownEventRecord)
     {
-        TextSyntaxRecord textSyntaxRecord;
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
         if (KeyboardFacts.IsWhitespaceKey(keyDownEventRecord))
         {
             if (KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
                 return plainTextEditorRecord.InsertNewLine();
 
-            textSyntaxRecord = ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord);
+            return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndSetCurrent(plainTextEditorRecord,
+                fabricatedDocumentClone,
+                ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord)));
         }
-        else
+        else if (KeyboardFacts.IsMovementKey(keyDownEventRecord))
         {
-            textSyntaxRecord = ConstructPlainTextSyntaxRecord(keyDownEventRecord);
+            return Task.FromResult(HandleMovementKey(plainTextEditorRecord,
+                fabricatedDocumentClone,
+                keyDownEventRecord));
         }
 
-        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
+        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndSetCurrent(plainTextEditorRecord,
+            fabricatedDocumentClone,
+            ConstructPlainTextSyntaxRecord(keyDownEventRecord)));
+    }
 
-        return Task.FromResult(InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord, fabricatedDocumentClone, textSyntaxRecord));
+    private PlainTextEditorRecordEdit HandleMovementKey(PlainTextEditorRecord plainTextEditorRecord,
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone,
+        KeyDownEventRecord keyDownEventRecord)
+    {
+        switch (keyDownEventRecord.Code)
+        {
+            case KeyboardFacts.MovementKeys.ArrowLeft:
+                return HandleArrowLeft(plainTextEditorRecord, fabricatedDocumentClone, keyDownEventRecord);
+            case KeyboardFacts.MovementKeys.ArrowRight:
+                return HandleArrowRight(plainTextEditorRecord, fabricatedDocumentClone, keyDownEventRecord);
+            default:
+                return new PlainTextEditorRecordEdit(plainTextEditorRecord);
+        }
+    }
+
+    private PlainTextEditorRecordEdit HandleArrowLeft(PlainTextEditorRecord plainTextEditorRecord,
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone,
+        KeyDownEventRecord keyDownEventRecord)
+    {
+        return SetPreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
+    }
+
+    private PlainTextEditorRecordEdit HandleArrowRight(PlainTextEditorRecord plainTextEditorRecord,
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone,
+        KeyDownEventRecord keyDownEventRecord)
+    {
+        return SetNextTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
     }
 }

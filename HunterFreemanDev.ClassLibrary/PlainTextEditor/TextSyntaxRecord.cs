@@ -23,7 +23,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         return new WhitespaceTextSyntaxRecord(keyDownEventRecord, null);
     }
 
-    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(PlainTextEditorRecord plainTextEditorRecord, 
+    public PlainTextEditorRecordEdit InsertAfterCurrentTextSyntaxRecordAndSetCurrent(PlainTextEditorRecord plainTextEditorRecord, 
         List<List<TextSyntaxRecord>> fabricatedDocument, 
         TextSyntaxRecord textSyntaxRecord)
     {
@@ -39,7 +39,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
             plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
     }
 
-    public PlainTextEditorRecordEdit MakePreviousTextSyntaxRecordCurrent(PlainTextEditorRecord plainTextEditorRecord,
+    public PlainTextEditorRecordEdit SetPreviousTextSyntaxRecordCurrent(PlainTextEditorRecord plainTextEditorRecord,
         List<List<TextSyntaxRecord>> fabricatedDocument)
     {
         if(plainTextEditorRecord.CurrentTextSyntaxRecordIndex == 0)
@@ -51,7 +51,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
 
                 fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousFinalTextSyntaxRecordOfPreviousRow with
                 {
-                    IndexInContent = 0
+                    IndexInContent = previousFinalTextSyntaxRecordOfPreviousRow.ToPlainText.Length - 1
                 };
 
                 fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex] = this with
@@ -73,7 +73,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
 
             fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousTextSyntaxRecord with
             {
-                IndexInContent = 0
+                IndexInContent = previousTextSyntaxRecord.ToPlainText.Length - 1
             };
 
             fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex] = this with
@@ -88,7 +88,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         }
     }
     
-    public PlainTextEditorRecordEdit MakeNextTextSyntaxRecordCurrent(PlainTextEditorRecord plainTextEditorRecord,
+    public PlainTextEditorRecordEdit SetNextTextSyntaxRecordCurrent(PlainTextEditorRecord plainTextEditorRecord,
         List<List<TextSyntaxRecord>> fabricatedDocument)
     {
         if(plainTextEditorRecord.CurrentTextSyntaxRecordIndex == plainTextEditorRecord.CurrentRow.Length - 1)

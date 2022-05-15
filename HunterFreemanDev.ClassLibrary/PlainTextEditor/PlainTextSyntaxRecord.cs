@@ -25,7 +25,7 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
             if(KeyboardFacts.WhitespaceKeys.Enter == keyDownEventRecord.Code)
                 return await plainTextEditorRecord.InsertNewLine();
 
-            return InsertAfterCurrentTextSyntaxRecordAndMakeCurrent(plainTextEditorRecord,
+            return InsertAfterCurrentTextSyntaxRecordAndSetCurrent(plainTextEditorRecord,
                 plainTextEditorRecord.ConstructFabricatedDocumentClone(),
                 ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord));
         }
@@ -68,7 +68,7 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
         if (IndexInContent == 0)
-            return MakePreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
+            return SetPreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
         
         PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
         {
@@ -89,7 +89,7 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
         if (IndexInContent == PlainText.Length - 1)
-            return MakeNextTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
+            return SetNextTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
         
         PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
         {
