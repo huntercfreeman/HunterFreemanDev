@@ -10,6 +10,8 @@
     background-color: yellow;
     min-width: 1em;
     min-height: 1ch;
+    display: inline-flex;
+    justify-content: end;
 }
 
 .hfd_debug-colored-plain-text-syntax-record-displays .hfd_plain-text-syntax-record-display {

@@ -3,13 +3,11 @@ using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
-public record StartOfRowTextSyntaxRecord(bool IsStartOfDocument, int? IndexInContent) 
+public record StartOfRowTextSyntaxRecord(int? IndexInContent) 
     : TextSyntaxRecord(IndexInContent)
 {
     public override TextSyntaxRecordKind TextSyntaxRecordKind => TextSyntaxRecordKind.StartOfRowText;
-    public override string ToPlainText => IsStartOfDocument
-        ? string.Empty
-        : '\n'.ToString();
+    public override string ToPlainText => '\n'.ToString();
 
     public override Task<PlainTextEditorRecordEdit> HandleKeyDownEventRecordAsync(PlainTextEditorRecord plainTextEditorRecord,
         KeyDownEventRecord keyDownEventRecord)
