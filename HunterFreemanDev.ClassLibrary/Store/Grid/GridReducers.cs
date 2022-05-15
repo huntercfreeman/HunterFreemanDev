@@ -30,7 +30,7 @@ public class GridReducers
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.GridRecord);
                 break;
             case Direction.CardinalDirectionKind.East:
-                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.GridRecord);
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Insert(addGridStateAction.ArgumentTuple.GridColumnIndex + 1, addGridStateAction.GridRecord);
                 break;
             case Direction.CardinalDirectionKind.South:
                 nextRowsList.Insert(addGridStateAction.ArgumentTuple.GridRowIndex + 1, new());

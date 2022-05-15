@@ -2,19 +2,10 @@
 
 <div class="hfd_grid-column-display"
      style="@GetStyle">
-     GridColumnIndex: @GridColumnIndex
-
     <GridAddColumnButtons AddWindowEventCallback="OnAddWindowEventCallback" />
 
-    @if (GridRecord.RenderedContentType != typeof(UninitializedElementRecord))
-    {
-        <CascadingValue Value="GridRecord">
-            <DynamicComponent Type="GridRecord.RenderedContentType"
-                              Parameters="GetDynamicComponentParameters()"/>
-        </CascadingValue>
-    }
-    else
-    {
-        <GridUninitializedElementRecordDisplay ElementRecord="GridRecord" />
-    }
+    <CascadingValue Value="GridRecord">
+        <DynamicComponent Type="GridRecord.RenderedContentType"
+                            Parameters="GetDynamicComponentParameters()"/>
+    </CascadingValue>
 </div>
