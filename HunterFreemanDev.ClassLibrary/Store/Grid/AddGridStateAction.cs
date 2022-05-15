@@ -9,7 +9,5 @@ using System.Threading.Tasks;
 namespace HunterFreemanDev.ClassLibrary.Store.Grid;
 
 public record AddGridRecordAction((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) ArgumentTuple, 
-    GridRecord GridRecord);
-
-public record RegisterGridRecordAction((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) ArgumentTuple,
-    GridRecord ElementRecord);
+    GridRecord GridRecord,
+    object? GridRecordChildComponentState);

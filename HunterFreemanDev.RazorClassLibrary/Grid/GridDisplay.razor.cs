@@ -20,7 +20,8 @@ public partial class GridDisplay : FluxorComponent
     private void OnAddWindowEventCallback((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) argumentTuple)
     {
         var action = new AddGridRecordAction(argumentTuple, 
-            new GridRecord(Guid.NewGuid(), typeof(PlainTextEditorDisplay), new PlainTextEditorRecord(), nameof(PlainTextEditorDisplay.PlainTextEditorRecord)));
+            new GridRecord(Guid.NewGuid(), typeof(PlainTextEditorDisplay), nameof(PlainTextEditorDisplay.PlainTextEditorRecord))
+            , new PlainTextEditorRecord());
 
         Dispatcher.Dispatch(action);
     }

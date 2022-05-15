@@ -16,6 +16,7 @@ using HunterFreemanDev.RazorClassLibrary.Focus;
 using HunterFreemanDev.ClassLibrary.Store.PlainTextEditor;
 using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 using HunterFreemanDev.ClassLibrary.Store.Grid;
+using HunterFreemanDev.ClassLibrary.Element;
 
 namespace HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
 
@@ -25,6 +26,11 @@ public partial class PlainTextEditorDisplay : FluxorComponent
     private IState<KeyDownEventState> KeyDownEventState { get; set; } = null!;
     [Inject]
     private IState<FocusState> FocusState { get; set; } = null!;
+    [Inject]
+    private IDispatcher Dispatcher { get; set; } = null!;
+
+    [CascadingParameter]
+    public GridRecord? GridRecord { get; set; }
 
     [Parameter]
     public PlainTextEditorRecord PlainTextEditorRecord { get; set; } = null!;
@@ -43,6 +49,13 @@ public partial class PlainTextEditorDisplay : FluxorComponent
         if (_focusBoundaryDisplay?.GetIsFocused() ?? false)
         {
             PlainTextEditorRecord = await PlainTextEditorRecord.HandleKeyDownEventAsync(KeyDownEventState.Value.OnKeyDownEventRecord);
+
+            if(GridRecord is not null)
+            {
+                var saveGridStateAction = new ReplaceGridRecordAction(GridRecord, PlainTextEditorRecord);
+
+                Dispatcher.Dispatch(saveGridStateAction);
+            }
         }
 
         await InvokeAsync(StateHasChanged);

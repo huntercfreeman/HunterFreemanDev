@@ -1,11 +1,16 @@
-﻿using HunterFreemanDev.ClassLibrary.Direction;
+﻿using Fluxor;
+using HunterFreemanDev.ClassLibrary.Direction;
 using HunterFreemanDev.ClassLibrary.Element;
+using HunterFreemanDev.ClassLibrary.Store.Grid;
 using Microsoft.AspNetCore.Components;
 
 namespace HunterFreemanDev.RazorClassLibrary.Grid;
 
 public partial class GridColumnDisplay : ComponentBase
 {
+    [Inject]
+    private IState<GridState> GridState { get; set; } = null!;
+
     [Parameter, EditorRequired]
     public int GridColumnIndex { get; set; }
     [Parameter, EditorRequired]
@@ -25,7 +30,7 @@ public partial class GridColumnDisplay : ComponentBase
             {
                 {
                     GridRecord.GridRecordChildComponentStateParameterName,
-                    GridRecord.GridRecordChildComponentState
+                    GridState.Value.GridRecordMap[GridRecord.GridRecordId]
                 }
             };
         }

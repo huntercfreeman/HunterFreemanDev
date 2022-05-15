@@ -45,10 +45,27 @@ public class GridReducers
         }
 
         // Replace GridRecordMap
-        var nextGridRecordMap = new Dictionary<Guid, GridRecord>(previousGridState.GridRecordMap);
+        var nextGridRecordMap = new Dictionary<Guid, object?>(previousGridState.GridRecordMap);
 
-        nextGridRecordMap.Add(addGridStateAction.GridRecord.GridRecordId, addGridStateAction.GridRecord);
+        nextGridRecordMap.Add(addGridStateAction.GridRecord.GridRecordId, addGridStateAction.GridRecordChildComponentState);
 
         return new GridState(nextGridRecordMap, nextRowsList);
+    }
+    
+    [ReducerMethod]
+    public static GridState ReduceReplaceGridRecordAction(GridState previousGridState,
+        ReplaceGridRecordAction replaceGridRecordAction)
+    {
+        // Replace GridRecordMap
+        var nextGridRecordMap = new Dictionary<Guid, object?>(previousGridState.GridRecordMap);
+
+        nextGridRecordMap.Remove(replaceGridRecordAction.GridRecord.GridRecordId);
+
+        nextGridRecordMap.Add(replaceGridRecordAction.GridRecord.GridRecordId, replaceGridRecordAction.GridRecordChildComponentState);
+
+        return previousGridState with
+        {
+            GridRecordMap = nextGridRecordMap
+        };
     }
 }

@@ -8,8 +8,10 @@
 
     @if (GridRecord.RenderedContentType != typeof(UninitializedElementRecord))
     {
-        <DynamicComponent Type="GridRecord.RenderedContentType"
-                          Parameters="GetDynamicComponentParameters()"/>
+        <CascadingValue Value="GridRecord">
+            <DynamicComponent Type="GridRecord.RenderedContentType"
+                              Parameters="GetDynamicComponentParameters()"/>
+        </CascadingValue>
     }
     else
     {
