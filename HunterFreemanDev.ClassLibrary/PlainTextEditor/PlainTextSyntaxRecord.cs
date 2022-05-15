@@ -29,6 +29,9 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
                 plainTextEditorRecord.ConstructFabricatedDocumentClone(),
                 ConstructWhitespaceTextSyntaxRecord(keyDownEventRecord));
         }
+        
+        if(KeyboardFacts.IsMovementKey(keyDownEventRecord))
+            return HandleMovementKey(plainTextEditorRecord, keyDownEventRecord);
 
         var nextPlainTextSyntaxRecord = this with
         {
@@ -37,6 +40,38 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         };
 
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
+
+        fabricatedDocumentClone[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex]
+            = nextPlainTextSyntaxRecord;
+
+        return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
+            fabricatedDocumentClone,
+            plainTextEditorRecord.CurrentRowIndex,
+            plainTextEditorRecord.CurrentTextSyntaxRecordIndex);
+    }
+
+    private PlainTextEditorRecordEdit HandleMovementKey(PlainTextEditorRecord plainTextEditorRecord, KeyDownEventRecord keyDownEventRecord)
+    {
+        switch(keyDownEventRecord.Code)
+        {
+            case KeyboardFacts.MovementKeys.ArrowLeft:
+                 return HandlePlainTextSyntaxRecordArrowLeft(plainTextEditorRecord, keyDownEventRecord);
+        }
+
+        return new PlainTextEditorRecordEdit(plainTextEditorRecord);
+    }
+
+    private PlainTextEditorRecordEdit HandlePlainTextSyntaxRecordArrowLeft(PlainTextEditorRecord plainTextEditorRecord, KeyDownEventRecord keyDownEventRecord)
+    {
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
+
+        if (IndexInContent == 0)
+            return MakePreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
+        
+        PlainTextSyntaxRecord nextPlainTextSyntaxRecord = this with
+        {
+            IndexInContent = IndexInContent - 1
+        };
 
         fabricatedDocumentClone[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex]
             = nextPlainTextSyntaxRecord;
