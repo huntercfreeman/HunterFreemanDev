@@ -46,10 +46,10 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         {
             if (plainTextEditorRecord.CurrentRowIndex != 0)
             {
-                var previousFinalTokenOfPreviousRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1]
+                var previousFinalTextSyntaxRecordOfPreviousRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1]
                     .Last();
 
-                plainTextEditorRecord.CurrentRow[plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousFinalTokenOfPreviousRow with
+                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousFinalTextSyntaxRecordOfPreviousRow with
                 {
                     IndexInContent = 0
                 };
@@ -71,7 +71,56 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         {
             var previousTextSyntaxRecord = plainTextEditorRecord.CurrentRow[plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1];
 
-            plainTextEditorRecord.CurrentRow[plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousTextSyntaxRecord with
+            fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousTextSyntaxRecord with
+            {
+                IndexInContent = 0
+            };
+
+            fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex] = this with
+            { 
+                IndexInContent = null
+            };
+
+            return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
+                fabricatedDocument,
+                plainTextEditorRecord.CurrentRowIndex,
+                plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1);
+        }
+    }
+    
+    public PlainTextEditorRecordEdit MakeNextTextSyntaxRecordCurrent(PlainTextEditorRecord plainTextEditorRecord,
+        List<List<TextSyntaxRecord>> fabricatedDocument)
+    {
+        if(plainTextEditorRecord.CurrentTextSyntaxRecordIndex == plainTextEditorRecord.CurrentRow.Length - 1)
+        {
+            if (plainTextEditorRecord.CurrentRowIndex != fabricatedDocument.Count - 1)
+            {
+                var nextFirstTextSyntaxRecordOfNextRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex + 1]
+                    .First();
+
+                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = nextFirstTextSyntaxRecordOfNextRow with
+                {
+                    IndexInContent = 0
+                };
+
+                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex] = this with
+                {
+                    IndexInContent = null
+                };
+
+                return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
+                    fabricatedDocument,
+                    plainTextEditorRecord.CurrentRowIndex - 1,
+                    fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1].Count - 1);
+            }
+
+            return new PlainTextEditorRecordEdit(plainTextEditorRecord);
+        }
+        else
+        {
+            var nextTextSyntaxRecord = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1];
+
+            fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = nextTextSyntaxRecord with
             {
                 IndexInContent = 0
             };

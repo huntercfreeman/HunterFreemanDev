@@ -37,7 +37,7 @@ public record PlainTextEditorRecord(Guid PlainTextEditorRecordId,
         };
     }
 
-    public List<TextSyntaxRecord> CurrentRow => _document[CurrentRowIndex];
+    public ImmutableArray<TextSyntaxRecord> CurrentRow => _document[CurrentRowIndex].ToImmutableArray();
     public TextSyntaxRecord CurrentTextSyntaxRecord => _document[CurrentRowIndex][CurrentTextSyntaxRecordIndex];
     public Guid StartOfDocumentTextSyntaxRecordId => _document.First().First().TextSyntaxRecordId;
     

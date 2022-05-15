@@ -56,6 +56,8 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         {
             case KeyboardFacts.MovementKeys.ArrowLeft:
                  return HandlePlainTextSyntaxRecordArrowLeft(plainTextEditorRecord, keyDownEventRecord);
+            case KeyboardFacts.MovementKeys.ArrowRight:
+                return HandlePlainTextSyntaxRecordArrowRight(plainTextEditorRecord, keyDownEventRecord);
         }
 
         return new PlainTextEditorRecordEdit(plainTextEditorRecord);
@@ -68,13 +70,34 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         if (IndexInContent == 0)
             return MakePreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
         
-        PlainTextSyntaxRecord nextPlainTextSyntaxRecord = this with
+        PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
         {
             IndexInContent = IndexInContent - 1
         };
 
         fabricatedDocumentClone[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex]
-            = nextPlainTextSyntaxRecord;
+            = copyPlainTextSyntaxRecord;
+
+        return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
+            fabricatedDocumentClone,
+            plainTextEditorRecord.CurrentRowIndex,
+            plainTextEditorRecord.CurrentTextSyntaxRecordIndex);
+    }
+    
+    private PlainTextEditorRecordEdit HandlePlainTextSyntaxRecordArrowRight(PlainTextEditorRecord plainTextEditorRecord, KeyDownEventRecord keyDownEventRecord)
+    {
+        List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
+
+        if (IndexInContent == PlainText.Length - 1)
+            return MakeNextTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
+        
+        PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
+        {
+            IndexInContent = IndexInContent + 1
+        };
+
+        fabricatedDocumentClone[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex]
+            = copyPlainTextSyntaxRecord;
 
         return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
             fabricatedDocumentClone,
