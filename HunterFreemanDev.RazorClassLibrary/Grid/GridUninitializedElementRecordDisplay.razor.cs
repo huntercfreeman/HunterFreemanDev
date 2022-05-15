@@ -1,4 +1,7 @@
-﻿using HunterFreemanDev.ClassLibrary.Element;
+﻿using Fluxor;
+using Fluxor.Blazor.Web.Components;
+using HunterFreemanDev.ClassLibrary.Element;
+using HunterFreemanDev.ClassLibrary.Store.Grid;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -8,8 +11,11 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.RazorClassLibrary.Grid;
 
-public partial class GridUninitializedElementRecordDisplay : ComponentBase
+public partial class GridUninitializedElementRecordDisplay : FluxorComponent
 {
+    [Inject]
+    private IState<GridState> GridState { get; set; } = null!;
+
     [Parameter, EditorRequired]
-    public ElementRecord ElementRecord { get; set; } = null!;
+    public GridRecord ElementRecord { get; set; } = null!;
 }

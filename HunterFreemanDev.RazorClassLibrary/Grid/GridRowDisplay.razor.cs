@@ -11,7 +11,7 @@ public partial class GridRowDisplay : ComponentBase
     [Parameter, EditorRequired]
     public int GridTotalRowCount { get; set; }
     [Parameter, EditorRequired]
-    public List<ElementRecord> GridRowElementReferences { get; set; } = null!;
+    public List<GridRecord> GridRowElementReferences { get; set; } = null!;
     [Parameter, EditorRequired]
     public EventCallback<(CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex)> AddWindowEventCallback { get; set; }
 

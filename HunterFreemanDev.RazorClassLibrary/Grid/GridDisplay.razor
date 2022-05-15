@@ -1,21 +1,22 @@
 ﻿@using HunterFreemanDev.ClassLibrary.Element
+@using HunterFreemanDev.ClassLibrary.Direction
 
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
 <div class="hfd_grid-display">
-    @if (GridState.Value.ElementRecords.Count == 0)
+    @if (GridState.Value.GridRecords.Count == 0)
     {
-        <GridIsEmptyDisplay />
+        <GridIsEmptyDisplay AddWindowEventCallback="((_) => OnAddWindowEventCallback((CardinalDirectionKind.North, 0, 0)))" />
     }
     else
     {
-        List<ElementRecord> previousRow = null;
+        List<GridRecord> previousRow = null;
 
-        for (int i = 0; i < GridState.Value.ElementRecords.Count; i++)
+        for (int i = 0; i < GridState.Value.GridRecords.Count; i++)
         {
             @* Storing a local copy of the for loop iteration variable is required in Blazor *@
             var rowIndex = i;
-            var currentRow = GridState.Value.ElementRecords[rowIndex];
+            var currentRow = GridState.Value.GridRecords[rowIndex];
 
             @if(previousRow is not null)
             {
@@ -23,7 +24,7 @@
             }
 
             <GridRowDisplay GridRowIndex="rowIndex"
-                            GridTotalRowCount="GridState.Value.ElementRecords.Count"
+                            GridTotalRowCount="GridState.Value.GridRecords.Count"
                             GridRowElementReferences="currentRow"
                             AddWindowEventCallback="OnAddWindowEventCallback" />
 

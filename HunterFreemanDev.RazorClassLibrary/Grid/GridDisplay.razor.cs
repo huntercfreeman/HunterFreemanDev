@@ -2,6 +2,7 @@
 using Fluxor.Blazor.Web.Components;
 using HunterFreemanDev.ClassLibrary.Direction;
 using HunterFreemanDev.ClassLibrary.Element;
+using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 using HunterFreemanDev.ClassLibrary.Store.Grid;
 using HunterFreemanDev.RazorClassLibrary.Counter;
 using HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
@@ -18,7 +19,8 @@ public partial class GridDisplay : FluxorComponent
 
     private void OnAddWindowEventCallback((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) argumentTuple)
     {
-        var action = new AddGridStateAction(argumentTuple, new ElementRecord(Guid.NewGuid(), typeof(PlainTextEditorDisplay)));
+        var action = new AddGridRecordAction(argumentTuple, 
+            new GridRecord(Guid.NewGuid(), typeof(PlainTextEditorDisplay), new PlainTextEditorRecord(), nameof(PlainTextEditorDisplay.PlainTextEditorRecord)));
 
         Dispatcher.Dispatch(action);
     }

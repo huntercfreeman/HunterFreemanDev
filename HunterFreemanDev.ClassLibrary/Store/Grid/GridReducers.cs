@@ -12,13 +12,14 @@ public class GridReducers
 {
     [ReducerMethod]
     public static GridState ReduceAddGridStateAction(GridState previousGridState,
-        AddGridStateAction addGridStateAction)
+        AddGridRecordAction addGridStateAction)
     {
-        var nextRowsList = new List<List<Element.ElementRecord>>();
+        // Replace GridRecords Lists
+        var nextRowsList = new List<List<GridRecord>>();
 
-        foreach(var row in previousGridState.ElementRecords)
+        foreach(var row in previousGridState.GridRecords)
         {
-            nextRowsList.Add(new List<ElementRecord>(row));
+            nextRowsList.Add(new List<GridRecord>(row));
         }
 
         switch (addGridStateAction.ArgumentTuple.CardinalDirectionKind)
@@ -26,23 +27,28 @@ public class GridReducers
             case Direction.CardinalDirectionKind.North:
                 nextRowsList.Insert(addGridStateAction.ArgumentTuple.GridRowIndex, new());
 
-                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.GridRecord);
                 break;
             case Direction.CardinalDirectionKind.East:
-                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.ElementRecord);
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex].Add(addGridStateAction.GridRecord);
                 break;
             case Direction.CardinalDirectionKind.South:
                 nextRowsList.Insert(addGridStateAction.ArgumentTuple.GridRowIndex + 1, new());
                 
-                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex + 1].Add(addGridStateAction.ElementRecord);
+                nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex + 1].Add(addGridStateAction.GridRecord);
                 break;
             case Direction.CardinalDirectionKind.West:
                 nextRowsList[addGridStateAction.ArgumentTuple.GridRowIndex]
                     .Insert(addGridStateAction.ArgumentTuple.GridColumnIndex, 
-                        addGridStateAction.ElementRecord);
+                        addGridStateAction.GridRecord);
                 break;
         }
 
-        return new GridState(nextRowsList);
+        // Replace GridRecordMap
+        var nextGridRecordMap = new Dictionary<Guid, GridRecord>(previousGridState.GridRecordMap);
+
+        nextGridRecordMap.Add(addGridStateAction.GridRecord.GridRecordId, addGridStateAction.GridRecord);
+
+        return new GridState(nextGridRecordMap, nextRowsList);
     }
 }

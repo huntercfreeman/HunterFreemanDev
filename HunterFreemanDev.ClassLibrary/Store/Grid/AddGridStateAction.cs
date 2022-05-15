@@ -8,5 +8,8 @@ using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Grid;
 
-public record AddGridStateAction((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) ArgumentTuple, 
-    ElementRecord ElementRecord);
+public record AddGridRecordAction((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) ArgumentTuple, 
+    GridRecord GridRecord);
+
+public record RegisterGridRecordAction((CardinalDirectionKind CardinalDirectionKind, int GridColumnIndex, int GridRowIndex) ArgumentTuple,
+    GridRecord ElementRecord);

@@ -6,12 +6,13 @@
 
     <GridAddColumnButtons AddWindowEventCallback="OnAddWindowEventCallback" />
 
-    @if (ElementRecord.RenderedContentType != typeof(UninitializedElementRecord))
+    @if (GridRecord.RenderedContentType != typeof(UninitializedElementRecord))
     {
-        <DynamicComponent Type="ElementRecord.RenderedContentType"/>
+        <DynamicComponent Type="GridRecord.RenderedContentType"
+                          Parameters="GetDynamicComponentParameters()"/>
     }
     else
     {
-        <GridUninitializedElementRecordDisplay ElementRecord="ElementRecord" />
+        <GridUninitializedElementRecordDisplay ElementRecord="GridRecord" />
     }
 </div>

@@ -1,9 +1,11 @@
-﻿using HunterFreemanDev.ClassLibrary.PlainTextEditor;
+﻿using Fluxor;
+using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 
 namespace HunterFreemanDev.ClassLibrary.Store.PlainTextEditor;
 
 public class PlainTextEditorReducers
 {
+    [ReducerMethod]
     public static PlainTextEditorsState ReduceRegisterPlainTextEditorAction(PlainTextEditorsState previousPlainTextEditorsState,
         RegisterPlainTextEditorAction registerPlainTextEditorAction)
     {
@@ -15,7 +17,8 @@ public class PlainTextEditorReducers
 
         return nextPlainTextEditorsState;
     }
-    
+
+    [ReducerMethod]
     public static PlainTextEditorsState ReduceRegisterPlainTextEditorAction(PlainTextEditorsState previousPlainTextEditorsState,
         UnregisterPlainTextEditorAction unregisterPlainTextEditorAction)
     {

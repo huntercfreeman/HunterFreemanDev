@@ -13,11 +13,11 @@ namespace HunterFreemanDev.RazorClassLibrary.Grid;
 public partial class GridColumnDividerDisplay : ComponentBase
 {
     [Parameter, EditorRequired]
-    public ElementRecord LeftElementRecord { get; set; } = null!;
+    public GridRecord LeftElementRecord { get; set; } = null!;
     [Parameter, EditorRequired]
-    public ElementRecord RightElementRecord { get; set; } = null!;
+    public GridRecord RightElementRecord { get; set; } = null!;
     [Parameter, EditorRequired]
-    public EventCallback<(ElementRecord LeftElementRecord, ElementRecord RightElementRecord)> OnMouseDownEventCallback { get; set; }
+    public EventCallback<(GridRecord LeftElementRecord, GridRecord RightElementRecord)> OnMouseDownEventCallback { get; set; }
 
     private void FireOnMouseDownEventCallback()
     {

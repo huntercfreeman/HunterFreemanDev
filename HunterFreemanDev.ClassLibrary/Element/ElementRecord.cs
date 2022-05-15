@@ -1,6 +1,6 @@
 ﻿namespace HunterFreemanDev.ClassLibrary.Element;
 
-public record ElementRecord(Guid ElementRecordId, Type RenderedContentType)
+public record GridRecord(Guid GridRecordId, Type RenderedContentType, object? GridRecordChildComponentState, string? GridRecordChildComponentStateParameterName)
 {
-    public static ElementRecord Uninitialized => new ElementRecord(Guid.NewGuid(), typeof(UninitializedElementRecord));
+    public static GridRecord Uninitialized => new GridRecord(Guid.NewGuid(), typeof(UninitializedElementRecord), null, null);
 }

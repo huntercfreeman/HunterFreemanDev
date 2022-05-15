@@ -8,7 +8,6 @@
     <div
          class="hfd_plain-text-editor-display">
         <div>
-            @_plainTextEditorRecord.PlainTextEditorRecordId
             @if(FocusState.Value.FocusRecord is not null &&
                 _focusBoundaryDisplay is not null &&
                 FocusState.Value.FocusRecord.FocusRecordId == _focusBoundaryDisplay.FocusRecord.FocusRecordId)
@@ -19,7 +18,7 @@
 
         <div class="hfd_plain-text-editor-display-body">
             @{
-                var document = _plainTextEditorRecord.GetImmutableDocument();
+                var document = PlainTextEditorRecord.GetImmutableDocument();
 
                 for (int i = 0; i < document.Length; i++)
                 {
@@ -38,7 +37,7 @@
                             var textSyntaxRecord = row[textSyntaxRecordIndex];
 
                             <TextSyntaxRecordDisplay TextSyntaxRecord="textSyntaxRecord"
-                                                     CurrentTextSyntaxRecordId="_plainTextEditorRecord.CurrentTextSyntaxRecord.TextSyntaxRecordId"/>
+                                                     CurrentTextSyntaxRecordId="PlainTextEditorRecord.CurrentTextSyntaxRecord.TextSyntaxRecordId"/>
                         }
                     </div>
                 }

@@ -15,6 +15,7 @@ using Fluxor.Blazor.Web.Components;
 using HunterFreemanDev.RazorClassLibrary.Focus;
 using HunterFreemanDev.ClassLibrary.Store.PlainTextEditor;
 using HunterFreemanDev.ClassLibrary.PlainTextEditor;
+using HunterFreemanDev.ClassLibrary.Store.Grid;
 
 namespace HunterFreemanDev.RazorClassLibrary.PlainTextEditor;
 
@@ -24,18 +25,14 @@ public partial class PlainTextEditorDisplay : FluxorComponent
     private IState<KeyDownEventState> KeyDownEventState { get; set; } = null!;
     [Inject]
     private IState<FocusState> FocusState { get; set; } = null!;
-    [Inject]
-    private IDispatcher Dispatcher { get; set; } = null!;
 
-    private PlainTextEditorRecord _plainTextEditorRecord = new();
+    [Parameter]
+    public PlainTextEditorRecord PlainTextEditorRecord { get; set; } = null!;
+
     private FocusBoundaryDisplay? _focusBoundaryDisplay = null!;
 
     protected override void OnInitialized()
     {
-        var action = new UnregisterPlainTextEditorAction(_plainTextEditorRecord);
-
-        Dispatcher.Dispatch(action);
-
         KeyDownEventState.StateChanged += KeyDownState_StateChanged;
 
         base.OnInitialized();
@@ -45,7 +42,7 @@ public partial class PlainTextEditorDisplay : FluxorComponent
     {
         if (_focusBoundaryDisplay?.GetIsFocused() ?? false)
         {
-            _plainTextEditorRecord = await _plainTextEditorRecord.HandleKeyDownEventAsync(KeyDownEventState.Value.OnKeyDownEventRecord);
+            PlainTextEditorRecord = await PlainTextEditorRecord.HandleKeyDownEventAsync(KeyDownEventState.Value.OnKeyDownEventRecord);
         }
 
         await InvokeAsync(StateHasChanged);
@@ -53,10 +50,6 @@ public partial class PlainTextEditorDisplay : FluxorComponent
 
     protected override void Dispose(bool disposing)
     {
-        var action = new UnregisterPlainTextEditorAction(_plainTextEditorRecord);
-
-        Dispatcher.Dispatch(action);
-
         KeyDownEventState.StateChanged -= KeyDownState_StateChanged;
 
         base.Dispose(disposing);

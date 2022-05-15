@@ -4,9 +4,9 @@ using HunterFreemanDev.ClassLibrary.Element;
 namespace HunterFreemanDev.ClassLibrary.Store.Grid;
 
 [FeatureState]
-public record GridState(List<List<ElementRecord>> ElementRecords)
+public record GridState(Dictionary<Guid, GridRecord> GridRecordMap, List<List<GridRecord>> GridRecords)
 {
-    private GridState() : this(new List<List<ElementRecord>> { new List<ElementRecord> { ElementRecord.Uninitialized } })
+    private GridState() : this(new Dictionary<Guid, GridRecord>(), new List<List<GridRecord>>())
     {
     }
 }

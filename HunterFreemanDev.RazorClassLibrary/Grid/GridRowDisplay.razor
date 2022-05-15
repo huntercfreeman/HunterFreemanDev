@@ -4,7 +4,7 @@
 <div class="hfd_grid-row-display"
      style="@GetStyle">
     @{
-        ElementRecord? previousColumn = null;
+        GridRecord? previousColumn = null;
 
         for (int i = 0; i < GridRowElementReferences.Count; i++)
         {
@@ -20,7 +20,7 @@
 
             <GridColumnDisplay GridColumnIndex="columnIndex"
                                GridTotalColumnCount="GridRowElementReferences.Count"
-                               ElementRecord="currentColumn"
+                               GridRecord="currentColumn"
                                AddWindowEventCallback="OnAddWindowEventCallback" />
 
             previousColumn = currentColumn;

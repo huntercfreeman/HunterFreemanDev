@@ -1,3 +1,19 @@
-﻿<div class="hfd_grid-uninitialized-element-display">
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<div class="hfd_grid-uninitialized-element-display">
     hfd_grid-uninitialized-element-display
+
+    @{
+        foreach(var row in GridState.Value.GridRecords)
+        {
+            int columnIndex = 0;
+            foreach(var column in row)
+            {
+                <div>columnIndex: @columnIndex, GridRecordId: @column.GridRecordId, RenderedContentType: @column.RenderedContentType</div>
+                columnIndex++;
+            }
+        }
+    }
 </div>
