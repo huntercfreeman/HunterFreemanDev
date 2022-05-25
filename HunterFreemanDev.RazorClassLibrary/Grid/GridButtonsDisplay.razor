@@ -1,0 +1,57 @@
+﻿@using HunterFreemanDev.ClassLibrary.Direction
+<div class="hfd_grid-display-add-buttons"
+     style='position: @(IsAbsolutePosition ? "absolute" : "static");'>
+
+     @if(!IsAbsolutePosition)
+     {
+         <h4>
+            @GetExplanationText
+        </h4>
+     }
+
+    <div class="hfd_grid-display-add-button-row">
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-north-west hfd_grid-display-add-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-north @GetIsActiveCss(CardinalDirectionKind.North)"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.North))">
+            <IconArrowUp />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-north-east hfd_grid-display-add-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+    </div>
+    <div class="hfd_grid-display-add-button-row">
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-west @GetIsActiveCss(CardinalDirectionKind.West)"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.West))">
+            <IconArrowLeft />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-center @GetIsActiveCss(CardinalDirectionKind.CurrentPosition)"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.CurrentPosition))">
+            <IconBrowser />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-east  @GetIsActiveCss(CardinalDirectionKind.East)"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.East))">
+            <IconArrowRight />
+        </span>
+    </div>
+    <div class="hfd_grid-display-add-button-row">
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-south-west hfd_grid-display-add-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-south  @GetIsActiveCss(CardinalDirectionKind.South)"
+              @onclick="(() => FireCardinalDirectionKind(ClassLibrary.Direction.CardinalDirectionKind.South))">
+            <IconArrowDown />
+        </span>
+        <span class="hfd_grid-display-add-button-item hfd_grid-display-add-button-item-south-east hfd_grid-display-add-button-item-diagonal hfd_unselectable">
+            <IconStarFull />
+        </span>
+    </div>
+
+    @if(!IsAbsolutePosition)
+    {
+        <div>
+            Selected direction: @SelectedCardinalDirectionKind
+        </div>
+    }
+</div>

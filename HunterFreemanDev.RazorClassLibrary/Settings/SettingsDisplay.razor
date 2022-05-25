@@ -1,16 +1,39 @@
 ﻿@using Fluxor.Blazor.Web.Components
+@using HunterFreemanDev.RazorClassLibrary.DebugCssClasses
+@using HunterFreemanDev.RazorClassLibrary.Panel
 
 @inherits FluxorComponent
 
 <div class="hfd_settings-display">
     Settings Display
 
-    <div>
-        Current Theme: @ThemeState.Value.ThemeRecord.ThemeDisplayName (ThemeId: @ThemeState.Value.ThemeRecord.ThemeId)
-    </div>
+    <PanelDisplay>
+        <PanelTitleRenderFragment Context="isExpanded">
+            Change Theme @PanelDisplay.GetDefaultExpansionIcons(isExpanded)
+        </PanelTitleRenderFragment>
 
-    @foreach(var themeRecord in ThemesProvider.Value.ThemeRecords)
-    {
-        <HunterFreemanDev.RazorClassLibrary.Theme.ThemeDisplay ThemeRecord="themeRecord" />
-    }
+        <PanelBodyRenderFragment>
+            <div>
+                Current Theme: @ThemeState.Value.ThemeRecord.ThemeDisplayName (ThemeId: @ThemeState.Value.ThemeRecord.ThemeId)
+            </div>
+
+            @foreach(var themeRecord in ThemesProvider.Value.ThemeRecords)
+            {
+                <HunterFreemanDev.RazorClassLibrary.Theme.ThemeDisplay ThemeRecord="themeRecord" />
+            }
+        </PanelBodyRenderFragment>
+    </PanelDisplay>
+
+    <PanelDisplay>
+        <PanelTitleRenderFragment Context="isExpanded">
+            Change Debug Css Classes @PanelDisplay.GetDefaultExpansionIcons(isExpanded)
+        </PanelTitleRenderFragment>
+
+        <PanelBodyRenderFragment>
+            @foreach(var debugCssClass in DebugCssClassesState.Value.DebugCssClassRecordMap.Values)
+            {
+                <DebugCssClassDisplay DebugCssClassRecord="debugCssClass" />
+            }
+        </PanelBodyRenderFragment>
+    </PanelDisplay>
 </div>

@@ -1,0 +1,47 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay @ref="_focusBoundaryDisplay" 
+                                                               FocusRecordDisplayName="@nameof(PlainTextEditorDisplay)"
+                                                               Class="hfd_match-parent-width-and-height">
+    <div class="hfd_plain-text-editor-display @GetDebugCssClasses()">
+        <div>
+            @if(FocusState.Value.FocusRecord is not null &&
+                _focusBoundaryDisplay is not null &&
+                FocusState.Value.FocusRecord.FocusRecordId == _focusBoundaryDisplay.FocusRecord.FocusRecordId)
+            {
+                <text>Is Focused</text>
+            }
+        </div>
+
+        <div class="hfd_plain-text-editor-display-body">
+            @{
+                var document = PlainTextEditorRecord.GetImmutableDocument();
+
+                for (int i = 0; i < document.Length; i++)
+                {
+                    @* Storing for loop iteration variables locally is necessary in Blazor *@
+                    var rowIndex = i;
+                    var row = document[rowIndex];
+                    <div class="hfd_plain-text-editor-display-body-row">
+                        <span class="hfd_plain-text-editor-display-body-row-line-number">
+                            @(rowIndex + 1)
+                        </span>
+
+                        @for(int j = 0; j < row.Length; j++)
+                        {
+                            @* Storing for loop iteration variables locally is necessary in Blazor *@
+                            var textSyntaxRecordIndex = j;
+                            var textSyntaxRecord = row[textSyntaxRecordIndex];
+
+                            <TextSyntaxRecordDisplay TextSyntaxRecord="textSyntaxRecord"
+                                                     CurrentTextSyntaxRecordId="PlainTextEditorRecord.CurrentTextSyntaxRecord.TextSyntaxRecordId"/>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay>
+

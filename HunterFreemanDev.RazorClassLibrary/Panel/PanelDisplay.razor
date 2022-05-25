@@ -1,0 +1,13 @@
+﻿<div class="hfd_panel-display">
+    <div class="hfd_panel-display-title"
+         @onclick="ToggleIsExpanded">
+         @PanelTitleRenderFragment(_isExpanded)
+    </div>
+    
+    @if (_isExpanded)
+    {
+        <div class="hfd_panel-display-body">
+            @PanelBodyRenderFragment
+        </div>
+    }
+</div>

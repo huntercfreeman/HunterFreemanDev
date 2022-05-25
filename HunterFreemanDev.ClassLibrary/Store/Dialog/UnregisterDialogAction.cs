@@ -2,4 +2,4 @@
 
 namespace HunterFreemanDev.ClassLibrary.Store.Dialog;
 
-public record UnregisterDialogAction(DialogRecord DialogRecord);
+public record UnregisterDialogAction(Guid DialogRecordId);

@@ -1,0 +1,45 @@
+﻿@using HunterFreemanDev.RazorClassLibrary.PlainTextEditor
+@using HunterFreemanDev.RazorClassLibrary.Counter
+@using HunterFreemanDev.RazorClassLibrary.Grid
+ <div class="add-window-to-grid-selector"> 
+     <h3>Select a Blazor component Type to render</h3> 
+ 
+     <div @onclick="() => _selectionTuple = (typeof(PlainTextEditorDisplay), nameof(PlainTextEditorDisplay))" 
+         style="cursor: pointer; @GetSelectedStyling(typeof(PlainTextEditorDisplay))"> 
+         (@nameof(PlainTextEditorDisplay)) 
+     </div> 
+      
+     <div @onclick="() => _selectionTuple = (typeof(ButtonDisplay), nameof(ButtonDisplay))" 
+         style="cursor: pointer; @GetSelectedStyling(typeof(ButtonDisplay))"> 
+         (@nameof(ButtonDisplay)) 
+     </div> 
+      
+     <div @onclick="() => _selectionTuple = (typeof(CounterDisplay), nameof(CounterDisplay))" 
+         style="cursor: pointer; @GetSelectedStyling(typeof(CounterDisplay))"> 
+         (@nameof(CounterDisplay)) 
+     </div> 
+ 
+     <hr/> 
+ 
+     <div @onclick="FireOnChoseGridTabRecordAction"
+          style="cursor: pointer;">
+         Return selection: (@_selectionTuple.renderedContentType.Name, @_selectionTuple.renderedContentTabDisplayName)
+     </div> 
+ </div> 
+ 
+ @code {
+     [CascadingParameter(Name = $"{GridDisplay.ON_CHOSE_GRID_TAB_RECORD_ACTION_PARAMETER_NAME}")]
+     public Action<(Type renderedContentType, string renderedContentTabDisplayName)> OnChoseGridTabRecordAction { get; set; } = null!;
+ 
+     private (Type renderedContentType, string renderedContentTabDisplayName) _selectionTuple = (typeof(PlainTextEditorDisplay), nameof(PlainTextEditorDisplay)); 
+ 
+     private string GetSelectedStyling(Type type) => _selectionTuple.renderedContentType == type 
+         ? "background-color: #a2c5fd" 
+         : string.Empty; 
+ 
+     private void FireOnChoseGridTabRecordAction() 
+     { 
+         OnChoseGridTabRecordAction(_selectionTuple); 
+     } 
+ } 
+  

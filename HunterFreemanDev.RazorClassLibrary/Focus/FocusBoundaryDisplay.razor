@@ -1,0 +1,13 @@
+﻿@using Fluxor.Blazor.Web.Components
+
+@inherits FluxorComponent
+
+<span class="bs_focusable-boundary @(Class ?? string.Empty)"
+      @onclick="FocusIn">
+    <FocusTrapDisplay @ref="_focusTrapDisplay" 
+                      FocusOut="FocusOut" />
+    
+    <CascadingValue Value="FocusRecord">
+        @ChildContent
+    </CascadingValue>
+</span>

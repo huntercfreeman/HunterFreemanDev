@@ -1,16 +1,11 @@
 ﻿using Fluxor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Drag;
 
 public class DragReducers
 {
     [ReducerMethod]
-    public static DragState ReduceOnDragEventAction(DragState previousDragState, OnDragEventAction onDragEventAction)
+    public static DragState ReduceOnDragEventAction(DragState previousDragState, DragEventAction onDragEventAction)
     {
         double nextDeltaX;
         double nextDeltaY;

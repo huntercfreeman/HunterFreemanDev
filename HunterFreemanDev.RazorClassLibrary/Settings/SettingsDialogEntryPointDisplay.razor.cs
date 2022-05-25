@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using HunterFreemanDev.RazorClassLibrary.Button;
-using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using Fluxor;
 using HunterFreemanDev.ClassLibrary.Store.Dialog;
 using HunterFreemanDev.ClassLibrary.Dialog;
 using HunterFreemanDev.ClassLibrary.Dimension;
+using HunterFreemanDev.ClassLibrary.Html;
 
 namespace HunterFreemanDev.RazorClassLibrary.Settings;
 
@@ -22,8 +16,8 @@ public partial class SettingsDialogEntryPointDisplay : ComponentBase
     [Inject]
     private IViewportDimensionsService ViewportDimensionsService { get; set;} = null!;
 
-    private Guid _settingsDialogRecordId = Guid.NewGuid();
-    private Type _settingsDialogRecordType = typeof(SettingsDisplay);
+    private readonly Guid _settingsDialogRecordId = Guid.NewGuid();
+    private readonly Type _settingsDialogRecordType = typeof(SettingsDisplay);
 
     private async Task DispatchConstructDialogOnClick()
     {
@@ -32,8 +26,10 @@ public partial class SettingsDialogEntryPointDisplay : ComponentBase
             var defaultDimensionsRecordForDialog = await DialogRecord.ConstructDefaultDimensionsRecord(ViewportDimensionsService);
 
             var action = new RegisterDialogAction(new DialogRecord(_settingsDialogRecordId,
+                "Settings Display",
                 _settingsDialogRecordType,
-                defaultDimensionsRecordForDialog));
+                null,
+                new HtmlElementRecordKey(Guid.NewGuid())));
 
             Dispatcher.Dispatch(action);
         }

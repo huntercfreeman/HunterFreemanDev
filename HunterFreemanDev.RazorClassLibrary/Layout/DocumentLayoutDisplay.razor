@@ -2,20 +2,28 @@
 
 @inherits FluxorLayout
 
-<div class="hfd_document-layout-display @ThemeState.Value.ThemeRecord.ThemeCssClassName">
+<div class="hfd_document-layout-display @ThemeState.Value.ThemeRecord.ThemeCssClassName @GetDebugCssClasses()">
     <div class="hfd_theme-wrapping">
         <Fluxor.Blazor.Web.StoreInitializer />
 
-        <HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
-            <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
+        <HunterFreemanDev.RazorClassLibrary.KeyDownEvent.KeyDownEventProviderDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
-        </HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
+        <div class="hfd_document-layout-display-body">
+            <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay GridRecord="_gridRecord" 
+                                                                 IsFixedDimensions="true"
+                                                                 InitialDimensionsRecord="_initialDimensionsRecordForGrid">
+                <ChooseGridTabRecordRenderFragment>
+                    <HunterFreemanDev.RazorClassLibrary.AddWindowToGrid.AddWindowToGridSelectorDisplay />
+                </ChooseGridTabRecordRenderFragment>
+            </HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay>
+        </div>
+
+        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
     </div>
 </div>

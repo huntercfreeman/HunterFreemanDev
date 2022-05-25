@@ -23,15 +23,14 @@ public class DialogReducer
     {
         var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
 
-        if(nextDialogStates.DialogRecordMap.TryGetValue(setIsMinimizedDialogAction.DialogRecord.DialogRecordId, out var dialogRecord))
-        {
-            nextDialogStates.DialogRecordMap.Remove(setIsMinimizedDialogAction.DialogRecord.DialogRecordId);
+        var previousDialogRecord =
+            nextDialogStates.DialogRecordMap[setIsMinimizedDialogAction.DialogRecord.DialogRecordId];
 
-            nextDialogStates.DialogRecordMap.Add(setIsMinimizedDialogAction.DialogRecord.DialogRecordId, setIsMinimizedDialogAction.DialogRecord with
+        nextDialogStates.DialogRecordMap[setIsMinimizedDialogAction.DialogRecord.DialogRecordId] = previousDialogRecord
+            with
             {
                 IsMinimized = setIsMinimizedDialogAction.IsMinimized
-            });
-        }
+            };
 
         return nextDialogStates;
     }
@@ -42,26 +41,7 @@ public class DialogReducer
     {
         var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
 
-        nextDialogStates.DialogRecordMap.Remove(unregisterDialogAction.DialogRecord.DialogRecordId);
-
-        return nextDialogStates;
-    }
-    
-    [ReducerMethod]
-    public static DialogStates ReduceReplaceDialogDimensionsRecordAction(DialogStates previousDialogStates,
-        ReplaceDialogDimensionsRecordAction replaceDialogDimensionsRecordAction)
-    {
-        var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
-
-        var nextDialogRecord = replaceDialogDimensionsRecordAction.DialogRecord with
-        {
-            DimensionsRecord = replaceDialogDimensionsRecordAction.DimensionsRecord
-        };
-
-        nextDialogStates.DialogRecordMap.Remove(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId);
-
-        nextDialogStates.DialogRecordMap.Add(nextDialogRecord.DialogRecordId,
-            nextDialogRecord);
+        nextDialogStates.DialogRecordMap.Remove(unregisterDialogAction.DialogRecordId);
 
         return nextDialogStates;
     }
