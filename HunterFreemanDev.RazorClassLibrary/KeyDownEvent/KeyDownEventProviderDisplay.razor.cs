@@ -9,7 +9,7 @@ using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using Fluxor;
 using Microsoft.JSInterop;
 using HunterFreemanDev.ClassLibrary.KeyDown;
-using HunterFreemanDev.ClassLibrary.Store.KeyDown;
+using HunterFreemanDev.ClassLibrary.Store.KeyDownEvent;
 
 namespace HunterFreemanDev.RazorClassLibrary.KeyDownEvent;
 

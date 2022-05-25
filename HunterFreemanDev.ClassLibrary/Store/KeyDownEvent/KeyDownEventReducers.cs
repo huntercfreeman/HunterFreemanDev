@@ -1,7 +1,6 @@
 ﻿using Fluxor;
-using HunterFreemanDev.ClassLibrary.KeyDown;
 
-namespace HunterFreemanDev.ClassLibrary.Store.KeyDown;
+namespace HunterFreemanDev.ClassLibrary.Store.KeyDownEvent;
 
 public class KeyDownEventReducers
 {

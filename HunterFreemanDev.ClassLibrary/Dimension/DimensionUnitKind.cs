@@ -3,5 +3,11 @@
 public enum DimensionUnitKind
 {
     Pixels,
-    PercentageOfParentAsDecimal
+    PercentageOfParent,
+    CharacterWidth,
+    Ch,
+    RootCharacterHeight,
+    Rem,
+    CharacterHeight,
+    Em,
 }

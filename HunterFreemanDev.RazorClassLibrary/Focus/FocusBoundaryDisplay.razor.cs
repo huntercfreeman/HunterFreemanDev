@@ -71,7 +71,7 @@ public partial class FocusBoundaryDisplay : FluxorComponent
         }
     }
 
-    public async Task FocusIn()
+    public void FocusIn()
     {
         try
         {
@@ -87,7 +87,7 @@ public partial class FocusBoundaryDisplay : FluxorComponent
         }
     }
     
-    public async Task FocusOut()
+    public void FocusOut()
     {
         var action = new SetActiveFocusRecordAction(null);
 

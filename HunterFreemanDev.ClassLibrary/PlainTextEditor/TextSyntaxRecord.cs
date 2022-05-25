@@ -1,5 +1,4 @@
-﻿using HunterFreemanDev.ClassLibrary.Keyboard;
-using HunterFreemanDev.ClassLibrary.KeyDown;
+﻿using HunterFreemanDev.ClassLibrary.KeyDown;
 
 namespace HunterFreemanDev.ClassLibrary.PlainTextEditor;
 

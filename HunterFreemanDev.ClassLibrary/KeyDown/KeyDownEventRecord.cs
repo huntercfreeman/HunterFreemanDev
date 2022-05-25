@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HunterFreemanDev.ClassLibrary.KeyDown;
+﻿namespace HunterFreemanDev.ClassLibrary.KeyDown;
 
 public record KeyDownEventRecord(string? Key,
     string? Code,

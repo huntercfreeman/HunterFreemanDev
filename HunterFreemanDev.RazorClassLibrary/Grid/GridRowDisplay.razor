@@ -1,29 +1,34 @@
-﻿@using HunterFreemanDev.ClassLibrary.Element
-@using HunterFreemanDev.ClassLibrary.Store.Grid
+﻿@using HunterFreemanDev.ClassLibrary.Grid
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
-<div class="hfd_grid-row-display"
-     style="@GetStyle">
-    @{
-        GridRecord? previousColumn = null;
+@if (_cachedHtmlElementRecord is not null)
+{
+    <div class="hfd_grid-row-display"
+         style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
+        @{
+            GridItemRecord? previousGridItemRecord = null;
 
-        for (int i = 0; i < GridRowElementReferences.Count; i++)
-        {
-            @* Storing a local copy of the for loop iteration variable is required in Blazor *@
-            var columnIndex = i;
-            var currentColumn = GridRowElementReferences[columnIndex];
-
-            @if(previousColumn is not null)
+            for (int j = 0; j < GridRowRecord.GridItemRecords.Length; j++)
             {
-                <GridColumnDividerDisplay LeftElementRecord="previousColumn"
-                                          RightElementRecord="currentColumn" />
+                var gridItemRecordIndex = j;
+                var gridItemRecord = GridRowRecord.GridItemRecords[gridItemRecordIndex];
+
+                if (previousGridItemRecord is not null)
+                {
+                    <GridItemDividerDisplay/>
+                }
+
+                <CascadingValue Name="ActiveRowIndex" Value="RowIndex">
+                    <CascadingValue Name="ActiveGridItemRecordIndex" Value="gridItemRecordIndex">
+                        <CascadingValue Name="TotalGridItemCountInRow" Value="GridRowRecord.GridItemRecords.Length">
+                            <GridItemDisplay @key="gridItemRecord.GridItemRecordKey"
+                                             GridItemRecord="gridItemRecord"/>
+                        </CascadingValue>
+                    </CascadingValue>
+                </CascadingValue>
+
+                previousGridItemRecord = gridItemRecord;
             }
-
-            <GridColumnDisplay GridColumnIndex="columnIndex"
-                               GridTotalColumnCount="GridRowElementReferences.Count"
-                               GridRecord="currentColumn"
-                               AddWindowEventCallback="OnAddWindowEventCallback" />
-
-            previousColumn = currentColumn;
         }
-    }
-</div>
+    </div>
+}

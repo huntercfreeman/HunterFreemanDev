@@ -1,0 +1,13 @@
+<div class="hfd_grid-tab-display @IsActiveCssClass"
+     @onclick="DispatchSetActiveGridTabActionOnClick">
+
+    <span class="hfd_grid-tab-display-display-name">
+        @GridTabRecord.RenderedContentTitleText
+    </span>
+
+    <span class="hfd_grid-tab-display-close-button"
+          @onclick="DispatchCloseGridTabActionOnClick"
+          @onclick:stopPropagation="true">
+        <IconChromeClose />
+    </span>
+</div>

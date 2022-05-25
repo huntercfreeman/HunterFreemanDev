@@ -1,0 +1,11 @@
+﻿<div class="html-element-example-wrapper-display">
+    <div style="cursor: pointer;"
+         @onclick="AddHtmlElementOnClick">
+        Add Html Element Example On Click
+    </div>
+
+    @foreach(var htmlElementKey in _htmlElementRecordKeys)
+    {
+        <HtmlElementExampleDisplay HtmlElementRecordKey="htmlElementKey" />
+    }
+</div>

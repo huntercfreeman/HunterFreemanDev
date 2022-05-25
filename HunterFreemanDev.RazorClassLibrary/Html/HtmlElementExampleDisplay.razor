@@ -1,0 +1,15 @@
+﻿@using Fluxor.Blazor.Web.Components
+@using HunterFreemanDev.RazorClassLibrary.Transformative
+@inherits FluxorComponent
+
+<div class="hfd_html-element-example-display"
+     style="@HtmlElementRecordsState.Value.LookupHtmlElementRecord(HtmlElementRecordKey).DimensionsRecord.BuildCssStyleString()">
+    <HunterFreemanDev.RazorClassLibrary.Transformative.TransformativeDisplay HtmlElementRecord="HtmlElementRecordsState.Value.LookupHtmlElementRecord(HtmlElementRecordKey)" />
+
+    HtmlElementExampleDisplay <RenderCounter RenderCount="_renderedCount" />
+
+    <div @onclick="RequestZIndexOnClick"
+         style="cursor: pointer;">
+        ZIndex: @HtmlElementRecordsState.Value.LookupHtmlElementRecord(HtmlElementRecordKey).ZIndexRecord.ZIndexValue
+    </div>
+</div>

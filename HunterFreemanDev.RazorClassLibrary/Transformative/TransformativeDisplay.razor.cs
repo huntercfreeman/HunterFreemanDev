@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using HunterFreemanDev.RazorClassLibrary.Button;
-using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
-using HunterFreemanDev.ClassLibrary.Dimension;
 using System.Text;
-using HunterFreemanDev.ClassLibrary.Store.Drag;
 using Fluxor;
-using HunterFreemanDev.ClassLibrary.Store.Dialog;
 using Fluxor.Blazor.Web.Components;
+using HunterFreemanDev.ClassLibrary.Dimension;
+using HunterFreemanDev.ClassLibrary.Html;
+using HunterFreemanDev.ClassLibrary.Store.Drag;
+using HunterFreemanDev.ClassLibrary.Store.Html;
+using Microsoft.AspNetCore.Components;
 
 namespace HunterFreemanDev.RazorClassLibrary.Transformative;
 
@@ -20,14 +14,10 @@ public partial class TransformativeDisplay : FluxorComponent
     [Inject]
     private IState<DragState> DragState { get; set; } = null!;
     [Inject]
-    private IState<DialogStates> DialogStates { get; set; } = null!;
-    [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public DimensionsRecord DimensionsRecord { get; set; } = null!;
-    [Parameter, EditorRequired]
-    public EventCallback<DimensionsRecord> OnDimensionsRecordChangedEventCallback { get; set; }
+    public HtmlElementRecord HtmlElementRecord { get; set; } = null!;
 
     private DimensionValuedUnit DEFAULT_HANDLE_SIZE_IN_PIXELS = new DimensionValuedUnit(7, DimensionUnitKind.Pixels);
     private Action? _dragStateEventHandler;
@@ -44,25 +34,32 @@ public partial class TransformativeDisplay : FluxorComponent
 
     private void DragState_StateChanged(object? sender, EventArgs e)
     {
-        if (_dragStateEventHandler is not null)
+        if(DragState.Value.MouseEventArgs is null)
         {
-            _dragStateEventHandler();
+            _dragStateEventHandler = null;
+        }
+        else
+        {
+            if (_dragStateEventHandler is not null)
+            {
+                _dragStateEventHandler();
+            }
         }
     }
 
     #region HandleCssStylings
     private string GetNorthResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
         DimensionValuedUnit widthInPixels = 
             new DimensionValuedUnit(
-                DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value, 
+                HtmlElementRecord.DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value, 
                 DimensionUnitKind.Pixels);
         
         DimensionValuedUnit heightInPixels = 
@@ -88,10 +85,10 @@ public partial class TransformativeDisplay : FluxorComponent
 
     private string GetEastResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -100,11 +97,11 @@ public partial class TransformativeDisplay : FluxorComponent
                 DimensionUnitKind.Pixels);
 
         DimensionValuedUnit heightInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit leftInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels =
@@ -122,15 +119,15 @@ public partial class TransformativeDisplay : FluxorComponent
     
     private string GetSouthResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
         DimensionValuedUnit widthInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
                 DimensionUnitKind.Pixels);
 
         DimensionValuedUnit heightInPixels =
@@ -142,7 +139,7 @@ public partial class TransformativeDisplay : FluxorComponent
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
@@ -156,10 +153,10 @@ public partial class TransformativeDisplay : FluxorComponent
 
     private string GetWestResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -168,7 +165,7 @@ public partial class TransformativeDisplay : FluxorComponent
                 DimensionUnitKind.Pixels);
 
         DimensionValuedUnit heightInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value,
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit leftInPixels =
@@ -190,10 +187,10 @@ public partial class TransformativeDisplay : FluxorComponent
     
     private string GetNorthEastResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -206,7 +203,7 @@ public partial class TransformativeDisplay : FluxorComponent
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit leftInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels =
@@ -224,10 +221,10 @@ public partial class TransformativeDisplay : FluxorComponent
     
     private string GetSouthEastResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -240,11 +237,11 @@ public partial class TransformativeDisplay : FluxorComponent
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit leftInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
@@ -258,10 +255,10 @@ public partial class TransformativeDisplay : FluxorComponent
     
     private string GetSouthWestResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -278,7 +275,7 @@ public partial class TransformativeDisplay : FluxorComponent
             DimensionUnitKind.Pixels);
 
         DimensionValuedUnit topInPixels =
-            new DimensionValuedUnit(DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
+            new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DEFAULT_HANDLE_SIZE_IN_PIXELS.Value / 2.0,
             DimensionUnitKind.Pixels);
 
         cssStylingBuilder.Append($"width: {widthInPixels.BuildCssStyleString()}; ");
@@ -292,10 +289,10 @@ public partial class TransformativeDisplay : FluxorComponent
     
     private string GetNorthWestResizeHandleCssStyling()
     {
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), DimensionsRecord.Width);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), DimensionsRecord.Height);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), DimensionsRecord.Left);
-        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), DimensionsRecord.Top);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Width), HtmlElementRecord.DimensionsRecord.Width);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Height), HtmlElementRecord.DimensionsRecord.Height);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Left), HtmlElementRecord.DimensionsRecord.Left);
+        ValidateDimensionUnitKindIsSupported(nameof(DimensionsRecord.Top), HtmlElementRecord.DimensionsRecord.Top);
 
         var cssStylingBuilder = new StringBuilder();
 
@@ -343,18 +340,20 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
             Height = 
-                new DimensionValuedUnit(DimensionsRecord.Height.Value - DragState.Value.DeltaY, 
+                new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DragState.Value.DeltaY, 
                     DimensionUnitKind.Pixels),
             Top =
-                new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
+                new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Top.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
         };
 
-        if(OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithEastResizeHandle()
@@ -367,14 +366,16 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value + DragState.Value.DeltaX, 
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value + DragState.Value.DeltaX, 
                 DimensionUnitKind.Pixels)
         };
 
-        if(OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
 
     private void SubscribeToDragEventWithSouthResizeHandle()
@@ -387,14 +388,16 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Height = new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY, 
+            Height = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value + DragState.Value.DeltaY, 
                 DimensionUnitKind.Pixels)
         };
 
-        if(OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithWestResizeHandle()
@@ -407,15 +410,17 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value - DragState.Value.DeltaX, 
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DragState.Value.DeltaX, 
                 DimensionUnitKind.Pixels),
-            Left = new DimensionValuedUnit(DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
+            Left = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
         };
 
-        if(OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction = 
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithNorthEastResizeHandle()
@@ -428,18 +433,20 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Height = new DimensionValuedUnit(DimensionsRecord.Height.Value - DragState.Value.DeltaY,
+            Height = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
-            Top = new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
+            Top = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Top.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value + DragState.Value.DeltaX,
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value + DragState.Value.DeltaX,
                 DimensionUnitKind.Pixels)
         };
 
-        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithSouthEastResizeHandle()
@@ -452,16 +459,18 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Height = new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY,
+            Height = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value + DragState.Value.DeltaY,
                 DimensionUnitKind.Pixels),
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value + DragState.Value.DeltaX,
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value + DragState.Value.DeltaX,
                 DimensionUnitKind.Pixels)
         };
 
-        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithSouthWestResizeHandle()
@@ -474,17 +483,19 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Height = new DimensionValuedUnit(DimensionsRecord.Height.Value + DragState.Value.DeltaY,
+            Height = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value + DragState.Value.DeltaY,
                 DimensionUnitKind.Pixels),
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value - DragState.Value.DeltaX,
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DragState.Value.DeltaX,
                 DimensionUnitKind.Pixels),
-            Left = new DimensionValuedUnit(DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
+            Left = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
         };
 
-        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     private void SubscribeToDragEventWithNorthWestResizeHandle()
@@ -497,19 +508,21 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Height = new DimensionValuedUnit(DimensionsRecord.Height.Value - DragState.Value.DeltaY,
+            Height = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Height.Value - DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
-            Top = new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
+            Top = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Top.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
-            Width = new DimensionValuedUnit(DimensionsRecord.Width.Value - DragState.Value.DeltaX,
+            Width = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Width.Value - DragState.Value.DeltaX,
                 DimensionUnitKind.Pixels),
-            Left = new DimensionValuedUnit(DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
+            Left = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Left.Value + DragState.Value.DeltaX, DimensionUnitKind.Pixels)
         };
 
-        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
     
     public void SubscribeToDragEventWithMoveHandle()
@@ -522,16 +535,18 @@ public partial class TransformativeDisplay : FluxorComponent
     {
         _resizeEventCounter++;
 
-        var nextDimensionsRecord = DimensionsRecord with
+        var nextDimensionsRecord = HtmlElementRecord.DimensionsRecord with
         {
-            Top = new DimensionValuedUnit(DimensionsRecord.Top.Value + DragState.Value.DeltaY,
+            Top = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Top.Value + DragState.Value.DeltaY,
                     DimensionUnitKind.Pixels),
-            Left = new DimensionValuedUnit(DimensionsRecord.Left.Value + DragState.Value.DeltaX, 
+            Left = new DimensionValuedUnit(HtmlElementRecord.DimensionsRecord.Left.Value + DragState.Value.DeltaX, 
                     DimensionUnitKind.Pixels)
         };
 
-        if (OnDimensionsRecordChangedEventCallback.HasDelegate)
-            OnDimensionsRecordChangedEventCallback.InvokeAsync(nextDimensionsRecord);
+        var replaceHtmlElementDimensionsRecordAction =
+            new ReplaceHtmlElementDimensionsRecordAction(HtmlElementRecord.HtmlElementRecordKey, nextDimensionsRecord);
+
+        Dispatcher.Dispatch(replaceHtmlElementDimensionsRecordAction);
     }
 
     private void ValidateDimensionUnitKindIsSupported(string dimensionName, 

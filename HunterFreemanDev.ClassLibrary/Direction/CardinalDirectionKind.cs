@@ -5,5 +5,6 @@ public enum CardinalDirectionKind
     North,
     West,
     South,
-    East
+    East,
+    CurrentPosition
 }

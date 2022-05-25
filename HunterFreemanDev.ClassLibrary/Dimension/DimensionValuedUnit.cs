@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace HunterFreemanDev.ClassLibrary.Dimension;
+﻿namespace HunterFreemanDev.ClassLibrary.Dimension;
 
 public record DimensionValuedUnit(double Value, DimensionUnitKind DimensionUnitKind)
 {

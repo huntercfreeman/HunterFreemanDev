@@ -17,7 +17,7 @@ public partial class FocusTrapDisplay : ComponentBase
     public ElementReference GetFocusTrapElementReference() => _focusTrap;
 
     [Parameter]
-    public Func<Task> FocusOut { get; set; } = null!;
+    public Action FocusOut { get; set; } = null!;
 
     protected override void OnAfterRender(bool firstRender)
     {

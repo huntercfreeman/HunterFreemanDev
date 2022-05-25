@@ -2,12 +2,10 @@
 using Fluxor.Blazor.Web.Components;
 using HunterFreemanDev.ClassLibrary.Store.Theme;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using HunterFreemanDev.ClassLibrary.DebugCssClasses;
+using HunterFreemanDev.ClassLibrary.Grid;
+using HunterFreemanDev.ClassLibrary.Html;
 using HunterFreemanDev.ClassLibrary.Store.DebugCssClasses;
 
 namespace HunterFreemanDev.RazorClassLibrary.Layout;
@@ -23,6 +21,9 @@ public partial class DocumentLayoutDisplay : FluxorLayout
     {
         DebugCssClassInitialStates.GlobalDebugCssClassRecord.DebugCssClassId
     };
+
+    private GridRecord _gridRecord = new(new GridRecordKey(Guid.NewGuid()), 
+        new HtmlElementRecordKey(Guid.NewGuid()));
 
     private string GetDebugCssClasses()
     {

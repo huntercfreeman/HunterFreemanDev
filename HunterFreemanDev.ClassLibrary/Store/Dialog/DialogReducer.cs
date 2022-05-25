@@ -42,26 +42,7 @@ public class DialogReducer
     {
         var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
 
-        nextDialogStates.DialogRecordMap.Remove(unregisterDialogAction.DialogRecord.DialogRecordId);
-
-        return nextDialogStates;
-    }
-    
-    [ReducerMethod]
-    public static DialogStates ReduceReplaceDialogDimensionsRecordAction(DialogStates previousDialogStates,
-        ReplaceDialogDimensionsRecordAction replaceDialogDimensionsRecordAction)
-    {
-        var nextDialogStates = new DialogStates(new Dictionary<Guid, DialogRecord>(previousDialogStates.DialogRecordMap));
-
-        var nextDialogRecord = replaceDialogDimensionsRecordAction.DialogRecord with
-        {
-            DimensionsRecord = replaceDialogDimensionsRecordAction.DimensionsRecord
-        };
-
-        nextDialogStates.DialogRecordMap.Remove(replaceDialogDimensionsRecordAction.DialogRecord.DialogRecordId);
-
-        nextDialogStates.DialogRecordMap.Add(nextDialogRecord.DialogRecordId,
-            nextDialogRecord);
+        nextDialogStates.DialogRecordMap.Remove(unregisterDialogAction.DialogRecordId);
 
         return nextDialogStates;
     }

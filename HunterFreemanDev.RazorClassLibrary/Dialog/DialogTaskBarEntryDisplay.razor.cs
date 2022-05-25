@@ -29,7 +29,7 @@ public partial class DialogTaskBarEntryDisplay : ComponentBase
 
     private void CloseDialogOnClick()
     {
-        var action = new UnregisterDialogAction(DialogRecord);
+        var action = new UnregisterDialogAction(DialogRecord.DialogRecordId);
 
         Dispatcher.Dispatch(action);
     }

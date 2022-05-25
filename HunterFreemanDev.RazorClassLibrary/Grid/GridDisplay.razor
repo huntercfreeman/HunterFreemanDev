@@ -1,34 +1,55 @@
-﻿@using HunterFreemanDev.ClassLibrary.Element
-@using HunterFreemanDev.ClassLibrary.Direction
+﻿@using Fluxor.Blazor.Web.Components
+@using System.Collections.Immutable
+@using HunterFreemanDev.ClassLibrary.Grid
+@using HunterFreemanDev.RazorClassLibrary.Transformative
 
-@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@inherits FluxorComponent
 
-<div class="hfd_grid-display">
-    @if (GridState.Value.GridRecords.Count == 0)
-    {
-        <GridIsEmptyDisplay AddWindowEventCallback="((_) => OnAddWindowEventCallback((CardinalDirectionKind.North, 0, 0)))" />
-    }
-    else
-    {
-        List<GridRecord> previousRow = null;
-
-        for (int i = 0; i < GridState.Value.GridRecords.Count; i++)
-        {
-            @* Storing a local copy of the for loop iteration variable is required in Blazor *@
-            var rowIndex = i;
-            var currentRow = GridState.Value.GridRecords[rowIndex];
-
-            @if(previousRow is not null)
+@if (_cachedGridBoard is not null &&
+     _cachedHtmlElementRecord is not null)
+{
+    <div class="hfd_grid-display-theme-wrapping"
+         style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
+        <div class="hfd_grid-display"
+             style="width: 100%; height: 100%;"
+             @key="_cachedGridBoard.GridBoardSequence">
+            <TransformativeDisplay HtmlElementRecord="_cachedHtmlElementRecord" />
+            
+            @if (_cachedGridBoard.GridRowRecords.Any())
             {
-                <GridRowDividerDisplay />
+                GridRowRecord? previousRow = null;
+
+                for (int i = 0; i < _cachedGridBoard.GridRowRecords.Length; i++)
+                {
+                    var rowIndex = i;
+                    var row = _cachedGridBoard.GridRowRecords[rowIndex];
+
+                    if (previousRow is not null)
+                    {
+                        <GridRowDividerDisplay />
+                    }
+
+                    <CascadingValue Value="ChooseGridTabRecordRenderFragment">
+                        <CascadingValue Name="GridDisplayCachedHtmlElementRecord" Value="_cachedHtmlElementRecord">
+                            <CascadingValue Value="GridRecord.GridRecordKey">
+                                <CascadingValue Name="RowIndex" Value="rowIndex">
+                                    <GridRowDisplay GridRowRecord="row"
+                                                    TotalRowCount="_cachedGridBoard.GridRowRecords.Length" />
+                                </CascadingValue>
+                            </CascadingValue>
+                        </CascadingValue>
+                    </CascadingValue>
+
+                    previousRow = row;
+                }
             }
-
-            <GridRowDisplay GridRowIndex="rowIndex"
-                            GridTotalRowCount="GridState.Value.GridRecords.Count"
-                            GridRowElementReferences="currentRow"
-                            AddWindowEventCallback="OnAddWindowEventCallback" />
-
-            previousRow = currentRow;
-        }
-    }
-</div>
+            else
+            {
+                <div style="cursor: pointer;"
+                     @onclick="AddGridItemRecordOnClick">
+                    GridRecord is empty click here to add a GridItem
+                </div>
+            }
+        </div>
+    </div>
+}
