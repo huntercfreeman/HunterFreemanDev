@@ -11,9 +11,13 @@
     <div class="hfd_grid-display-theme-wrapping"
          style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
         <div class="hfd_grid-display"
-             style="width: 100%; height: 100%;"
+             style="width: calc(100% - 4px); height: calc(100% - 2px);"
              @key="_cachedGridBoard.GridBoardSequence">
-            <TransformativeDisplay HtmlElementRecord="_cachedHtmlElementRecord" />
+             
+            @if (!IsFixedDimensions)
+            {
+                <TransformativeDisplay HtmlElementRecord="_cachedHtmlElementRecord" />
+            }
             
             @if (_cachedGridBoard.GridRowRecords.Any())
             {

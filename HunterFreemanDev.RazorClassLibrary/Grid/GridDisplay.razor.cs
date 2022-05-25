@@ -29,6 +29,8 @@ public partial class GridDisplay : FluxorComponent
     public RenderFragment ChooseGridTabRecordRenderFragment { get; set; } = null!;
     [Parameter]
     public DimensionsRecord? InitialDimensionsRecord { get; set; }
+    [Parameter]
+    public bool IsFixedDimensions { get; set; }
 
     public const string ON_CHOSE_GRID_TAB_RECORD_ACTION_PARAMETER_NAME = "OnChoseGridTabRecordAction";
     

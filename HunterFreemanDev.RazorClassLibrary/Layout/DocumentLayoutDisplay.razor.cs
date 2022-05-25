@@ -4,6 +4,7 @@ using HunterFreemanDev.ClassLibrary.Store.Theme;
 using Microsoft.AspNetCore.Components;
 using System.Text;
 using HunterFreemanDev.ClassLibrary.DebugCssClasses;
+using HunterFreemanDev.ClassLibrary.Dimension;
 using HunterFreemanDev.ClassLibrary.Grid;
 using HunterFreemanDev.ClassLibrary.Html;
 using HunterFreemanDev.ClassLibrary.Store.DebugCssClasses;
@@ -22,8 +23,13 @@ public partial class DocumentLayoutDisplay : FluxorLayout
         DebugCssClassInitialStates.GlobalDebugCssClassRecord.DebugCssClassId
     };
 
-    private GridRecord _gridRecord = new(new GridRecordKey(Guid.NewGuid()), 
+    private readonly GridRecord _gridRecord = new(new GridRecordKey(Guid.NewGuid()), 
         new HtmlElementRecordKey(Guid.NewGuid()));
+
+    private readonly DimensionsRecord _initialDimensionsRecordForGrid = new(new DimensionValuedUnit(100, DimensionUnitKind.PercentageOfParent),
+        new DimensionValuedUnit(100, DimensionUnitKind.PercentageOfParent),
+        new DimensionValuedUnit(0, DimensionUnitKind.Pixels),
+        new DimensionValuedUnit(0, DimensionUnitKind.Pixels));
 
     private string GetDebugCssClasses()
     {
