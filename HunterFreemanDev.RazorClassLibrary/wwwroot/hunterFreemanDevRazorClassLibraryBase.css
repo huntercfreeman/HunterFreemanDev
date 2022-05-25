@@ -578,6 +578,7 @@
 }
 
 .hfd_match-parent-width-and-height {
+    display: block;
     width: 100%;
     height: 100%;
 }

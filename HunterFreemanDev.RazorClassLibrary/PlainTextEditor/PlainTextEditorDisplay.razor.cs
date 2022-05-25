@@ -27,7 +27,7 @@ public partial class PlainTextEditorDisplay : FluxorComponent
     public GridRecord? GridRecord { get; set; }
 
     [Parameter]
-    public PlainTextEditorRecord PlainTextEditorRecord { get; set; } = null!;
+    public PlainTextEditorRecord PlainTextEditorRecord { get; set; } = new();
 
     private FocusBoundaryDisplay? _focusBoundaryDisplay = null!;
 
