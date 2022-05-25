@@ -3,11 +3,11 @@
     --hfd_grid-display-add-button-item-padding: 5px;
     --hfd_grid-row-divider-display-height: 3px;
     --hfd_grid-column-divider-display-width: 3px;
-    --hfd_dialog-task-bar-display-height: 4ch;
+    --hfd_dialog-task-bar-display-height: 2rem;
     --hfd_dialog-display-title-height: 4ch;
     --hfd_toolbar-display-row-padding: 4px 0;
     --hfd_toolbar-display-padding: 5px;
-    --hfd_toolbar-display-height: 10ch;
+    --hfd_toolbar-display-height: 4rem;
     --hfd_button-display-padding: 5px;
     --hfd_button-display-border-radius: 5px;
     --hfd_grid-column-display-add-column-button-row-margin-top: 5px;
@@ -127,6 +127,10 @@
 .hfd_document-layout-display {
     width: 100vw;
     height: 100vh;
+}
+
+.hfd_document-layout-display-body {
+    height: calc(100% - var(--hfd_toolbar-display-height) - var(--hfd_dialog-task-bar-display-height) - var(--hfd_toolbar-display-padding) - 6px);
 }
 
 .hfd_theme-wrapping {
