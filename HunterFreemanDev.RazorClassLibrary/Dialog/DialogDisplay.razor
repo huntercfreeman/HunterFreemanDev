@@ -4,27 +4,27 @@
 
 @if(_cachedHtmlElementRecord is not null)
 {
-    <div class="hfd_window-manager-dialog-display"
+    <div class="hfd_dialog-display"
      style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
 
-     <div class="hfd_window-manager-dialog-display-title hfd_unselectable"
+     <div class="hfd_dialog-display-title hfd_unselectable"
           @onmousedown="FireSubscribeToDragEventWithMoveHandle">
-          <div class="hfd_window-manager-dialog-display-title-content">
+          <div class="hfd_dialog-display-title-content">
               @DialogRecord.DialogRecordDisplayName
               <HunterFreemanDev.RazorClassLibrary.Html.RenderCounter RenderCount="_renderCount" />
           </div>
           
-          <div class="hfd_window-manager-dialog-display-title-control-buttons">
-              <div class="hfd_window-manager-dialog-display-title-control-button-wrapper"
+          <div class="hfd_dialog-display-title-control-buttons">
+              <div class="hfd_dialog-display-title-control-button-wrapper"
                    @onclick="MinimizeDialogOnClick"
                    @onclick:stopPropagation="true"
                    @onmousedown:stopPropagation="true">
                   <IconChromeMinimize />
               </div>
-              <div class="hfd_window-manager-dialog-display-title-control-button-wrapper">
+              <div class="hfd_dialog-display-title-control-button-wrapper">
                   <IconChromeMaximize />
               </div>
-              <div class="hfd_window-manager-dialog-display-title-control-button-wrapper"
+              <div class="hfd_dialog-display-title-control-button-wrapper"
                    @onclick="CloseDialogOnClick"
                    @onclick:stopPropagation="true"
                    @onmousedown:stopPropagation="true">

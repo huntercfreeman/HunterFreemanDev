@@ -1,4 +1,10 @@
 ﻿:root {
+    --hfd_grid-display-add-button-row-margin-top: 5px;
+    --hfd_grid-display-add-button-item-padding: 5px;
+    --hfd_grid-row-divider-display-height: 3px;
+    --hfd_grid-column-divider-display-width: 3px;
+    --hfd_dialog-task-bar-display-height: 4ch;
+    --hfd_dialog-display-title-height: 4ch;
     --hfd_toolbar-display-row-padding: 4px 0;
     --hfd_toolbar-display-padding: 5px;
     --hfd_toolbar-display-height: 10ch;
@@ -162,9 +168,134 @@
         background-color: var(--hfd_info-color);
     }
 
+.hfd_grid-window-display-title {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hfd_grid-window-display-title-content {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.hfd_grid-window-display-title-control-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.hfd_grid-window-display-title-control-buttons .hfd_grid-window-display-title-control-button-wrapper {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 5px;
+}
+
+.hfd_grid-window-display-title-control-buttons .hfd_grid-window-display-title-control-button-wrapper:hover {
+    background-color: var(--hfd_primary-hover-background-color);
+}
+
+.hfd_grid-display-tabs {
+    display: flex;
+    background-color: var(--hfd_dialog-display-title-background-color);
+    height: var(--hfd_dialog-display-title-height);
+}
+
+.hfd_grid-display-change-active-tab-section {
+    display: inline-flex;
+}
+
+.hfd_grid-add-tab-display {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.hfd_dialog-task-bar-display {
+    height: var(--hfd_dialog-task-bar-display-height);
+    background-color: var(--hfd_dialog-task-bar-display-background-color);
+}
+
+.hfd_dialog-task-entry-display {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin-left: 5px;
+}
+
+    .hfd_dialog-task-entry-display:hover {
+        background-color: var(--hfd_primary-hover-background-color);
+    }
+
+.hfd_dialog-task-entry-display-title {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px;
+    padding-left: 5px;
+}
+
+.hfd_dialog-task-entry-display-close-button {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+    .hfd_dialog-task-entry-display-close-button:hover {
+        background-color: var(--hfd_danger-color);
+    }
+
+.hfd_transformative-resize-handle-display {
+    position: absolute;
+}
+
+.hfd_transformative-resize-handle-north-display {
+    cursor: n-resize;
+}
+
+.hfd_transformative-resize-handle-east-display {
+    cursor: e-resize;
+}
+
+.hfd_transformative-resize-handle-south-display {
+    cursor: s-resize;
+}
+
+.hfd_transformative-resize-handle-west-display {
+    cursor: w-resize;
+}
+
+.hfd_transformative-resize-handle-north-east-display {
+    cursor: ne-resize;
+}
+
+.hfd_transformative-resize-handle-south-east-display {
+    cursor: se-resize;
+}
+
+.hfd_transformative-resize-handle-south-west-display {
+    cursor: sw-resize;
+}
+
+.hfd_transformative-resize-handle-north-west-display {
+    cursor: nw-resize;
+}
+
 .hfd_grid-display {
     width: 100%;
-    height: calc(100% - var(--hfd_toolbar-display-height) - 2 * var(--hfd_toolbar-display-padding) - var(--hfd_dialog-task-bar-display-height));
+    height: 100%;
+    position: relative;
+    border-left: 2px solid var(--hfd_primary-active-background-color);
+    border-right: 2px solid var(--hfd_primary-active-background-color);
+    border-bottom: 2px solid var(--hfd_primary-active-background-color);
+}
+
+.hfd_grid-body-display {
+    height: 100%;
+    overflow: auto;
 }
 
 .hfd_grid-row-display {
@@ -205,9 +336,78 @@
     background-color: var(--hfd_primary-border-color);
 }
 
-.hfd_grid-column-divider-display {
+.hfd_grid-item-divider-display {
     width: var(--hfd_grid-column-divider-display-width);
     background-color: var(--hfd_primary-border-color);
+}
+
+.hfd_grid-window-display-title-context-menu {
+    position: fixed;
+}
+
+.hfd_grid-display-tabs {
+    border-bottom: 2px solid var(--hfd_primary-active-background-color);
+}
+
+.hfd_grid-tab-display {
+    cursor: pointer;
+    display: flex;
+}
+
+    .hfd_grid-tab-display:hover {
+        background-color: var(--hfd_primary-hover-background-color);
+    }
+
+    .hfd_grid-tab-display.hfd_active {
+        background-color: var(--hfd_primary-active-background-color);
+        box-shadow: 0px -2px 2px #333;
+        padding-left: 2px;
+    }
+
+.hfd_grid-tab-display-display-name {
+    display: inline-block;
+    padding: 3px;
+}
+
+.hfd_grid-tab-display-close-button {
+    display: inline-flex;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    align-items: center;
+}
+
+    .hfd_grid-tab-display-close-button:hover {
+        background-color: var(--hfd_danger-color);
+    }
+
+.hfd_grid-display-add-buttons {
+    position: absolute;
+    left: calc(50% - 4em);
+    top: calc(50% - 9ch);
+    font-family: monospace;
+}
+
+.hfd_grid-display-add-button-row {
+    margin-top: var(--hfd_grid-display-add-button-row-margin-top);
+}
+
+.hfd_grid-display-add-button-item {
+    cursor: pointer;
+    padding: var(--hfd_grid-display-add-button-item-padding);
+}
+
+.hfd_grid-display-add-button-item:hover {
+    background-color: var(--hfd_primary-hover-background-color);
+}
+
+.hfd_grid-display-add-button-item.hfd_active {
+    background-color: var(--hfd_primary-active-background-color);
+}
+
+.hfd_grid-display-add-button-item-diagonal {
+    visibility: hidden;
 }
 
 .hfd_drag-event-provider-display {
