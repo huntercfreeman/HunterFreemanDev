@@ -31,14 +31,22 @@ public partial class DialogDisplay : FluxorComponent
 
     protected override async Task OnInitializedAsync()
     {
-        var dimensionsRecordForDialog = await HunterFreemanDev.ClassLibrary.Dialog.DialogRecord
-            .ConstructDefaultDimensionsRecord(ViewportDimensionsService);
-        
-        var registerHtmlElementAction = new RegisterHtmlElementAction(DialogRecord.HtmlElementRecordKey,
-            dimensionsRecordForDialog,
-            new ZIndexRecord(1));
+        try
+        {
+            _cachedHtmlElementRecord =
+                HtmlElementRecordsState.Value.LookupHtmlElementRecord(DialogRecord.HtmlElementRecordKey);
+        }
+        catch (KeyNotFoundException)
+        {
+            var dimensionsRecordForDialog = await HunterFreemanDev.ClassLibrary.Dialog.DialogRecord
+                .ConstructDefaultDimensionsRecord(ViewportDimensionsService);
+            
+            var registerHtmlElementAction = new RegisterHtmlElementAction(DialogRecord.HtmlElementRecordKey,
+                dimensionsRecordForDialog,
+                new ZIndexRecord(1));
 
-        Dispatcher.Dispatch(registerHtmlElementAction);
+            Dispatcher.Dispatch(registerHtmlElementAction);
+        }
 
         await base.OnInitializedAsync();
     }
