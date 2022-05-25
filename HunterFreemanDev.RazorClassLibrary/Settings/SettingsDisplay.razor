@@ -1,4 +1,6 @@
 ﻿@using Fluxor.Blazor.Web.Components
+@using HunterFreemanDev.ClassLibrary.DebugCssClasses
+@using HunterFreemanDev.RazorClassLibrary.DebugCssClasses
 @using HunterFreemanDev.RazorClassLibrary.Panel
 
 @inherits FluxorComponent
@@ -25,17 +27,13 @@
 
     <PanelDisplay>
         <PanelTitleRenderFragment Context="isExpanded">
-            Change Theme @PanelDisplay.GetDefaultExpansionIcons(isExpanded)
+            Change Debug Css Classes @PanelDisplay.GetDefaultExpansionIcons(isExpanded)
         </PanelTitleRenderFragment>
 
         <PanelBodyRenderFragment>
-            <div>
-                Current Theme: @ThemeState.Value.ThemeRecord.ThemeDisplayName (ThemeId: @ThemeState.Value.ThemeRecord.ThemeId)
-            </div>
-
-            @foreach(var themeRecord in ThemesProvider.Value.ThemeRecords)
+            @foreach(var debugCssClass in DebugCssClassesState.Value.DebugCssClassRecordMap.Values)
             {
-                <HunterFreemanDev.RazorClassLibrary.Theme.ThemeDisplay ThemeRecord="themeRecord" />
+                <DebugCssClassDisplay DebugCssClassRecord="debugCssClass" />
             }
         </PanelBodyRenderFragment>
     </PanelDisplay>

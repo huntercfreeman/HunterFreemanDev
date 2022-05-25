@@ -13,5 +13,9 @@ public record DebugCssClassesState(Dictionary<Guid, DebugCssClassRecord> DebugCs
 {
     public DebugCssClassesState() : this(new Dictionary<Guid, DebugCssClassRecord>())
     {
+        foreach (var debugCssClass in DebugCssClassInitialStates.AllDebugCssClassRecords)
+        {
+            DebugCssClassRecordMap.Add(debugCssClass.DebugCssClassId, debugCssClass);
+        }
     }
 }

@@ -26,7 +26,7 @@ public partial class DebugCssClassProviderDisplay : FluxorComponent
 
     protected override void OnInitialized()
     {
-        var action = new InitializeDebugCssClassesStateAction(DebugCssClassFacts.AllDebugCssClassRecords);
+        var action = new InitializeDebugCssClassesStateAction(DebugCssClassInitialStates.AllDebugCssClassRecords);
 
         Dispatcher.Dispatch(action);
 

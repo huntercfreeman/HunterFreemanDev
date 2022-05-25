@@ -2,22 +2,20 @@
 
 @inherits FluxorLayout
 
-<div class="hfd_document-layout-display @ThemeState.Value.ThemeRecord.ThemeCssClassName">
+<div class="hfd_document-layout-display @ThemeState.Value.ThemeRecord.ThemeCssClassName @GetDebugCssClasses()">
     <div class="hfd_theme-wrapping">
         <Fluxor.Blazor.Web.StoreInitializer />
 
-        <HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
-            <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Drag.DragEventProviderDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.KeyDownEvent.KeyDownEventProviderDisplay />
+        <HunterFreemanDev.RazorClassLibrary.KeyDownEvent.KeyDownEventProviderDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogMapDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Toolbar.ToolbarDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay />
+        <HunterFreemanDev.RazorClassLibrary.Grid.GridDisplay />
 
-            <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
-        </HunterFreemanDev.RazorClassLibrary.DebugCssClasses.DebugCssClassProviderDisplay>
+        <HunterFreemanDev.RazorClassLibrary.Dialog.DialogTaskBarDisplay />
     </div>
 </div>

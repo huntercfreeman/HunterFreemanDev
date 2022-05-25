@@ -229,6 +229,10 @@
     height: 100%;
 }
 
+.hfd_debug-css-class-display.hfd_active {
+    background-color: var(--hfd_primary-active-background-color);
+}
+
 .hfd_toolbar-display {
     height: var(--hfd_toolbar-display-height);
     overflow-x: auto;

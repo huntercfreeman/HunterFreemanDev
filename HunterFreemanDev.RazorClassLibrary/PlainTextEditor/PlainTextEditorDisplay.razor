@@ -5,8 +5,7 @@
 <HunterFreemanDev.RazorClassLibrary.Focus.FocusBoundaryDisplay @ref="_focusBoundaryDisplay" 
                                                                FocusRecordDisplayName="@nameof(PlainTextEditorDisplay)"
                                                                Class="hfd_match-parent-width-and-height">
-    <div
-         class="hfd_plain-text-editor-display">
+    <div class="hfd_plain-text-editor-display @GetDebugCssClasses()">
         <div>
             @if(FocusState.Value.FocusRecord is not null &&
                 _focusBoundaryDisplay is not null &&
