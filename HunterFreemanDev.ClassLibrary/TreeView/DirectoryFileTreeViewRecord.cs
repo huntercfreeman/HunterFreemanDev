@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using HunterFreemanDev.ClassLibrary.Errors;
 using HunterFreemanDev.ClassLibrary.FileSystem.Classes;
 using HunterFreemanDev.ClassLibrary.FileSystem.Interfaces;
 
@@ -25,16 +26,23 @@ public record DirectoryFileTreeViewRecord : FileTreeViewRecordBase
 
     public override Task LoadChildTreeViewRecords()
     {
-        var childDirectoryStringFilePaths = System.IO.Directory.GetDirectories(Data.GetAbsoluteFilePathString());
-        var childFileStringFilePaths = System.IO.Directory.GetFiles(Data.GetAbsoluteFilePathString());
+        try
+        {
+            var childDirectoryStringFilePaths = System.IO.Directory.GetDirectories(Data.GetAbsoluteFilePathString());
+            var childFileStringFilePaths = System.IO.Directory.GetFiles(Data.GetAbsoluteFilePathString());
 
-        _childDirectoryFileTreeViewRecords = childDirectoryStringFilePaths
-            .Select(x => new DirectoryFileTreeViewRecord(new AbsoluteFilePath(x, true)))
-            .ToArray();
+            _childDirectoryFileTreeViewRecords = childDirectoryStringFilePaths
+                .Select(x => new DirectoryFileTreeViewRecord(new AbsoluteFilePath(x, true)))
+                .ToArray();
 
-        _childDefaultFileTreeViewRecords = childFileStringFilePaths
-            .Select(x => new DefaultFileTreeViewRecord(new AbsoluteFilePath(x, true)))
-            .ToArray();
+            _childDefaultFileTreeViewRecords = childFileStringFilePaths
+                .Select(x => new DefaultFileTreeViewRecord(new AbsoluteFilePath(x, true)))
+                .ToArray();
+        }
+        catch (Exception e)
+        {
+            RichErrorModel = new(e.Message, $"{nameof(LoadChildTreeViewRecords)} threw an exception.");
+        }
 
         return Task.CompletedTask;
     }

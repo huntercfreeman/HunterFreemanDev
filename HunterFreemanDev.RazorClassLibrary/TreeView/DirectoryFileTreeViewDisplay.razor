@@ -4,8 +4,6 @@
     <TreeViewExpansionButtonsDisplay IsExpanded="DirectoryFileTreeViewRecord.IsExpanded"
                                      OnToggleIsExpandedEventCallback="OnToggleIsExpandedEventCallback" />
 
-    @if (DirectoryFileTreeViewRecord.GetChildTreeViewRecords.Any())
-    {
-        <FileTreeViewChildrenDisplay ChildFileTreeViewRecordBases="DirectoryFileTreeViewRecord.GetChildTreeViewRecords" />
-    }
+    <FileTreeViewChildrenDisplay ChildFileTreeViewRecordBases="DirectoryFileTreeViewRecord.GetChildTreeViewRecords"
+                                 RichErrorModel="DirectoryFileTreeViewRecord.RichErrorModel" />
 </div>

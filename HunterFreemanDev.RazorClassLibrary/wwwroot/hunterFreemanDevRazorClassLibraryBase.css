@@ -621,3 +621,15 @@
     animation-duration: 1s;
     animation-iteration-count: infinite
 }
+
+.hfd_file-tree-view-children-display {
+    margin-left: 30px;
+}
+
+.hfd_rich-error-display-error {
+    color: var(--hfd_danger-color);
+}
+
+.hfd_rich-error-display-hint {
+    color: var(--hfd_primary-color);
+}

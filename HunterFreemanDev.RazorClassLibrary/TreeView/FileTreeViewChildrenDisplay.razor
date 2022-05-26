@@ -1,5 +1,11 @@
 ﻿@using HunterFreemanDev.ClassLibrary.TreeView
+
 <div class="hfd_file-tree-view-children-display">
+    @if (RichErrorModel is not null)
+    {
+        <RichErrorDisplay RichErrorModel="RichErrorModel" />
+    }
+
     @foreach (var child in ChildFileTreeViewRecordBases)
     {
         if (child is DirectoryFileTreeViewRecord directoryFileTreeViewRecord)
