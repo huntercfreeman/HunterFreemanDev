@@ -1,12 +1,18 @@
 ﻿<div class="hfd_folder-explorer">
-    @if (_workspaceAbsoluteFilePath is null)
+    @if (_workspaceAbsoluteFilePath is null && _onFileSelectedRichErrorModel is null)
     {
         <div>_workspaceAbsoluteFilePath is null please select a directory</div>
 
         <HunterFreemanDev.RazorClassLibrary.InputFile.InputFileDialogEntryPointDisplay OnFileSelectedAction="OnFileSelected"/>
     }
-    else
+    else if(_workspaceAbsoluteFilePath?.IsDirectory ?? false)
     {
         <div>_workspaceAbsoluteFilePath: @_workspaceAbsoluteFilePath.GetAbsoluteFilePathString()</div>
+    }
+    else if (_onFileSelectedRichErrorModel is not null)
+    {
+        <RichErrorDisplay RichErrorModel="_onFileSelectedRichErrorModel" />
+
+        <HunterFreemanDev.RazorClassLibrary.InputFile.InputFileDialogEntryPointDisplay OnFileSelectedAction="OnFileSelected"/>
     }
 </div>
