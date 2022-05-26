@@ -26,4 +26,9 @@ public partial class InputFileDialogDisplay : ComponentBase
 
         InvokeAsync(StateHasChanged);
     }
+
+    private void ConfirmWorkspaceDirectoryOnClick()
+    {
+        Console.WriteLine($"Confirmed Workspace: {_activeTreeViewRecord.Data.GetAbsoluteFilePathString()}");
+    }
 }

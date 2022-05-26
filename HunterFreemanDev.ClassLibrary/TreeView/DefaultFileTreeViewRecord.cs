@@ -10,6 +10,8 @@ public record DefaultFileTreeViewRecord : FileTreeViewRecordBase
     {
     }
 
+    public override bool CanHaveChildren => false;
+
     public override ImmutableArray<TreeViewRecordBase<IAbsoluteFilePath>> GetChildTreeViewRecords =>
         Array.Empty<TreeViewRecordBase<IAbsoluteFilePath>>()
             .ToImmutableArray();

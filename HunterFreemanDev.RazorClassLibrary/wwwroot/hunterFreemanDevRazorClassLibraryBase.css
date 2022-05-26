@@ -5,6 +5,7 @@
     --hfd_grid-column-divider-display-width: 3px;
     --hfd_dialog-task-bar-display-height: 2rem;
     --hfd_dialog-display-title-height: 4ch;
+    --hfd_input-file-dialog-display-control-buttons-height: 2rem;
     --hfd_toolbar-display-row-padding: 4px 0;
     --hfd_toolbar-display-padding: 5px;
     --hfd_toolbar-display-height: 4rem;
@@ -627,6 +628,20 @@
     animation-iteration-count: infinite
 }
 
+.hfd_input-file-dialog-display {
+    height: 100%;
+}
+
+.hfd_input-file-dialog-display-tree-view {
+    height: calc(100% - var(--hfd_input-file-dialog-display-control-buttons-height) - 5px);
+    margin-bottom: 5px;
+    overflow-y: auto;
+}
+
+.hfd_input-file-dialog-display-control-buttons {
+    height: var(--hfd_input-file-dialog-display-control-buttons-height);
+}
+
 .hfd_file-tree-view-children-display {
     margin-left: 30px;
 }
@@ -649,4 +664,8 @@
 
 .hfd_rich-error-display-hint {
     color: var(--hfd_primary-color);
+}
+
+.hfd_invisible-padding {
+    visibility: hidden;
 }

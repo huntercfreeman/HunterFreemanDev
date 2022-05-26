@@ -15,6 +15,8 @@ public abstract record TreeViewRecordBase<T>
     public bool IsExpanded { get; set; }
     public RichErrorModel? RichErrorModel { get; set; }
 
+    public abstract bool CanHaveChildren { get; }
+
     public abstract ImmutableArray<TreeViewRecordBase<T>> GetChildTreeViewRecords { get; }
 
     public abstract Task LoadChildTreeViewRecords();

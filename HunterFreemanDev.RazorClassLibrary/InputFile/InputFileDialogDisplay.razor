@@ -1,7 +1,18 @@
-﻿<div class="hfd_input-file-dialog-display">
-    <CascadingValue Name="SetActiveTreeViewRecordAction" Value="SetActiveTreeViewRecordAction">
-        <CascadingValue Name="ActiveTreeViewRecord" Value="_activeTreeViewRecord">
-            <HunterFreemanDev.RazorClassLibrary.TreeView.DirectoryFileTreeViewDisplay DirectoryFileTreeViewRecord="_rootDirectoryFileTreeViewRecord" />
+﻿@using HunterFreemanDev.ClassLibrary.Theme
+<div class="hfd_input-file-dialog-display">
+    <div class="hfd_input-file-dialog-display-tree-view">
+        <CascadingValue Name="SetActiveTreeViewRecordAction" Value="SetActiveTreeViewRecordAction">
+            <CascadingValue Name="ActiveTreeViewRecord" Value="_activeTreeViewRecord">
+                <HunterFreemanDev.RazorClassLibrary.TreeView.DirectoryFileTreeViewDisplay DirectoryFileTreeViewRecord="_rootDirectoryFileTreeViewRecord" />
+            </CascadingValue>
         </CascadingValue>
-    </CascadingValue>
+    </div>
+    
+    <div class="hfd_input-file-dialog-display-control-buttons">
+        <ButtonDisplay Title="Choose Workspace Directory"
+                       ColorKind="ColorKind.Primary"
+                       OnClickEventCallback="ConfirmWorkspaceDirectoryOnClick">
+            Confirm Workspace Directory: @_activeTreeViewRecord.Data.GetAbsoluteFilePathString()
+        </ButtonDisplay>
+    </div>
 </div>

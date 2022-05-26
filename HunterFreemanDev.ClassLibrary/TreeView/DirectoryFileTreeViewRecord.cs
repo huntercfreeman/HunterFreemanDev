@@ -18,6 +18,8 @@ public record DirectoryFileTreeViewRecord : FileTreeViewRecordBase
     {
     }
 
+    public override bool CanHaveChildren => true;
+
     public override ImmutableArray<TreeViewRecordBase<IAbsoluteFilePath>> GetChildTreeViewRecords =>
         _childDirectoryFileTreeViewRecords
             .Select(x => (TreeViewRecordBase<IAbsoluteFilePath>)x)
@@ -36,7 +38,7 @@ public record DirectoryFileTreeViewRecord : FileTreeViewRecordBase
                 .ToArray();
 
             _childDefaultFileTreeViewRecords = childFileStringFilePaths
-                .Select(x => new DefaultFileTreeViewRecord(new AbsoluteFilePath(x, true)))
+                .Select(x => new DefaultFileTreeViewRecord(new AbsoluteFilePath(x, false)))
                 .ToArray();
         }
         catch (Exception e)
