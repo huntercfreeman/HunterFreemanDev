@@ -1,0 +1,14 @@
+﻿@using HunterFreemanDev.ClassLibrary.TreeView
+<div class="hfd_file-tree-view-children-display">
+    @foreach (var child in ChildFileTreeViewRecordBases)
+    {
+        if (child is DirectoryFileTreeViewRecord directoryFileTreeViewRecord)
+        {
+            <DirectoryFileTreeViewDisplay DirectoryFileTreeViewRecord="directoryFileTreeViewRecord" />
+        }
+        else if (child is DefaultFileTreeViewRecord defaultFileTreeViewRecord)
+        {
+            <DefaultFileTreeViewDisplay DefaultFileTreeViewRecord="defaultFileTreeViewRecord" />
+        }
+    }
+</div>

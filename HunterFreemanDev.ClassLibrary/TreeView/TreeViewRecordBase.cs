@@ -10,6 +10,8 @@ public abstract record TreeViewRecordBase<T>
     }
 
     public T Data { get; }
+    // TODO: Strictly enforce immutability within the TreeViews
+    public bool IsExpanded { get; set; }
 
     public abstract ImmutableArray<TreeViewRecordBase<T>> GetChildTreeViewRecords { get; }
 

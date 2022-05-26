@@ -1,0 +1,11 @@
+﻿<div class="hfd_tree-view-display">
+    <TreeViewTitleDisplay Title="@DirectoryFileTreeViewRecord.Data.GetAbsoluteFilePathString()" />
+
+    <TreeViewExpansionButtonsDisplay IsExpanded="DirectoryFileTreeViewRecord.IsExpanded"
+                                     OnToggleIsExpandedEventCallback="OnToggleIsExpandedEventCallback" />
+
+    @if (DirectoryFileTreeViewRecord.GetChildTreeViewRecords.Any())
+    {
+        <FileTreeViewChildrenDisplay ChildFileTreeViewRecordBases="DirectoryFileTreeViewRecord.GetChildTreeViewRecords" />
+    }
+</div>
