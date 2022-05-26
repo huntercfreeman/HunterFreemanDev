@@ -1,4 +1,5 @@
-﻿<div class="hfd_folder-explorer">
+﻿@using HunterFreemanDev.ClassLibrary.TreeView
+<div class="hfd_folder-explorer-display">
     @if (_workspaceAbsoluteFilePath is null && _onFileSelectedRichErrorModel is null)
     {
         <div>_workspaceAbsoluteFilePath is null please select a directory</div>
@@ -7,7 +8,13 @@
     }
     else if(_workspaceAbsoluteFilePath?.IsDirectory ?? false)
     {
-        <div>_workspaceAbsoluteFilePath: @_workspaceAbsoluteFilePath.GetAbsoluteFilePathString()</div>
+        <div class="hfd_folder-explorer-display-tree-view">
+            <CascadingValue Name="SetActiveTreeViewRecordAction" Value="SetActiveTreeViewRecordAction">
+                <CascadingValue Name="ActiveTreeViewRecord" Value="_activeTreeViewRecord">
+                    <HunterFreemanDev.RazorClassLibrary.TreeView.DirectoryFileTreeViewDisplay DirectoryFileTreeViewRecord="_workspaceTreeView" />
+                </CascadingValue>
+            </CascadingValue>
+        </div>
     }
     else if (_onFileSelectedRichErrorModel is not null)
     {

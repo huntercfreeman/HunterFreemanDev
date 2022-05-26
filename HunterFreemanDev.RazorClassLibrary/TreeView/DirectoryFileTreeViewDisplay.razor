@@ -2,7 +2,7 @@
     <TreeViewExpansionButtonsDisplay IsExpanded="DirectoryFileTreeViewRecord.IsExpanded"
                                      OnToggleIsExpandedEventCallback="OnToggleIsExpandedEventCallback" />
 
-    <TreeViewTitleDisplay Title="@DirectoryFileTreeViewRecord.Data.GetAbsoluteFilePathString()"
+    <TreeViewTitleDisplay Title="@DirectoryFileTreeViewRecord.Data.GetFilenameWithExtension"
                           SetActiveTreeViewRecordAction="() =>  SetActiveTreeViewRecordAction(DirectoryFileTreeViewRecord)"
                           Classes="@IsActiveTreeViewRecordCss" />
 
