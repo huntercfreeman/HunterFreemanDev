@@ -631,6 +631,18 @@
     margin-left: 30px;
 }
 
+.hfd_tree-view-display-title {
+    cursor: pointer;
+}
+
+    .hfd_tree-view-display-title:hover {
+        background-color: var(--hfd_primary-hover-background-color);
+    }
+
+    .hfd_tree-view-display-title.hfd_active {
+        background-color: var(--hfd_primary-active-background-color);
+    }
+
 .hfd_rich-error-display-error {
     color: var(--hfd_danger-color);
 }
