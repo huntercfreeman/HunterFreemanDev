@@ -12,4 +12,12 @@ public partial class TreeViewTitleDisplay : ComponentBase
     public Action SetActiveTreeViewRecordAction { get; set; } = null!;
     [Parameter, EditorRequired]
     public string Classes { get; set; } = null!;
+    [Parameter]
+    public Action? DefaultFileOnDoubleClick { get; set; } = null!;
+
+    private void FireDefaultFileOnDoubleClick()
+    {
+        if(DefaultFileOnDoubleClick is not null)
+            DefaultFileOnDoubleClick.Invoke();
+    }
 }

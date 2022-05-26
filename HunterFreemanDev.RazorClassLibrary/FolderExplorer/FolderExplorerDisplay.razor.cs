@@ -1,4 +1,5 @@
-﻿using HunterFreemanDev.ClassLibrary.Errors;
+﻿using Fluxor;
+using HunterFreemanDev.ClassLibrary.Errors;
 using HunterFreemanDev.ClassLibrary.FileSystem.Classes;
 using HunterFreemanDev.ClassLibrary.FileSystem.Interfaces;
 using HunterFreemanDev.ClassLibrary.TreeView;
@@ -8,6 +9,9 @@ namespace HunterFreemanDev.RazorClassLibrary.FolderExplorer;
 
 public partial class FolderExplorerDisplay : ComponentBase
 {
+    [Inject]
+    public IState<IFileBuffer> FileBuffer { get; set; } = null!;
+
     private IAbsoluteFilePath? _workspaceAbsoluteFilePath;
     private RichErrorModel? _onFileSelectedRichErrorModel;
     private TreeViewRecordBase<IAbsoluteFilePath> _activeTreeViewRecord;
@@ -50,5 +54,9 @@ public partial class FolderExplorerDisplay : ComponentBase
         _activeTreeViewRecord = treeViewRecord;
 
         InvokeAsync(StateHasChanged);
+    }
+
+    private void DefaultFileOnDoubleClick(TreeViewRecordBase<IAbsoluteFilePath> treeViewRecord)
+    {
     }
 }

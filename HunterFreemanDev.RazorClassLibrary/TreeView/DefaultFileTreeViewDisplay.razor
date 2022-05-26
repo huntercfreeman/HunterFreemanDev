@@ -13,6 +13,7 @@
 
     <TreeViewTitleDisplay Title="@DefaultFileTreeViewRecord.Data.GetFilenameWithExtension"
                           SetActiveTreeViewRecordAction="() =>  SetActiveTreeViewRecordAction(DefaultFileTreeViewRecord)"
+                          DefaultFileOnDoubleClick="() => DefaultFileOnDoubleClick(DefaultFileTreeViewRecord)"
                           Classes="@IsActiveTreeViewRecordCss" />
 
     @if (DefaultFileTreeViewRecord.GetChildTreeViewRecords.Any())
