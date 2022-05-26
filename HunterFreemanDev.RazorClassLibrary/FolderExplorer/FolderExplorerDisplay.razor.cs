@@ -1,11 +1,12 @@
 ﻿using HunterFreemanDev.ClassLibrary.FileSystem.Classes;
+using HunterFreemanDev.ClassLibrary.FileSystem.Interfaces;
 using Microsoft.AspNetCore.Components;
 
 namespace HunterFreemanDev.RazorClassLibrary.FolderExplorer;
 
 public partial class FolderExplorerDisplay : ComponentBase
 {
-    
+    private IAbsoluteFilePath? _workspaceAbsoluteFilePath;
 
     protected override void OnInitialized()
     {
@@ -18,5 +19,12 @@ public partial class FolderExplorerDisplay : ComponentBase
             System.IO.Directory.GetFiles(rootDirectoryAbsoluteFilePath.GetAbsoluteFilePathString());
 
         base.OnInitialized();
+    }
+
+    private void OnFileSelected(IAbsoluteFilePath absoluteFilePath)
+    {
+        _workspaceAbsoluteFilePath = absoluteFilePath;
+
+        InvokeAsync(StateHasChanged);
     }
 }

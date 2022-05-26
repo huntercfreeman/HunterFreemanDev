@@ -1,3 +1,12 @@
 ﻿<div class="hfd_folder-explorer">
-    <HunterFreemanDev.RazorClassLibrary.InputFile.InputFileDialogEntryPointDisplay />
+    @if (_workspaceAbsoluteFilePath is null)
+    {
+        <div>_workspaceAbsoluteFilePath is null please select a directory</div>
+
+        <HunterFreemanDev.RazorClassLibrary.InputFile.InputFileDialogEntryPointDisplay OnFileSelectedAction="OnFileSelected"/>
+    }
+    else
+    {
+        <div>_workspaceAbsoluteFilePath: @_workspaceAbsoluteFilePath.GetAbsoluteFilePathString()</div>
+    }
 </div>
