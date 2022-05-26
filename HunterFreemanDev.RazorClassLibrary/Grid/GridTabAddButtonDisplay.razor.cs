@@ -19,6 +19,7 @@ public partial class GridTabAddButtonDisplay : ComponentBase
     private void DispatchAddGridTabAction()
     {
         var addGridTabAction = new AddGridTabRecordAction(GridItemRecordKey, new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), 
+                true,
                 typeof(GridTabAddFormDisplay),
                 "Empty"),
             NextAvailableTabIndex);

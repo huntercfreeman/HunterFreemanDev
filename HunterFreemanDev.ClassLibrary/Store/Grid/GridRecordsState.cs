@@ -2,6 +2,7 @@
 using HunterFreemanDev.ClassLibrary.ConstructorAction;
 using HunterFreemanDev.ClassLibrary.Direction;
 using HunterFreemanDev.ClassLibrary.Grid;
+using HunterFreemanDev.ClassLibrary.Html;
 
 namespace HunterFreemanDev.ClassLibrary.Store.Grid;
 
@@ -13,6 +14,10 @@ public record GridRecordsState
     public GridRecordsState()
     {
         _gridRecordItemContainerMap = new();
+
+        var gridRecordKey = new GridRecordKey(Guid.NewGuid());
+
+        _gridRecordItemContainerMap.Add(gridRecordKey, new GridBoardRecord(true));
     }
     
     public GridRecordsState(GridRecordsState otherGridRecordsState,

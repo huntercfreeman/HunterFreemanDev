@@ -36,7 +36,7 @@ public partial class GridTabAddFormDisplay : ComponentBase
             var guidId = ActiveGridTabId ?? Guid.NewGuid();
             
             var replaceGridTabAction = new ReplaceGridTabRecordAction(GridItemRecordKey,
-                new GridTabRecord(new GridTabRecordKey(guidId), argumentTuple.renderedContentType, argumentTuple.renderedContentTabDisplayName),
+                new GridTabRecord(new GridTabRecordKey(guidId), true, argumentTuple.renderedContentType, argumentTuple.renderedContentTabDisplayName),
                 ActiveGridTabIndex ?? 0);
 
             Dispatcher.Dispatch(replaceGridTabAction);
@@ -55,6 +55,7 @@ public partial class GridTabAddFormDisplay : ComponentBase
             
             var addGridTabRecordAction = new AddGridTabRecordAction(gridItemRecord.GridItemRecordKey,
                 new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), 
+                    true,
                     argumentTuple.renderedContentType, 
                     argumentTuple.renderedContentTabDisplayName),
                 0);

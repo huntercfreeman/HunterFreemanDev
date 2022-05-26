@@ -33,7 +33,9 @@ public partial class GridTabDisplay : ComponentBase
     private void OnGridTabRecordChosenAction((Type renderedContentType, string renderedContentTabDisplayName) argumentTuple)
     {
         var addGridTabRecordAction = new AddGridTabRecordAction(GridItemRecordKey,
-            new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), argumentTuple.renderedContentType,
+            new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), 
+                true, 
+                argumentTuple.renderedContentType,
                 argumentTuple.renderedContentTabDisplayName),
             0);
 
@@ -46,6 +48,9 @@ public partial class GridTabDisplay : ComponentBase
 
     private void DispatchCloseGridTabActionOnClick()
     {
+        if (!GridTabRecord.IsCloseable)
+            return;
+
         var closeGridTabAction = new CloseGridTabRecordAction(GridItemRecordKey, 
             GridTabRecord.GridTabRecordKey, 
             null);

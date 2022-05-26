@@ -5,9 +5,12 @@
         @GridTabRecord.RenderedContentTitleText
     </span>
 
-    <span class="hfd_grid-tab-display-close-button"
-          @onclick="DispatchCloseGridTabActionOnClick"
-          @onclick:stopPropagation="true">
-        <IconChromeClose />
-    </span>
+    @if (GridTabRecord.IsCloseable)
+    {
+        <span class="hfd_grid-tab-display-close-button"
+              @onclick="DispatchCloseGridTabActionOnClick"
+              @onclick:stopPropagation="true">
+            <IconChromeClose />
+        </span>
+    }
 </div>

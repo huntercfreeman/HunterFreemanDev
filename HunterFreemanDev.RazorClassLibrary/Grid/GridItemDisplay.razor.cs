@@ -3,6 +3,7 @@ using Fluxor.Blazor.Web.Components;
 using HunterFreemanDev.ClassLibrary.Dimension;
 using HunterFreemanDev.ClassLibrary.Grid;
 using HunterFreemanDev.ClassLibrary.Html;
+using HunterFreemanDev.ClassLibrary.PlainTextEditor;
 using HunterFreemanDev.ClassLibrary.Store.Grid;
 using HunterFreemanDev.ClassLibrary.Store.Html;
 using HunterFreemanDev.RazorClassLibrary.Html;
@@ -119,6 +120,7 @@ public partial class GridItemDisplay : FluxorComponent
     {
         var addGridTabRecordAction = new AddGridTabRecordAction(GridItemRecord.GridItemRecordKey,
             new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()),
+                              true,
                               typeof(HtmlElementExampleWrapperDisplay),
                               nameof(HtmlElementExampleWrapperDisplay)),
             0);
@@ -129,7 +131,9 @@ public partial class GridItemDisplay : FluxorComponent
     private void OnGridTabRecordChosenAction((Type renderedContentType, string renderedContentTabDisplayName) argumentTuple)
     {
         var addGridTabRecordAction = new AddGridTabRecordAction(GridItemRecord.GridItemRecordKey,
-            new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), argumentTuple.renderedContentType,
+            new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()), 
+                true,
+                argumentTuple.renderedContentType,
                 argumentTuple.renderedContentTabDisplayName),
             0);
 
