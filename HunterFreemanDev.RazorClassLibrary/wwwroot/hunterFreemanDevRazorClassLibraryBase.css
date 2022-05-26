@@ -658,6 +658,14 @@
         background-color: var(--hfd_primary-active-background-color);
     }
 
+.hfd_tree-view-expansion-buttons-display {
+    cursor: pointer;
+}
+
+    .hfd_tree-view-expansion-buttons-display:hover {
+        background-color: var(--hfd_primary-hover-background-color);
+    }
+
 .hfd_rich-error-display-error {
     color: var(--hfd_danger-color);
 }
