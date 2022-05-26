@@ -8,52 +8,55 @@
 @if (_cachedGridBoard is not null &&
      _cachedHtmlElementRecord is not null)
 {
-    <div class="hfd_grid-display-theme-wrapping"
-         style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
-        <div class="hfd_grid-display"
-             style="width: calc(100% - 4px); height: calc(100% - 2px);"
-             @key="_cachedGridBoard.GridBoardSequence">
-             
-            @if (!IsFixedDimensions)
-            {
-                <TransformativeDisplay HtmlElementRecord="_cachedHtmlElementRecord" />
-            }
-            
-            @if (_cachedGridBoard.GridRowRecords.Any())
-            {
-                GridRowRecord? previousRow = null;
-
-                for (int i = 0; i < _cachedGridBoard.GridRowRecords.Length; i++)
+    if (InitialGridTabRecord is null || _isInitialized)
+    {
+        <div class="hfd_grid-display-theme-wrapping"
+             style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
+            <div class="hfd_grid-display"
+                 style="width: calc(100% - 4px); height: calc(100% - 2px);"
+                 @key="_cachedGridBoard.GridBoardSequence">
+                 
+                @if (!IsFixedDimensions)
                 {
-                    var rowIndex = i;
-                    var row = _cachedGridBoard.GridRowRecords[rowIndex];
+                    <TransformativeDisplay HtmlElementRecord="_cachedHtmlElementRecord" />
+                }
+                
+                @if (_cachedGridBoard.GridRowRecords.Any())
+                {
+                    GridRowRecord? previousRow = null;
 
-                    if (previousRow is not null)
+                    for (int i = 0; i < _cachedGridBoard.GridRowRecords.Length; i++)
                     {
-                        <GridRowDividerDisplay />
-                    }
+                        var rowIndex = i;
+                        var row = _cachedGridBoard.GridRowRecords[rowIndex];
 
-                    <CascadingValue Value="ChooseGridTabRecordRenderFragment">
-                        <CascadingValue Name="GridDisplayCachedHtmlElementRecord" Value="_cachedHtmlElementRecord">
-                            <CascadingValue Value="GridRecord.GridRecordKey">
-                                <CascadingValue Name="RowIndex" Value="rowIndex">
-                                    <GridRowDisplay GridRowRecord="row"
-                                                    TotalRowCount="_cachedGridBoard.GridRowRecords.Length" />
+                        if (previousRow is not null)
+                        {
+                            <GridRowDividerDisplay />
+                        }
+
+                        <CascadingValue Value="ChooseGridTabRecordRenderFragment">
+                            <CascadingValue Name="GridDisplayCachedHtmlElementRecord" Value="_cachedHtmlElementRecord">
+                                <CascadingValue Value="GridRecord.GridRecordKey">
+                                    <CascadingValue Name="RowIndex" Value="rowIndex">
+                                        <GridRowDisplay GridRowRecord="row"
+                                                        TotalRowCount="_cachedGridBoard.GridRowRecords.Length" />
+                                    </CascadingValue>
                                 </CascadingValue>
                             </CascadingValue>
                         </CascadingValue>
-                    </CascadingValue>
 
-                    previousRow = row;
+                        previousRow = row;
+                    }
                 }
-            }
-            else
-            {
-                <div style="cursor: pointer;"
-                     @onclick="AddGridItemRecordOnClick">
-                    GridRecord is empty click here to add a GridItem
-                </div>
-            }
+                else
+                {
+                    <div style="cursor: pointer;"
+                         @onclick="AddGridItemRecordOnClick">
+                        GridRecord is empty click here to add a GridItem
+                    </div>
+                }
+            </div>
         </div>
-    </div>
+    }
 }

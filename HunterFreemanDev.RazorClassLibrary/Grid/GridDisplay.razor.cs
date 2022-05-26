@@ -31,11 +31,15 @@ public partial class GridDisplay : FluxorComponent
     public DimensionsRecord? InitialDimensionsRecord { get; set; }
     [Parameter]
     public bool IsFixedDimensions { get; set; }
+    [Parameter]
+    public GridTabRecord? InitialGridTabRecord { get; set; }
 
     public const string ON_CHOSE_GRID_TAB_RECORD_ACTION_PARAMETER_NAME = "OnChoseGridTabRecordAction";
     
     private GridBoardRecord? _cachedGridBoard;
     private HtmlElementRecord? _cachedHtmlElementRecord;
+
+    private bool _isInitialized;
 
     protected override void OnInitialized()
     {
@@ -64,6 +68,23 @@ public partial class GridDisplay : FluxorComponent
 
             _cachedGridBoard = GridRecordsState.Value
                 .LookupGridBoard(GridRecord.GridRecordKey);
+
+            if (!_isInitialized && InitialGridTabRecord is not null && _cachedGridBoard is not null)
+            {
+                var initialGridItemRecord = new GridItemRecord(new GridItemRecordKey(Guid.NewGuid()),
+                    new HtmlElementRecordKey(Guid.NewGuid()),
+                    InitialGridTabRecord);
+
+                var addGridItemRecordAction = new AddGridItemRecordAction(GridRecord.GridRecordKey,
+                    initialGridItemRecord,
+                    CardinalDirectionKind.CurrentPosition,
+                    null,
+                    null);
+
+                Dispatcher.Dispatch(addGridItemRecordAction);
+            }
+
+            _isInitialized = true;
         }
         catch (KeyNotFoundException)
         {
@@ -89,7 +110,7 @@ public partial class GridDisplay : FluxorComponent
 
         Dispatcher.Dispatch(addGridItemRecordAction);
     }
-    
+
     protected override void Dispose(bool disposing)
     {
         GridRecordsState.StateChanged -= OnStateChanged;

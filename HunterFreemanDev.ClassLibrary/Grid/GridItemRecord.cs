@@ -3,4 +3,5 @@
 namespace HunterFreemanDev.ClassLibrary.Grid;
 
 public record GridItemRecord(GridItemRecordKey GridItemRecordKey,
-    HtmlElementRecordKey HtmlElementRecordKey);
+    HtmlElementRecordKey HtmlElementRecordKey,
+    GridTabRecord? InitialGridTabRecord = null);

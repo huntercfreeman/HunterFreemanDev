@@ -34,13 +34,15 @@ public partial class GridItemDisplay : FluxorComponent
     private HtmlElementRecord? _cachedHtmlElementRecord;
     private int _previousTotalGridItemCountInRow;
 
+    private bool _isInitialized;
+
     private DimensionValuedUnit _heightOfGridTabDimensionValuedUnit = new DimensionValuedUnit(2, DimensionUnitKind.Rem);
     
     protected override void OnInitialized()
     {
         GridItemRecordsState.StateChanged += OnStateChanged;
         HtmlElementRecordsState.StateChanged += OnStateChanged;
-        
+
         try
         {
             _cachedHtmlElementRecord = HtmlElementRecordsState.Value
@@ -91,6 +93,17 @@ public partial class GridItemDisplay : FluxorComponent
             
             _cachedGridTabContainer = GridItemRecordsState.Value
                 .LookupGridTabContainer(GridItemRecord.GridItemRecordKey);
+
+            if (!_isInitialized && GridItemRecord.InitialGridTabRecord is not null && _cachedGridTabContainer is not null)
+            {
+                var addGridTabRecordAction = new AddGridTabRecordAction(GridItemRecord.GridItemRecordKey,
+                   GridItemRecord.InitialGridTabRecord,
+                0);
+
+                Dispatcher.Dispatch(addGridTabRecordAction);
+            }
+
+            _isInitialized = true;
         }
         catch (KeyNotFoundException)
         {

@@ -14,10 +14,6 @@ public record GridRecordsState
     public GridRecordsState()
     {
         _gridRecordItemContainerMap = new();
-
-        var gridRecordKey = new GridRecordKey(Guid.NewGuid());
-
-        _gridRecordItemContainerMap.Add(gridRecordKey, new GridBoardRecord(true));
     }
     
     public GridRecordsState(GridRecordsState otherGridRecordsState,

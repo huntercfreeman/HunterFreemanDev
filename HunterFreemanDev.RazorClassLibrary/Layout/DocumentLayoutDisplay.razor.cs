@@ -8,6 +8,7 @@ using HunterFreemanDev.ClassLibrary.Dimension;
 using HunterFreemanDev.ClassLibrary.Grid;
 using HunterFreemanDev.ClassLibrary.Html;
 using HunterFreemanDev.ClassLibrary.Store.DebugCssClasses;
+using HunterFreemanDev.RazorClassLibrary.FolderExplorer;
 
 namespace HunterFreemanDev.RazorClassLibrary.Layout;
 
@@ -25,6 +26,11 @@ public partial class DocumentLayoutDisplay : FluxorLayout
 
     private readonly GridRecord _gridRecord = new(new GridRecordKey(Guid.NewGuid()), 
         new HtmlElementRecordKey(Guid.NewGuid()));
+
+    private readonly GridTabRecord _folderExplorerGridTabRecord = new GridTabRecord(new GridTabRecordKey(Guid.NewGuid()),
+        false,
+        typeof(FolderExplorerDisplay),
+        nameof(FolderExplorerDisplay));
 
     private readonly DimensionsRecord _initialDimensionsRecordForGrid = new(new DimensionValuedUnit(100, DimensionUnitKind.PercentageOfParent),
         new DimensionValuedUnit(100, DimensionUnitKind.PercentageOfParent),

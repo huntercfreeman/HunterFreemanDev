@@ -5,42 +5,45 @@
 @if (_cachedGridTabContainer is not null &&
      _cachedHtmlElementRecord is not null)
 {
-    <div class="hfd_grid-item-display"
-         style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
-        <CascadingValue Value="GridItemRecord.GridItemRecordKey">
-            <CascadingValue Name="@GridDisplay.ON_CHOSE_GRID_TAB_RECORD_ACTION_PARAMETER_NAME" IsFixed="true" Value="OnGridTabRecordChosenAction">
-                <CascadingValue Name="ActiveGridTabIndex" Value="_cachedGridTabContainer.ActiveGridTabIndex">
-                    <CascadingValue Name="GridItemDisplayCachedHtmlElementRecord" Value="_cachedHtmlElementRecord">
+    if (GridItemRecord.InitialGridTabRecord is null || _isInitialized)
+    {
+        <div class="hfd_grid-item-display"
+             style="@_cachedHtmlElementRecord.DimensionsRecord.BuildCssStyleString()">
+            <CascadingValue Value="GridItemRecord.GridItemRecordKey">
+                <CascadingValue Name="@GridDisplay.ON_CHOSE_GRID_TAB_RECORD_ACTION_PARAMETER_NAME" IsFixed="true" Value="OnGridTabRecordChosenAction">
+                    <CascadingValue Name="ActiveGridTabIndex" Value="_cachedGridTabContainer.ActiveGridTabIndex">
+                        <CascadingValue Name="GridItemDisplayCachedHtmlElementRecord" Value="_cachedHtmlElementRecord">
 
-                        <div class="hfd_grid-display-tabs"
-                             style="height: @_heightOfGridTabDimensionValuedUnit.BuildCssStyleString()">
-                            @if (_cachedGridTabContainer.ActiveGridTabIndex is not null)
-                            {
-                                <div class="hfd_grid-display-change-active-tab-section">
-                                    @for (int i = 0; i < _cachedGridTabContainer.GridTabRecords.Length; i++)
-                                    {
-                                        var tabIndex = i;
-                                        var gridTabRecord = _cachedGridTabContainer.GridTabRecords[tabIndex];
+                            <div class="hfd_grid-display-tabs"
+                                 style="height: @_heightOfGridTabDimensionValuedUnit.BuildCssStyleString()">
+                                @if (_cachedGridTabContainer.ActiveGridTabIndex is not null)
+                                {
+                                    <div class="hfd_grid-display-change-active-tab-section">
+                                        @for (int i = 0; i < _cachedGridTabContainer.GridTabRecords.Length; i++)
+                                        {
+                                            var tabIndex = i;
+                                            var gridTabRecord = _cachedGridTabContainer.GridTabRecords[tabIndex];
 
-                                        <GridTabDisplay GridTabRecord="gridTabRecord"
-                                                        MyGridTabIndex="tabIndex"
-                                                        TotalCountOfGridTabs="_cachedGridTabContainer.GridTabRecords.Length"/>
-                                    }
-                                </div>
+                                            <GridTabDisplay GridTabRecord="gridTabRecord"
+                                                            MyGridTabIndex="tabIndex"
+                                                            TotalCountOfGridTabs="_cachedGridTabContainer.GridTabRecords.Length"/>
+                                        }
+                                    </div>
 
-                                <GridTabAddButtonDisplay NextAvailableTabIndex="_cachedGridTabContainer.GridTabRecords.Length"/>
-                            }
-                        </div>
+                                    <GridTabAddButtonDisplay NextAvailableTabIndex="_cachedGridTabContainer.GridTabRecords.Length"/>
+                                }
+                            </div>
 
-                        <div class="grid-body-display-wrapping"
-                             style="height: calc(100% - @_heightOfGridTabDimensionValuedUnit.BuildCssStyleString())">
-                            <CascadingValue Value="GetActiveGridTabId()">
-                                <GridBodyDisplay RenderedContentType="GetGridBodyRenderedContentType()"/>
-                            </CascadingValue>
-                        </div>
+                            <div class="grid-body-display-wrapping"
+                                 style="height: calc(100% - @_heightOfGridTabDimensionValuedUnit.BuildCssStyleString())">
+                                <CascadingValue Value="GetActiveGridTabId()">
+                                    <GridBodyDisplay RenderedContentType="GetGridBodyRenderedContentType()"/>
+                                </CascadingValue>
+                            </div>
+                        </CascadingValue>
                     </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
-    </div>
+        </div>
+    }
 }

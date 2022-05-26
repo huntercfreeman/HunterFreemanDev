@@ -26,4 +26,12 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="FolderExplorer\FolderExplorerDisplay.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="FolderExplorer\FolderExplorerDisplay.razor" />
+  </ItemGroup>
+
 </Project>
