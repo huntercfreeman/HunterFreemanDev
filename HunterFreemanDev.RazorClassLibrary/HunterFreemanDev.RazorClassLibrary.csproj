@@ -32,6 +32,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="FolderExplorer\FolderExplorerDisplay.razor" />
+    <_ContentIncludedByDefault Remove="InputFile\InputFileDialogDisplay.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="InputFile\InputFileDialogDisplay.razor" />
   </ItemGroup>
 
 </Project>

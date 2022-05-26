@@ -10,4 +10,8 @@
     <PackageReference Include="Fluxor.Blazor.Web" Version="5.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Store\FolderExplorer\" />
+  </ItemGroup>
+
 </Project>
