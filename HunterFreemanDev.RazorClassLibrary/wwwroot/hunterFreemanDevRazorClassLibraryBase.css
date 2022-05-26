@@ -488,6 +488,11 @@
             background-color: var(--hfd_primary-hover-background-color);
         }
 
+.hfd_dialog-display-body {
+    height: calc(100% - var(--hfd_dialog-display-title-height));
+    overflow-y: auto;
+}
+
 .hfd_dialog-task-bar-display {
     height: var(--hfd_dialog-task-bar-display-height);
     background-color: var(--hfd_dialog-task-bar-display-background-color);
