@@ -9,4 +9,6 @@ public partial class GridBodyDisplay : ComponentBase
 
     [Parameter, EditorRequired]
     public Type? RenderedContentType { get; set; }
+    [Parameter, EditorRequired]
+    public Dictionary<string, object>? Parameters { get; set; }
 }

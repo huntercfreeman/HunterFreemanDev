@@ -153,12 +153,12 @@ public partial class GridItemDisplay : FluxorComponent
         Dispatcher.Dispatch(addGridTabRecordAction);
     }
     
-    private Type? GetGridBodyRenderedContentType()
+    private GridTabRecord? GetActiveGridTab()
     {
         if(_cachedGridTabContainer is not null &&
            _cachedGridTabContainer.ActiveGridTabIndex is not null)
         {
-            return _cachedGridTabContainer.GridTabRecords[_cachedGridTabContainer.ActiveGridTabIndex.Value].RenderedContentType;
+            return _cachedGridTabContainer.GridTabRecords[_cachedGridTabContainer.ActiveGridTabIndex.Value];
         }
 
         return null;

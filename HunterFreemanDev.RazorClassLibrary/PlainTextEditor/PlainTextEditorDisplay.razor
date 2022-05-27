@@ -13,6 +13,11 @@
             {
                 <text>Is Focused</text>
             }
+            
+            @if (_cachedFileDescriptorRecord is not null)
+            {
+                <div>_cachedFileDescriptorRecord.AbsoluteFilePath: @_cachedFileDescriptorRecord.AbsoluteFilePath.GetAbsoluteFilePathString()</div>
+            }
         </div>
 
         <div class="hfd_plain-text-editor-display-body">

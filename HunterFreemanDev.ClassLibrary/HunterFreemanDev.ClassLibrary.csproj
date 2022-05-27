@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Store\FolderExplorer\" />
+    <Folder Include="Store\FileBuffer\" />
   </ItemGroup>
 
 </Project>

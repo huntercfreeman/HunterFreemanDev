@@ -37,7 +37,8 @@
                             <div class="grid-body-display-wrapping"
                                  style="height: calc(100% - @_heightOfGridTabDimensionValuedUnit.BuildCssStyleString())">
                                 <CascadingValue Value="GetActiveGridTabId()">
-                                    <GridBodyDisplay RenderedContentType="GetGridBodyRenderedContentType()"/>
+                                    <GridBodyDisplay RenderedContentType="GetActiveGridTab()?.RenderedContentType"
+                                                     Parameters="GetActiveGridTab()?.Parameters" />
                                 </CascadingValue>
                             </div>
                         </CascadingValue>
