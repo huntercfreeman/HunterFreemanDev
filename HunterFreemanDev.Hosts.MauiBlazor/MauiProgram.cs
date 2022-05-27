@@ -23,7 +23,7 @@ namespace HunterFreemanDev.Hosts.MauiBlazor
 
             builder.Services.AddHunterFreemanDevClassLibraryServices();
 
-            builder.Services.AddHunterFreemanDevRazorClassLibraryServices();
+            builder.Services.AddHunterFreemanDevRazorClassLibraryServices(true);
 
             return builder.Build();
         }

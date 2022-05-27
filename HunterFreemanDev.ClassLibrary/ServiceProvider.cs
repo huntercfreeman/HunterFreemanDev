@@ -10,9 +10,7 @@ public static class ServiceProvider
     public static IServiceCollection AddHunterFreemanDevClassLibraryServices(this IServiceCollection services)
     {
         return services
-            .AddHunterFreemanDevClassLibraryRequiredFluxorServices()
-            .AddFileBuffer()
-            .AddFilePersister();
+            .AddHunterFreemanDevClassLibraryRequiredFluxorServices();
     }
     
     private static IServiceCollection AddHunterFreemanDevClassLibraryRequiredFluxorServices(this IServiceCollection services)
@@ -21,15 +19,5 @@ public static class ServiceProvider
 
         return services
             .AddFluxor(options => options.ScanAssemblies(currentAssembly));
-    }
-
-    private static IServiceCollection AddFileBuffer(this IServiceCollection services)
-    {
-        return services.AddScoped<IFileBuffer, FileBuffer>();
-    }
-    
-    private static IServiceCollection AddFilePersister(this IServiceCollection services)
-    {
-        return services.AddScoped<IFilePersister, FilePersister>();
     }
 }

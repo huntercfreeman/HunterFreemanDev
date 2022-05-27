@@ -11,6 +11,13 @@
     </div>
 
     <div class="hfd_toolbar-display-row hfd_toolbar-display-row-secondary">
-        Running Web Assembly. Clear cache to ensure latest version is running.
+        @if (FileSystemAccessSettings.AllowFileSystemAccess)
+        {
+            <div>Running .NET Maui.</div>
+        }
+        else
+        {
+            <div>Running Blazor Web Assembly. Clear cache to ensure latest version is running.</div>
+        }
     </div>
 </div>

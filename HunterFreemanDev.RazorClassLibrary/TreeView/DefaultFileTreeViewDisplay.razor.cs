@@ -9,7 +9,7 @@ public partial class DefaultFileTreeViewDisplay : ComponentBase
     [CascadingParameter(Name="SetActiveTreeViewRecordAction")]
     public Action<TreeViewRecordBase<IAbsoluteFilePath>> SetActiveTreeViewRecordAction { get; set; } = null!;
     [CascadingParameter(Name="DefaultFileOnDoubleClick")]
-    public Action<TreeViewRecordBase<IAbsoluteFilePath>> DefaultFileOnDoubleClick { get; set; } = null!;
+    public Action<TreeViewRecordBase<IAbsoluteFilePath>>? DefaultFileOnDoubleClick { get; set; } = null!;
     [CascadingParameter(Name="ActiveTreeViewRecord")]
     public TreeViewRecordBase<IAbsoluteFilePath> ActiveTreeViewRecord { get; set; } = null!;
 
@@ -24,5 +24,11 @@ public partial class DefaultFileTreeViewDisplay : ComponentBase
     private void OnToggleIsExpandedEventCallback()
     {
         DefaultFileTreeViewRecord.IsExpanded = !DefaultFileTreeViewRecord.IsExpanded;
+    }
+
+    private void FireDefaultFileOnDoubleClick()
+    {
+        if (DefaultFileOnDoubleClick is not null)
+            DefaultFileOnDoubleClick.Invoke(DefaultFileTreeViewRecord);
     }
 }

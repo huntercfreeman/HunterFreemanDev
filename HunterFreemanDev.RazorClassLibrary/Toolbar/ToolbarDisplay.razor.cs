@@ -9,6 +9,7 @@ using HunterFreemanDev.RazorClassLibrary.Icons.Codicon;
 using HunterFreemanDev.ClassLibrary.Store.Toolbar;
 using Fluxor;
 using Fluxor.Blazor.Web.Components;
+using HunterFreemanDev.ClassLibrary.FileSystem.Classes;
 using HunterFreemanDev.ClassLibrary.Toolbar;
 using HunterFreemanDev.RazorClassLibrary.Settings;
 
@@ -20,6 +21,8 @@ public partial class ToolbarDisplay : FluxorComponent
     private IState<ToolbarState> ToolbarState { get; set; } = null!;
     [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
+    [Inject]
+    private FileSystemAccessSettings FileSystemAccessSettings { get; set; } = null!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

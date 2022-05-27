@@ -15,6 +15,8 @@ namespace HunterFreemanDev.RazorClassLibrary.FolderExplorer;
 public partial class FolderExplorerDisplay : ComponentBase
 {
     [Inject]
+    private FileSystemAccessSettings FileSystemAccessSettings { get; set; } = null!;
+    [Inject]
     private IDispatcher Dispatcher { get; set; } = null!;
 
     [CascadingParameter]
@@ -24,19 +26,6 @@ public partial class FolderExplorerDisplay : ComponentBase
     private RichErrorModel? _onFileSelectedRichErrorModel;
     private TreeViewRecordBase<IAbsoluteFilePath> _activeTreeViewRecord;
     private DirectoryFileTreeViewRecord _workspaceTreeView;
-
-    protected override void OnInitialized()
-    {
-        var rootDirectoryAbsoluteFilePath = new AbsoluteFilePath(System.IO.Path.DirectorySeparatorChar.ToString(), true);
-
-        var rootDirectoryDirectoryFiles =
-            System.IO.Directory.GetDirectories(rootDirectoryAbsoluteFilePath.GetAbsoluteFilePathString());
-
-        var rootDirectoryFileFiles =
-            System.IO.Directory.GetFiles(rootDirectoryAbsoluteFilePath.GetAbsoluteFilePathString());
-
-        base.OnInitialized();
-    }
 
     private void OnFileSelected(IAbsoluteFilePath absoluteFilePath)
     {

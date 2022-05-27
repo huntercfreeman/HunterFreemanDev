@@ -12,6 +12,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddHunterFreemanDevClassLibraryServices();
 
-builder.Services.AddHunterFreemanDevRazorClassLibraryServices();
+builder.Services.AddHunterFreemanDevRazorClassLibraryServices(false);
 
 await builder.Build().RunAsync();
