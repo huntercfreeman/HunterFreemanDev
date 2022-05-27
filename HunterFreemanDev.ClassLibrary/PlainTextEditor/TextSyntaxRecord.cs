@@ -45,12 +45,14 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         {
             if (plainTextEditorRecord.CurrentRowIndex != 0)
             {
-                var previousFinalTextSyntaxRecordOfPreviousRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1]
+                var finalTextSyntaxRecordOfPreviousRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1]
                     .Last();
 
-                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = previousFinalTextSyntaxRecordOfPreviousRow with
+                var lengthOfPreviousRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1].Count;
+
+                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1][lengthOfPreviousRow - 1] = finalTextSyntaxRecordOfPreviousRow with
                 {
-                    IndexInContent = previousFinalTextSyntaxRecordOfPreviousRow.ToPlainText.Length - 1
+                    IndexInContent = finalTextSyntaxRecordOfPreviousRow.ToPlainText.Length - 1
                 };
 
                 fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex] = this with
@@ -61,7 +63,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
                 return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
                     fabricatedDocument,
                     plainTextEditorRecord.CurrentRowIndex - 1,
-                    fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1].Count - 1);
+                    lengthOfPreviousRow - 1);
             }
 
             return new PlainTextEditorRecordEdit(plainTextEditorRecord);
@@ -97,7 +99,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
                 var nextFirstTextSyntaxRecordOfNextRow = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex + 1]
                     .First();
 
-                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = nextFirstTextSyntaxRecordOfNextRow with
+                fabricatedDocument[plainTextEditorRecord.CurrentRowIndex + 1][0] = nextFirstTextSyntaxRecordOfNextRow with
                 {
                     IndexInContent = 0
                 };
@@ -109,8 +111,8 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
 
                 return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
                     fabricatedDocument,
-                    plainTextEditorRecord.CurrentRowIndex - 1,
-                    fabricatedDocument[plainTextEditorRecord.CurrentRowIndex - 1].Count - 1);
+                    plainTextEditorRecord.CurrentRowIndex + 1,
+                    0);
             }
 
             return new PlainTextEditorRecordEdit(plainTextEditorRecord);
@@ -119,7 +121,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
         {
             var nextTextSyntaxRecord = fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1];
 
-            fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1] = nextTextSyntaxRecord with
+            fabricatedDocument[plainTextEditorRecord.CurrentRowIndex][plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1] = nextTextSyntaxRecord with
             {
                 IndexInContent = 0
             };
@@ -132,7 +134,7 @@ public abstract record TextSyntaxRecord(int? IndexInContent)
             return new PlainTextEditorRecordEdit(plainTextEditorRecord.PlainTextEditorRecordId,
                 fabricatedDocument,
                 plainTextEditorRecord.CurrentRowIndex,
-                plainTextEditorRecord.CurrentTextSyntaxRecordIndex - 1);
+                plainTextEditorRecord.CurrentTextSyntaxRecordIndex + 1);
         }
     }
 }

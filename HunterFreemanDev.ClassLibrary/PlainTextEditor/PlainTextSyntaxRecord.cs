@@ -33,10 +33,12 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
         if(KeyboardFacts.IsMovementKey(keyDownEventRecord))
             return HandleMovementKey(plainTextEditorRecord, keyDownEventRecord);
 
+        var alteredPlainText = PlainText.Insert(IndexInContent!.Value + 1, keyDownEventRecord.Key!);
+        
         var nextPlainTextSyntaxRecord = this with
         {
             IndexInContent = IndexInContent + 1,
-            PlainText = PlainText + keyDownEventRecord.Key
+            PlainText = alteredPlainText
         };
 
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
@@ -67,7 +69,7 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
     {
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        if (IndexInContent == 0)
+        if (keyDownEventRecord.CtrlWasPressed || IndexInContent == 0)
             return SetPreviousTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
         
         PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
@@ -88,7 +90,7 @@ public record PlainTextSyntaxRecord(string PlainText, int? IndexInContent)
     {
         List<List<TextSyntaxRecord>> fabricatedDocumentClone = plainTextEditorRecord.ConstructFabricatedDocumentClone();
 
-        if (IndexInContent == PlainText.Length - 1)
+        if (keyDownEventRecord.CtrlWasPressed || IndexInContent == PlainText.Length - 1)
             return SetNextTextSyntaxRecordCurrent(plainTextEditorRecord, fabricatedDocumentClone);
         
         PlainTextSyntaxRecord copyPlainTextSyntaxRecord = this with
